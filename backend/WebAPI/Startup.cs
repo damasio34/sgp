@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Web.Http;
+using Damasio34.SGP.WebAPI.Autenticacao;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 
+[assembly: OwinStartup(typeof(Damasio34.SGP.WebAPI.Startup))]
 namespace Damasio34.SGP.WebAPI
-{
+{    
     public class Startup
     {
         public void Configuration(IAppBuilder app)

@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.OAuth;
 
-namespace Damasio34.SGP.WebAPI
+namespace Damasio34.SGP.WebAPI.Autenticacao
 {
     public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
     {

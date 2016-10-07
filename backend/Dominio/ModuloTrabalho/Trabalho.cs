@@ -42,7 +42,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
             {
                 var total = TimeSpan.Zero;
 
-                if (!Pontos.Any(s => s.TipoEvento.Equals(TipoEvento.Entrada)))
+                if (!Pontos.Any(s => s.TipoDoEvento.Equals(TipoDoEvento.Entrada)))
                     return TimeSpan.Zero;
 
                 return Pontos.GroupBy(s => s.DataHora.Date).Aggregate(total, (current, item) => current + CalcularBancoHoras(item));
@@ -54,25 +54,25 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 
         #region [ Métodos Privados ]
 
-        private Ponto GetPonto(IEnumerable<Ponto> pontos, TipoEvento tipoEvento)
+        private Ponto GetPonto(IEnumerable<Ponto> pontos, TipoDoEvento tipoDoEvento)
         {
-            return pontos.LastOrDefault(s => s.TipoEvento.Equals(tipoEvento));
+            return pontos.LastOrDefault(s => s.TipoDoEvento.Equals(tipoDoEvento));
         }
         private TimeSpan CalcularBancoHoras(IGrouping<DateTime, Ponto> pontos)
         {
-            var entrada = GetPonto(pontos, TipoEvento.Entrada).DataHora.TimeOfDay;
-            var pontoSaida = GetPonto(pontos, TipoEvento.Saida);
+            var entrada = GetPonto(pontos, TipoDoEvento.Entrada).DataHora.TimeOfDay;
+            var pontoSaida = GetPonto(pontos, TipoDoEvento.Saida);
             var saida = pontoSaida != null ? pontoSaida.DataHora.TimeOfDay : DateTime.Now.TimeOfDay;
 
             var cargaHoraria = saida.Subtract(entrada).Subtract(this.CargaHorariaDiaria);
 
-            var pontoEntradaAlmoco = GetPonto(pontos, TipoEvento.EntradaAlmoco);
+            var pontoEntradaAlmoco = GetPonto(pontos, TipoDoEvento.EntradaAlmoco);
 
             if (!this.ControlaAlmoco) return cargaHoraria.Subtract(this.TempoAlmoco);
             if (pontoEntradaAlmoco == null && this.ControlaAlmoco) return cargaHoraria;
           
             var entradaAlmoco = pontoEntradaAlmoco != null ? pontoEntradaAlmoco.DataHora.TimeOfDay : TimeSpan.Zero;
-            var pontoSaidaAlmoco = GetPonto(pontos, TipoEvento.SaidaAlmoco);
+            var pontoSaidaAlmoco = GetPonto(pontos, TipoDoEvento.SaidaAlmoco);
             var saidaAlmoco = pontoSaidaAlmoco != null ? pontoSaidaAlmoco.DataHora.TimeOfDay : TimeSpan.Zero;
 
             var tempoAlmoco = saidaAlmoco.Subtract(entradaAlmoco).Subtract(this.TempoAlmoco);

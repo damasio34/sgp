@@ -80,7 +80,7 @@
     <Compile Include="ModuloTrabalho\Interfaces\ITrabalhoRepository.cs" />
     <Compile Include="ModuloTrabalho\Ponto.cs" />
     <Compile Include="ModuloTrabalho\Resources\Mensagens.Designer.cs" />
-    <Compile Include="ModuloTrabalho\TipoEvento.cs" />
+    <Compile Include="ModuloTrabalho\TipoDoEvento.cs" />
     <Compile Include="ModuloTrabalho\Trabalho.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

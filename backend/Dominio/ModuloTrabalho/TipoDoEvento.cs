@@ -1,6 +1,6 @@
 ﻿namespace Damasio34.SGP.Dominio.ModuloTrabalho
 {
-    public enum TipoEvento
+    public enum TipoDoEvento
     {
         Entrada = 0,
         Saida = 1,
