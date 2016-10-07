@@ -41,13 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IContraChequeAppService.cs" />
-    <Compile Include="Interfaces\ICrudBasicoAppService.cs" />
-    <Compile Include="Interfaces\ICrudBasicoDTO.cs" />
     <Compile Include="Interfaces\IFinanceiroAppService.cs" />
     <Compile Include="Interfaces\IPessoaAppService.cs" />
     <Compile Include="Interfaces\ITrabalhoAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\CrudBasicoAppService.cs" />
     <Compile Include="Services\FinanceiroAppService.cs" />
     <Compile Include="Services\PessoaAppService.cs" />
     <Compile Include="Services\TrabalhoAppService.cs" />
