@@ -44,4 +44,5 @@ namespace Damasio34.SGP.WebAPI
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
     }
+
 }

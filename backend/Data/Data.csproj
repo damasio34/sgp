@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Damasio34.GraphDiff, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Damasio34.GraphDiff.1.0.0.3\lib\net451\Damasio34.GraphDiff.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Damasio34.Seedwork, Version=1.0.2.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Damasio34.Seedwork.1.0.2.3\lib\net451\Damasio34.Seedwork.dll</HintPath>
       <Private>True</Private>
@@ -64,6 +68,7 @@
     <Compile Include="Repositories\ModuloTrabalho\PontoRepository.cs" />
     <Compile Include="Repositories\ModuloTrabalho\TrabalhoRepository.cs" />
     <Compile Include="SgpRepository.cs" />
+    <Compile Include="UnitOfWork\EntityQueryBuilder.cs" />
     <Compile Include="UnitOfWork\Extensions.cs" />
     <Compile Include="UnitOfWork\Initializers\CreateDatabaseIfNotExistsInitializer.cs" />
     <Compile Include="UnitOfWork\Initializers\DropCreateDatabaseAlwaysInitializer.cs" />

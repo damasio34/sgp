@@ -42,10 +42,7 @@ namespace Damasio34.SGP.Data.UnitOfWork
             this.AggregateUpdateStrategy = aggregateUpdateStrategy;
         }
 
-        protected ObjectContext ObjectContext
-        {
-            get { return (this as IObjectContextAdapter).ObjectContext; }
-        }
+        protected ObjectContext ObjectContext => (this as IObjectContextAdapter).ObjectContext;
 
         #region ' IUnitOfWork '
 
@@ -145,7 +142,7 @@ namespace Damasio34.SGP.Data.UnitOfWork
 
         public IQueryBuilder<TEntidade> CreateQueryBuilder<TEntidade>() where TEntidade : class
         {
-            throw new NotImplementedException();
+            return new EntityQueryBuilder<TEntidade>();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using Damasio34.Seedwork.UnitOfWork;
+using Damasio34.SGP.Data.UnitOfWork;
 using Damasio34.SGP.Dominio.ModuloTrabalho;
 
 namespace Damasio34.SGP.WebAPI.Controllers

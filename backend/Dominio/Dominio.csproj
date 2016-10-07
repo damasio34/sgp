@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Damasio34.Seedwork, Version=1.0.2.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\backend\packages\Damasio34.Seedwork.1.0.2.3\lib\net451\Damasio34.Seedwork.dll</HintPath>
+      <HintPath>..\packages\Damasio34.Seedwork.1.0.2.3\lib\net451\Damasio34.Seedwork.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

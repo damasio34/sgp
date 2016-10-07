@@ -61,8 +61,9 @@ namespace Damasio34.SGP.WebAPI
         /// </summary>
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
-        {
-            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+        {            
+            kernel.Bind<IUnitOfWork>().To<MainUnitOfWork>().InRequestScope();
+            var a = kernel.Get<IUnitOfWork>();
         }        
     }
 }
