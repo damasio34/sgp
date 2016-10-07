@@ -24,9 +24,9 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public TimeSpan CargaHorariaDiaria { get; set; }        
         public TimeSpan TempoAlmoco { get; set; }
         public uint HoraMes { get; set; }
-        public Decimal SalarioBruto { get; set; }
+        public decimal SalarioBruto { get; set; }
         public bool ControlaAlmoco { get; set; }
-        public Decimal ValorHora { 
+        public decimal ValorHora { 
             get {
                 if (SalarioBruto.Equals(0))
                     return 0;
@@ -48,13 +48,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
                 return Pontos.GroupBy(s => s.DataHora.Date).Aggregate(total, (current, item) => current + CalcularBancoHoras(item));
             }
         }
-        public Decimal ValorBancoHoras
-        {
-            get
-            {
-                return (decimal) SaldoBancoHoras.TotalHours * ValorHora;
-            }
-        }
+        public decimal ValorBancoHoras => (decimal) SaldoBancoHoras.TotalHours * ValorHora;
 
         #endregion
 
