@@ -1,0 +1,28 @@
+<ion-view view-title="Dashboard" hide-back-button="true">
+	<ion-content class="padding">
+		<div class="card">
+			<div class="item item-text-wrap">
+				<h2 class="text-center">{{clock}}</h2>
+			</div>
+		</div>
+		<div class="card">
+			<div class="list card">
+				<span class="item item-icon-left">
+					<i class="icon ion-arrow-right-c"></i> Entrada: {{ horario.Entrada }}
+				</span>
+				<span class="item item-icon-left">
+					<i class="icon ion-arrow-return-right"></i> Entrada almoço: {{ horario.EntradaDoAlmoco }}
+				</span>
+				<span class="item item-icon-left">
+					<i class="icon ion-arrow-return-left"></i> Saída almoço: {{ horario.SaidaDoAlmoco }}
+				</span>
+				<span class="item item-icon-left">
+					<i class="icon ion-arrow-left-c"></i> Saída: {{ horario.Saida }}
+				</span>
+			</div>
+		</div>
+		<button class="button button-block button-outline button-balanced icon ion-clock button-rounded">
+			Efetuar marcação
+		</button>
+	</ion-content>
+</ion-view>

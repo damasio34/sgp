@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6B012ABC-D88B-4177-B832-12FF6AA47E6E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Damasio34.SGP.Dominio</RootNamespace>
+    <AssemblyName>Damasio34.SGP.Dominio</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Damasio34.Seedwork, Version=1.0.2.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\backend\packages\Damasio34.Seedwork.1.0.2.3\lib\net451\Damasio34.Seedwork.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\IFinalizavel.cs" />
+    <Compile Include="Interfaces\ISgpRepository.cs" />
+    <Compile Include="ModuloFinanceiro\Banco.cs" />
+    <Compile Include="ModuloFinanceiro\Cartao.cs" />
+    <Compile Include="ModuloFinanceiro\Carteira.cs" />
+    <Compile Include="ModuloFinanceiro\Categoria.cs" />
+    <Compile Include="ModuloFinanceiro\Conta.cs" />
+    <Compile Include="ModuloFinanceiro\ContaBancaria.cs" />
+    <Compile Include="ModuloFinanceiro\ContaCorrente.cs" />
+    <Compile Include="ModuloFinanceiro\ContaPoupanca.cs" />
+    <Compile Include="ModuloFinanceiro\Factories\ContaFactory.cs" />
+    <Compile Include="ModuloFinanceiro\Factories\LancamentoFactory.cs" />
+    <Compile Include="ModuloFinanceiro\Interfaces\IBancoRepository.cs" />
+    <Compile Include="ModuloFinanceiro\Interfaces\ICategoriaRepository.cs" />
+    <Compile Include="ModuloFinanceiro\Interfaces\IContaRepository.cs" />
+    <Compile Include="ModuloFinanceiro\Interfaces\ILancamentoRepository.cs" />
+    <Compile Include="ModuloFinanceiro\Lancamento.cs" />
+    <Compile Include="ModuloFinanceiro\Resources\Mensagens.Designer.cs" />
+    <Compile Include="ModuloFinanceiro\Specifications\ValorLancamentoIgualZeroSpec.cs" />
+    <Compile Include="ModuloFinanceiro\Specifications\ValorLancamentoMaiorQueZeroSpec.cs" />
+    <Compile Include="ModuloFinanceiro\Specifications\ValorLancamentoMenorQueZeroSpec.cs" />
+    <Compile Include="ModuloFinanceiro\TipoLancamento.cs" />
+    <Compile Include="ModuloPessoa\Factories\UsuarioFactory.cs" />
+    <Compile Include="ModuloPessoa\Interfaces\IPessoaRepository.cs" />
+    <Compile Include="ModuloPessoa\Interfaces\IUsuarioRepository.cs" />
+    <Compile Include="ModuloPessoa\Pessoa.cs" />
+    <Compile Include="ModuloPessoa\Usuario.cs" />
+    <Compile Include="ModuloTrabalho\ContraCheque.cs" />
+    <Compile Include="ModuloTrabalho\Factories\ContraChequeFactory.cs" />
+    <Compile Include="ModuloTrabalho\Factories\EmpregoFactory.cs" />
+    <Compile Include="ModuloTrabalho\Factories\PontoFactory.cs" />
+    <Compile Include="ModuloTrabalho\Interfaces\IContraChequeRepository.cs" />
+    <Compile Include="ModuloTrabalho\Interfaces\IPontoRepository.cs" />
+    <Compile Include="ModuloTrabalho\Interfaces\ITrabalhoRepository.cs" />
+    <Compile Include="ModuloTrabalho\Ponto.cs" />
+    <Compile Include="ModuloTrabalho\Resources\Mensagens.Designer.cs" />
+    <Compile Include="ModuloTrabalho\TipoEvento.cs" />
+    <Compile Include="ModuloTrabalho\Trabalho.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ModuloFinanceiro\Resources\Mensagens.resx" />
+    <EmbeddedResource Include="ModuloTrabalho\Resources\Mensagens.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\Resources\Resources\" />
+    <Folder Include="Interfaces\Specifications\Specifications\" />
+    <Folder Include="ModuloPessoa\Specifications\" />
+    <Folder Include="ModuloTrabalho\Specifications\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
