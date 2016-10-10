@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Damasio34.Seedwork, Version=1.0.2.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Damasio34.Seedwork.1.0.2.3\lib\net451\Damasio34.Seedwork.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfiguracoesDoUsuarioDto.cs" />
     <Compile Include="Interfaces\IContraChequeAppService.cs" />
     <Compile Include="Interfaces\IFinanceiroAppService.cs" />
     <Compile Include="Interfaces\IPessoaAppService.cs" />
@@ -58,6 +63,9 @@
       <Project>{6b012abc-d88b-4177-b832-12ff6aa47e6e}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

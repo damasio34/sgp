@@ -58,7 +58,7 @@ namespace Damasio34.SGP.Data.UnitOfWork
 
             // Modulo Emprego
             modelBuilder.Configurations.Add(new ContraChequeTypeConfiguration());
-            //modelBuilder.Configurations.Add(new EmpregoTypeConfiguration());
+            modelBuilder.Configurations.Add(new TrabalhoTypeConfiguration());
             modelBuilder.Configurations.Add(new PontoTypeConfiguration());
 
             // Modulo Financeiro

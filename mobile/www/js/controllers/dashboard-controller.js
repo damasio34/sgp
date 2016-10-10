@@ -11,6 +11,7 @@
 
         $scope.MarcarPonto = MarcarPonto;
 
+        GetConfiguracoes();
 
         var tickInterval = 1000;
         var tick = function() {
@@ -21,13 +22,24 @@
         // Start the timer
         $timeout(tick, tickInterval);
 
-        var data = {
-            TipoDoEvento: 0,
-            IdTrabalho: '614544E1-1CC8-4887-9B7A-3BBC8F0264F8'
-        }
+        function GetConfiguracoes() {
+            console.log(localStorage.getItem('_token'));
+            $http.get('http://localhost:1151/api/dashboard', { headers: { Authorization: 'Bearer ' + localStorage.getItem('_token') } })
+                .then(function(response) {
+                    console.log(response.data.IdTrabalho);
+                    localStorage.setItem('_IdTrabalho', response.data.IdTrabalho);
+                })
+                .catch(function(response) {
+                    console.error(response);
+                });
+        };
 
         function MarcarPonto() {
-            $http.post('http://localhost:1151/api/ponto', data)
+            var data = localStorage.getItem('_IdTrabalho');
+            console.log(data);
+            $http.post('http://localhost:1151/api/dashboard/' + data, null,
+                    { headers: { Authorization: 'Bearer ' + localStorage.getItem('_token') }
+                })
                 .then(function(response) {
                     console.log(response.data);
                 })

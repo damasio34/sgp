@@ -19,6 +19,8 @@
             $http.post(authUrl, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
                 .then(function(response) {
                     console.log(response.data.access_token);
+                    localStorage.setItem('_token', response.data.access_token);
+                    $http.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access_token;
                     $state.go('app.dashboard');
                 })
                 .catch(function(response) {

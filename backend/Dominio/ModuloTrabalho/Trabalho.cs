@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Damasio34.Seedwork.Domain;
+using Damasio34.SGP.Dominio.ModuloPessoa;
 
 namespace Damasio34.SGP.Dominio.ModuloTrabalho
 {
@@ -9,10 +10,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
     {
         #region [ Contrutores ]
 
-        protected internal Trabalho() { 
-            Pontos = new List<Ponto>();
-            ControlaAlmoco = true;
-        }
+        public Trabalho() { ControlaAlmoco = true; }
 
         #endregion
 
@@ -34,8 +32,8 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
                     return SalarioBruto / HoraMes;
             }
         }
-        public virtual ICollection<Ponto> Pontos { get; private set; }
-        public virtual ICollection<ContraCheque> ContraCheques { get; set; }
+        public virtual ICollection<Ponto> Pontos { get; private set; } = new List<Ponto>();
+        public virtual ICollection<ContraCheque> ContraCheques { get; set; } = new List<ContraCheque>();
         public TimeSpan SaldoBancoHoras
         {
             get
@@ -49,6 +47,8 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
             }
         }
         public decimal ValorBancoHoras => (decimal) SaldoBancoHoras.TotalHours * ValorHora;
+        public Guid IdUsuario { get; set; }
+        public Usuario Usuario { get; set; }
 
         #endregion
 
@@ -84,11 +84,15 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 
         #region [ Métodos Públicos ]
 
-        public void AdicionarPonto(Ponto ponto)
+        public void AdicionarPonto()
         {
-            if (this.Pontos == null)
-                this.Pontos = new List<Ponto>();
-
+            var ponto = new Ponto
+            {
+                DataHora = DateTime.Now,
+                IdTrabalho = this.Id,
+                TipoDoEvento = TipoDoEvento.Entrada
+            };
+            ponto.GerarId();
             this.Pontos.Add(ponto);
         }
 

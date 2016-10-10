@@ -1,21 +1,16 @@
 ﻿using System.Web.Http;
-using Damasio34.Seedwork.UnitOfWork;
-using Damasio34.SGP.Data.UnitOfWork;
+using Damasio34.SGP.Aplicacao.Interfaces;
 using Damasio34.SGP.Dominio.ModuloTrabalho;
 
 namespace Damasio34.SGP.WebAPI.Controllers
 {
     public class PontoController : ApiController
     {
-        public PontoController(IUnitOfWork unitOfWork)
-        {
-                        
-        }
+        private readonly ITrabalhoAppService _trabalhoAppService;
 
-        [HttpPost]
-        public void Post(Ponto ponto)
+        public PontoController(ITrabalhoAppService trabalhoAppService)
         {
-            
+            this._trabalhoAppService = trabalhoAppService;
         }
     }
 }
