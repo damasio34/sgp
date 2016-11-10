@@ -4,6 +4,8 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
+using Damasio34.SGP.Data.Repositories.ModuloPessoa;
+using Damasio34.SGP.Data.UnitOfWork;
 using Microsoft.Owin.Security.OAuth;
 
 namespace Damasio34.SGP.WebAPI.Autenticacao
@@ -21,15 +23,16 @@ namespace Damasio34.SGP.WebAPI.Autenticacao
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {            
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new []{ "*" });
+            var repository = new UsuarioRepository(new MainUnitOfWork());
 
             try
             {
                 var user = context.UserName;
                 var password = context.Password;
 
-                if (user != "damasio34" || password != "12345")
+                if (!repository.Existe(p => p.Login.Equals(user) && p.Senha.Equals(password)))
                 {
-                    context.SetError("invalid_grant", "Usuário ou senha inválidos");
+                    context.SetError("invalid_grant", "Usuário ou senha inválidos.");
                     return;
                 }
 

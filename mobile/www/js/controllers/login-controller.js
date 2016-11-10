@@ -11,7 +11,7 @@
         // var login = this;
         var authUrl = "http://localhost:1151/api/security/token";
 
-        $scope.usuario = { username: 'damasio34', password: '12345' };
+        $scope.usuario = { username: 'damasio34', password: '1235' };
         $scope.entrar = entrar;
 
         function entrar(usuario) {
