@@ -5,8 +5,9 @@ using Damasio34.SGP.Aplicacao;
 using Damasio34.SGP.Aplicacao.Interfaces;
 using Damasio34.SGP.Dominio.ModuloTrabalho;
 
-namespace Damasio34.SGP.WebAPI.Controllers
+namespace Damasio34.SGP.API.Controllers
 {
+    [RoutePrefix("api/dashboard")]
     [Authorize]
     public class DashboardController : ApiController
     {
@@ -17,6 +18,7 @@ namespace Damasio34.SGP.WebAPI.Controllers
             this._trabalhoAppService = trabalhoAppService;
         }
 
+        [Route("")]
         [HttpGet]
         public ConfiguracoesDoUsuarioDto Get()
         {

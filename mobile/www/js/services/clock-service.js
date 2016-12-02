@@ -2,7 +2,7 @@
   'use strict'
 
   angular
-    .module('sgp.controllers')
+    .module('sgp.services')
     .factory('ClockService', function($interval) {
 
         var service = {

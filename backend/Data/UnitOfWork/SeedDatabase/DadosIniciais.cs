@@ -12,15 +12,8 @@ namespace Damasio34.SGP.Data.UnitOfWork.SeedDatabase
         public void Seed(MainUnitOfWork context)
         {
             this._context = context;
-            DadosSimulacao();
-            //CargaInicial();
-        }
-
-        private void DadosSimulacao()
-        {
             var usuario = InserirUsuario();
             var emprego = InserirEmprego(usuario);
-            //InserirPontos(emprego);
         }
 
         private Usuario InserirUsuario()
@@ -31,7 +24,6 @@ namespace Damasio34.SGP.Data.UnitOfWork.SeedDatabase
 
             return usuario;
         }
-
         private Trabalho InserirEmprego(Usuario usuario)
         {
             var trabalho = new Trabalho

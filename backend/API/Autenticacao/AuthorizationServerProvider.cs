@@ -8,7 +8,7 @@ using Damasio34.SGP.Data.Repositories.ModuloPessoa;
 using Damasio34.SGP.Data.UnitOfWork;
 using Microsoft.Owin.Security.OAuth;
 
-namespace Damasio34.SGP.WebAPI.Autenticacao
+namespace Damasio34.SGP.API.Autenticacao
 {
     public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
     {

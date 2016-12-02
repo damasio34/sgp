@@ -13,14 +13,20 @@
 
         GetConfiguracoes();
 
+        // -------------------------------------------------------------
+
         var tickInterval = 1000;
         var tick = function() {
-            $scope.clock = $filter('date')(Date.now(), 'dd/MM/yyyy - HH:mm:ss'); // get the current time
+            $scope.clock = $filter('date')(Date.now(), 'HH:mm:ss'); // get the current time
             $timeout(tick, tickInterval); // reset the timer
         }
 
         // Start the timer
         $timeout(tick, tickInterval);
+        
+        DashaboardService.Listar(function(pontos) {
+            Pontos = pontos;
+        });
 
         function GetConfiguracoes() {
             console.log(localStorage.getItem('_token'));
