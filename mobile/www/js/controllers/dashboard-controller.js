@@ -5,41 +5,41 @@
         .module('sgp.controllers')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$scope', '$timeout', '$filter', '$http', 'ClockService'];
+    DashboardController.$inject = ['$timeout', '$filter', 'ClockService', 'DashboardService'];
+    function DashboardController($timeout, $filter, ClockService, DashboardService) {
+        var vm = this;
 
-    function DashboardController($scope, $timeout, $filter, $http, ClockService) {
+        vm.MarcarPonto = MarcarPonto;
 
-        $scope.MarcarPonto = MarcarPonto;
-
-        GetConfiguracoes();
+        _init();
 
         // -------------------------------------------------------------
 
-        var tickInterval = 1000;
-        var tick = function() {
-            $scope.clock = $filter('date')(Date.now(), 'HH:mm:ss'); // get the current time
-            $timeout(tick, tickInterval); // reset the timer
-        }
+        function _init() {
+            var tickInterval = 1000;
+            var tick = function() {
+                vm.Relogio = $filter('date')(Date.now(), 'HH:mm:ss'); // get the current time
+                $timeout(tick, tickInterval); // reset the timer
+            };
 
-        // Start the timer
-        $timeout(tick, tickInterval);
-        
-        DashaboardService.Listar(function(pontos) {
-            Pontos = pontos;
-        });
+            // Start the timer
+            $timeout(tick, tickInterval);
 
-        function GetConfiguracoes() {
-            console.log(localStorage.getItem('_token'));
-            $http.get('http://localhost:1151/api/dashboard', { headers: { Authorization: 'Bearer ' + localStorage.getItem('_token') } })
-                .then(function(response) {
-                    console.log(response.data.IdTrabalho);
-                    localStorage.setItem('_IdTrabalho', response.data.IdTrabalho);
-                })
-                .catch(function(response) {
-                    console.error(response);
-                });
+            DashboardService.getAll(function(pontos) {
+                vm.Pontos = pontos;
+            });
+
+            // console.log(localStorage.getItem('_token'));
+
+            // $http.get('http://localhost:1151/api/dashboard', { headers: { Authorization: 'Bearer ' + localStorage.getItem('_token') } })
+            //     .then(function(response) {
+            //         console.log(response.data.IdTrabalho);
+            //         localStorage.setItem('_IdTrabalho', response.data.IdTrabalho);
+            //     })
+            //     .catch(function(response) {
+            //         console.error(response);
+            //     });
         };
-
         function MarcarPonto() {
             var data = localStorage.getItem('_IdTrabalho');
             console.log(data);

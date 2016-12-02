@@ -2,19 +2,16 @@
     'use strict';
 
     angular
-        .module('gp.services')
+        .module('sgp.services')
         .service('RestBaseService', RestBaseService);
 
-    RestBaseService.$inject = ['$http', 'LoginService'];
+    RestBaseService.$inject = ['$http', 'WebStorageService', 'LoginService', 'UrlDefault'];
 
-    function RestBaseService($http, LoginService) {
-        var self = this;
+    function RestBaseService($http, WebStorageService, LoginService, UrlDefault) {
+        let self = this;
         this.mainRoute = undefined;
-        this.urlBase = 'http://localhost:1151/api/';
-
-        this.headers = { 
-            Authorization: 'Bearer ' + localStorage.getItem('_token') 
-        };
+        this.urlBase = UrlDefault.Uri;
+        this.headers = { 'Content-Type': 'application/json' };
 
         var _service = {
             editar: editar,
@@ -34,6 +31,7 @@
 
         function getAll() {
             if (!self.mainRoute) throw "mainRoute não configurada.";
+            // self.headers['Authorization'] = 'bearer ' + LoginService.getToken();
             return $http.get(self.urlBase + self.mainRoute, { headers: self.headers });
         }
 
@@ -50,15 +48,13 @@
 
         function editar(model) {
             if (!self.mainRoute) throw "mainRoute não configurada.";
-            return $http.put(self.urlBase + self.mainRoute + '/' + model.objectId,
-                model, { headers: self.headers });
+            return $http.put(self.urlBase + self.mainRoute, model, { headers: self.headers });
         }
 
         function excluir(id) {
             if (!self.mainRoute) throw "mainRoute não configurada.";
             return $http.delete(self.urlBase + self.mainRoute + '/' + id, { headers: self.headers });
         }
-
     }
 
 })(angular);

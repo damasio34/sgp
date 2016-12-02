@@ -2,22 +2,22 @@
 	<ion-content class="padding">
 		<div class="card">
 			<div class="item item-text-wrap">
-				<h2 class="text-center">{{clock}}</h2>
+				<h1 class="text-center">{{vm.Relogio}}</h1>
 			</div>
 		</div>
 		<div class="card">
 			<div class="list card">
 				<span class="item item-icon-left">
-					<i class="icon ion-arrow-right-c"></i> Entrada: {{ horario.Entrada }}
+					<i class="icon ion-arrow-right-c"></i> Entrada: {{ vm.Horario.Entrada }}
 				</span>
 				<span class="item item-icon-left">
-					<i class="icon ion-arrow-return-right"></i> Entrada almoço: {{ horario.EntradaDoAlmoco }}
+					<i class="icon ion-arrow-return-right"></i> Entrada almoço: {{ vm.Horario.EntradaDoAlmoco }}
 				</span>
 				<span class="item item-icon-left">
-					<i class="icon ion-arrow-return-left"></i> Saída almoço: {{ horario.SaidaDoAlmoco }}
+					<i class="icon ion-arrow-return-left"></i> Saída almoço: {{ vm.Horario.SaidaDoAlmoco }}
 				</span>
 				<span class="item item-icon-left">
-					<i class="icon ion-arrow-left-c"></i> Saída: {{ horario.Saida }}
+					<i class="icon ion-arrow-left-c"></i> Saída: {{ vm.Horario.Saida }}
 				</span>
 			</div>
 		</div>

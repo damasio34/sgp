@@ -2,10 +2,12 @@
     'use strict'
 
     angular.module('sgp', [
-        'ionic',        
+        'ionic',
+        'ui.utils.masks',
 
-        'sgp.controllers',
-        'sgp.services'
+        'sgp.interceptors',
+        'sgp.services',
+        'sgp.controllers'
     ]);
 
 })(angular);

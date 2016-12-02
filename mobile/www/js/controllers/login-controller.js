@@ -5,27 +5,38 @@
         .module('sgp.controllers')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$state', '$http'];
+    LoginController.$inject = ['$state', '$ionicPopup','LoginService'];
 
-    function LoginController($scope, $state, $http) {
-        // var login = this;
-        var authUrl = "http://localhost:1151/api/security/token";
+    function LoginController($state, $ionicPopup, LoginService) {
+        var vm = this;
 
-        $scope.usuario = { username: 'damasio34', password: '1235' };
-        $scope.entrar = entrar;
+        vm.Usuario = { Login: 'damasio34', Senha: 1235 };
+        vm.Login = Login;
 
-        function entrar(usuario) {
-            var data = "grant_type=password&username=" + usuario.username + "&password=" + usuario.password + "";
-            $http.post(authUrl, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
-                .then(function(response) {
-                    console.log(response.data.access_token);
-                    localStorage.setItem('_token', response.data.access_token);
-                    $http.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access_token;
-                    $state.go('app.dashboard');
-                })
-                .catch(function(response) {
-                    console.error(response.data.error_description, response.status);
+        _init();
+
+        // -----------------------------------------------------------------------------
+
+        function _init() {
+            if (LoginService.usuarioAutenticado()) {
+                $ionicPopup.alert({
+                    title: 'Clube Palace Diz!',
+                    cssClass: 'custom-popup',
+                    content: '<div class="text-center">Você já está logado, para sair faça logout.</div>',
+                    buttons: [
+                        {
+                            text: '<b>Ok</b>',
+                            type: 'btn-amarelo',
+                        },
+                    ]
                 });
+
+                $state.go('app.dashboard');
+            };
+        };
+        function Login(usuario) {
+            LoginService.login({ username: usuario.Login, password: usuario.Senha }, usuario.LembrarSenha)
+                .then(function() { $state.go('app.dashboard'); });
         };
     };
 

@@ -1,5 +1,5 @@
 (function(angular) {
-    'use strict'
+    'use strict';
 
     angular
         .module('sgp')
@@ -7,10 +7,9 @@
             $stateProvider
 
                 .state('login', {
-                    url: '/login',
+                    url: '/',
                     templateUrl: 'views/login-view.html',
-                    controller: 'LoginController',
-                    // controllerAs: 'login'
+                    controller: 'LoginController as vm'
                 })
 
                 // --------------------------------------------
@@ -27,7 +26,7 @@
                     views: {
                         'MainContent': {
                             templateUrl: 'views/dashboard-view.html',
-                            controller: 'DashboardController'
+                            controller: 'DashboardController as vm'
                         }
                     }
                 })
@@ -40,11 +39,9 @@
                             controller: 'ConfiguracaoController'
                         }
                     }
-                })
+                });
 
-                ;
-
-           $urlRouterProvider.otherwise('/login');
+           $urlRouterProvider.otherwise('/app/dashboard');
 
         });
 

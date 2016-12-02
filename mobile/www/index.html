@@ -1,46 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>SGP</title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/custom-app.css" rel="stylesheet">
+        <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/custom-app.css" rel="stylesheet">
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
+        <!--
+        IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+        <link href="css/ionic.app.css" rel="stylesheet">
+        -->
 
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
+        <!-- ionic/angularjs js -->
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
+        <!-- cordova script (this will be a 404 during development) -->
+        <script src="cordova.js"></script>
+    </head>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+    <body ng-app="sgp">
+        <ion-nav-view></ion-nav-view>
+    </body>
 
-  </head>
-
-  <body ng-app="sgp">
-    <ion-nav-view></ion-nav-view>
+    <script src="lib/angular-input-masks/angular-input-masks-standalone.js"></script>
 
     <!-- App -->
     <script src="app.js"></script>
+    <script src="app-constant.js"></script>
     <script src="app-run.js"></script>
     <script src="app-config.js"></script>
     <script src="app-route.js"></script>
 
+    <!-- Services -->
+    <script src="js/services/services.js"></script>
+    <script src="js/services/web-storage-service.js"></script>
+    <script src="js/services/clock-service.js"></script>
+    <script src="js/services/login-service.js"></script>
+    <script src="js/services/rest-base-service.js"></script>
+    <script src="js/services/dashboard-service.js"></script>
+
+    <!-- Interceptors -->
+    <script src="js/interceptors/interceptors.js"></script>
+    <script src="js/interceptors/loader-interceptor.js"></script>
+    <script src="js/interceptors/login-interceptor.js"></script>
+
     <!-- Controllers -->
     <script src="js/controllers/controllers.js"></script>
-    <script src="js/controllers/app-controller.js"></script>
     <script src="js/controllers/login-controller.js"></script>
+    <script src="js/controllers/app-controller.js"></script>
     <script src="js/controllers/dashboard-controller.js"></script>
     <script src="js/controllers/configuracao-controller.js"></script>
 
-    <!-- Services -->
-    <script src="js/services/services.js"></script>
-    <script src="js/services/clock-service.js"></script>
-    <!-- <script src="js/services/login-service.js"></script> -->
-    <!-- <script src="js/services/dashboard-service.js"></script> -->
-  </body>
 </html>
