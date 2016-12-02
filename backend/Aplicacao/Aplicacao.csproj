@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfiguracoesDoUsuarioDto.cs" />
+    <Compile Include="PontosDoDiaDto.cs" />
     <Compile Include="Interfaces\IContraChequeAppService.cs" />
     <Compile Include="Interfaces\IFinanceiroAppService.cs" />
     <Compile Include="Interfaces\IPessoaAppService.cs" />

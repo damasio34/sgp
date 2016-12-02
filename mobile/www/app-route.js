@@ -18,7 +18,7 @@
                     url: '/app',
                     abstract: true,
                     templateUrl: 'views/app-view.html',
-                    controller: 'AppController'
+                    controller: 'AppController as vm'
                 })
 
                 .state('app.dashboard', {

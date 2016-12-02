@@ -62,18 +62,18 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         {
             var entrada = GetPonto(pontos, TipoDoEvento.Entrada).DataHora.TimeOfDay;
             var pontoSaida = GetPonto(pontos, TipoDoEvento.Saida);
-            var saida = pontoSaida != null ? pontoSaida.DataHora.TimeOfDay : DateTime.Now.TimeOfDay;
+            var saida = pontoSaida?.DataHora.TimeOfDay ?? DateTime.Now.TimeOfDay;
 
             var cargaHoraria = saida.Subtract(entrada).Subtract(this.CargaHorariaDiaria);
 
-            var pontoEntradaAlmoco = GetPonto(pontos, TipoDoEvento.EntradaAlmoco);
+            var pontoEntradaAlmoco = GetPonto(pontos, TipoDoEvento.EntradaDoAlmoco);
 
             if (!this.ControlaAlmoco) return cargaHoraria.Subtract(this.TempoAlmoco);
             if (pontoEntradaAlmoco == null && this.ControlaAlmoco) return cargaHoraria;
           
-            var entradaAlmoco = pontoEntradaAlmoco != null ? pontoEntradaAlmoco.DataHora.TimeOfDay : TimeSpan.Zero;
-            var pontoSaidaAlmoco = GetPonto(pontos, TipoDoEvento.SaidaAlmoco);
-            var saidaAlmoco = pontoSaidaAlmoco != null ? pontoSaidaAlmoco.DataHora.TimeOfDay : TimeSpan.Zero;
+            var entradaAlmoco = pontoEntradaAlmoco?.DataHora.TimeOfDay ?? TimeSpan.Zero;
+            var pontoSaidaAlmoco = GetPonto(pontos, TipoDoEvento.SaidaDoAlmoco);
+            var saidaAlmoco = pontoSaidaAlmoco?.DataHora.TimeOfDay ?? TimeSpan.Zero;
 
             var tempoAlmoco = saidaAlmoco.Subtract(entradaAlmoco).Subtract(this.TempoAlmoco);
 

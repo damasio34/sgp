@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Damasio34.Seedwork.Extensions;
 using Damasio34.SGP.Aplicacao.Interfaces;
 using Damasio34.SGP.Dominio.ModuloPessoa.Interfaces;
@@ -18,6 +19,7 @@ namespace Damasio34.SGP.Aplicacao.Services
             this._trabalhoRepository = trabalhoRepository;
             this._usuarioRepository = usuarioRepository;
         }
+
         public void MarcarPonto(Guid idTrabalho)
         {
             var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
@@ -36,12 +38,30 @@ namespace Damasio34.SGP.Aplicacao.Services
                 throw;
             }            
         }
-
-        public Trabalho GetTrabalho(string usuario)
+        public PontosDoDiaDto GetPontosDoDia(string login)
         {
-            var idUsuario = _usuarioRepository.Selecionar(p => p.Login.Equals(usuario)).Id;
-            var trabalho = _trabalhoRepository.Selecionar(p => p.IdUsuario.Equals(idUsuario));
-            return trabalho;            
+            try
+            {
+                var usuario = _usuarioRepository.Selecionar(p => p.Login.Equals(login));
+                var trabalho = _trabalhoRepository.Selecionar(p => p.IdUsuario.Equals(usuario.Id));
+
+                var pontos = trabalho.Pontos.Where(p => p.DataHora.CompareTo(DateTime.Today) >= 0);
+                var deHoje = pontos as Ponto[] ?? pontos.ToArray();
+                var configuracoesDoUsuarioDto = new PontosDoDiaDto
+                {
+                    IdTrabalho = trabalho.Id,
+                    HorarioDeEntrada = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.Entrada))?.DataHora,
+                    HorarioDeSaida = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.Entrada))?.DataHora,
+                    HorarioDeEntradaDoAlmoco = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.EntradaDoAlmoco))?.DataHora,
+                    HorarioDeSaidaDoAlmoco = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.SaidaDoAlmoco))?.DataHora
+                };
+
+                return configuracoesDoUsuarioDto;
+            }
+            catch (Exception ex)
+            {                
+                throw ex;
+            }
         }
     }
 }

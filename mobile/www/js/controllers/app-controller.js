@@ -5,35 +5,60 @@
         .module('sgp.controllers')
         .controller('AppController', AppController);
 
-    AppController.$inject = ['$scope', '$ionicModal', '$ionicPopover', '$timeout'];
+    AppController.$inject = ['$ionicModal', '$ionicPopover', '$timeout', 'LoginService'];
 
-    function AppController($scope, $ionicModal, $ionicPopover, $timeout) {
+    function AppController($ionicModal, $ionicPopover, $timeout, LoginService) {
+        var vm = this;
+
+        vm.Logout = Logout;
+
         // Form data for the login modal
-        $scope.loginData = {};
-        $scope.isExpanded = false;
-        $scope.hasHeaderFabLeft = false;
-        $scope.hasHeaderFabRight = false;
+        vm.loginData = {};
+        vm.isExpanded = false;
+        vm.hasHeaderFabLeft = false;
+        vm.hasHeaderFabRight = false;
 
-        var navIcons = document.getElementsByClassName('ion-navicon');
-        for (var i = 0; i < navIcons.length; i++) {
-            navIcons.addEventListener('click', function() {
-                this.classList.toggle('active');
-            });
+        vm.hideNavBar = hideNavBar;
+        vm.showNavBar = showNavBar;
+        vm.noHeader = noHeader;
+        vm.setExpanded = setExpanded;
+        vm.setHeaderFab = setHeaderFab;
+        vm.hasHeader = hasHeader;
+        vm.hideHeader = hideHeader;
+        vm.showHeader = showHeader;
+        vm.clearFabs = clearFabs;
+
+        // -------------------------------------------------------------
+
+        _init();
+
+        // -------------------------------------------------------------
+
+        function _init() {
+            var navIcons = document.getElementsByClassName('ion-navicon');
+            for (var i = 0; i < navIcons.length; i++) {
+                navIcons.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            }
         }
 
         ////////////////////////////////////////
         // Layout Methods
         ////////////////////////////////////////
 
-        $scope.hideNavBar = function() {
+        function Logout() {
+            LoginService.logout();
+            $state.go('login');
+        };
+
+        function hideNavBar() {
             document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
         };
-
-        $scope.showNavBar = function() {
+        function showNavBar() {
             document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
         };
-
-        $scope.noHeader = function() {
+        function noHeader() {
             var content = document.getElementsByTagName('ion-content');
             for (var i = 0; i < content.length; i++) {
                 if (content[i].classList.contains('has-header')) {
@@ -41,12 +66,10 @@
                 }
             }
         };
-
-        $scope.setExpanded = function(bool) {
-            $scope.isExpanded = bool;
+        function setExpanded(bool) {
+            vm.isExpanded = bool;
         };
-
-        $scope.setHeaderFab = function(location) {
+        function setHeaderFab(location) {
             var hasHeaderFabLeft = false;
             var hasHeaderFabRight = false;
 
@@ -59,11 +82,10 @@
                     break;
             }
 
-            $scope.hasHeaderFabLeft = hasHeaderFabLeft;
-            $scope.hasHeaderFabRight = hasHeaderFabRight;
+            vm.hasHeaderFabLeft = hasHeaderFabLeft;
+            vm.hasHeaderFabRight = hasHeaderFabRight;
         };
-
-        $scope.hasHeader = function() {
+        function hasHeader() {
             var content = document.getElementsByTagName('ion-content');
             for (var i = 0; i < content.length; i++) {
                 if (!content[i].classList.contains('has-header')) {
@@ -72,18 +94,15 @@
             }
 
         };
-
-        $scope.hideHeader = function() {
-            $scope.hideNavBar();
-            $scope.noHeader();
+        function hideHeader() {
+            vm.hideNavBar();
+            vm.noHeader();
         };
-
-        $scope.showHeader = function() {
-            $scope.showNavBar();
-            $scope.hasHeader();
+        function showHeader() {
+            vm.showNavBar();
+            vm.hasHeader();
         };
-
-        $scope.clearFabs = function() {
+        function clearFabs() {
             var fabs = document.getElementsByClassName('button-fab');
             if (fabs.length && fabs.length > 1) {
                 fabs[0].remove();

@@ -163,7 +163,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Autenticacao\AuthorizationServerProvider.cs" />
-    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\TrabalhoController.cs" />
     <Compile Include="Controllers\PontoController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">

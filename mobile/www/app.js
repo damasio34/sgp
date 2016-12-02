@@ -7,6 +7,7 @@
 
         'sgp.interceptors',
         'sgp.services',
+        'sgp.directives',
         'sgp.controllers'
     ]);
 

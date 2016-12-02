@@ -5,8 +5,8 @@
         .module('sgp.controllers')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$timeout', '$filter', 'ClockService', 'DashboardService'];
-    function DashboardController($timeout, $filter, ClockService, DashboardService) {
+    DashboardController.$inject = ['$timeout', '$filter', 'ClockService', 'TrabalhoService'];
+    function DashboardController($timeout, $filter, ClockService, TrabalhoService) {
         var vm = this;
 
         vm.MarcarPonto = MarcarPonto;
@@ -25,8 +25,8 @@
             // Start the timer
             $timeout(tick, tickInterval);
 
-            DashboardService.getAll(function(pontos) {
-                vm.Pontos = pontos;
+            TrabalhoService.getPontosDoDia(function(pontosDoDia) {
+                vm.PontosDoDia = pontosDoDia;
             });
 
             // console.log(localStorage.getItem('_token'));
@@ -41,17 +41,20 @@
             //     });
         };
         function MarcarPonto() {
-            var data = localStorage.getItem('_IdTrabalho');
-            console.log(data);
-            $http.post('http://localhost:1151/api/dashboard/' + data, null,
-                    { headers: { Authorization: 'Bearer ' + localStorage.getItem('_token') }
-                })
-                .then(function(response) {
-                    console.log(response.data);
-                })
-                .catch(function(response) {
-                    console.error(response.data);
-                });
+            TrabalhoService.postMarcarPonto(function(pontosDoDia) {
+                vm.PontosDoDia = pontosDoDia;
+            });
+            // var data = localStorage.getItem('_IdTrabalho');
+            // console.log(data);
+            // $http.post('http://localhost:1151/api/dashboard/' + data, null,
+            //         { headers: { Authorization: 'Bearer ' + localStorage.getItem('_token') }
+            //     })
+            //     .then(function(response) {
+            //         console.log(response.data);
+            //     })
+            //     .catch(function(response) {
+            //         console.error(response.data);
+            //     });
         };
     };
 

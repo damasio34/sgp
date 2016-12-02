@@ -25,27 +25,22 @@ namespace Damasio34.SGP.API.Autenticacao
 
             try
             {
-                var user = context.UserName;
-                var password = context.Password;
+                var login = context.UserName;
+                var senha = context.Password;
+                var repository = new UsuarioRepository(new MainUnitOfWork());
 
-                var _repository = new UsuarioRepository(new MainUnitOfWork());
-
-                if (!_repository.Existe(p => p.Login.Equals(user) && p.Senha.Equals(password)))
+                if (!repository.Existe(p => p.Login.Equals(login) && p.Senha.Equals(senha)))
                 {
                     context.SetError("invalid_grant", "Usuário ou senha inválidos");
                     return;
                 }
 
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-                identity.AddClaim(new Claim(ClaimTypes.Name, user));
-
-                var roles = new List<string> { "User" };
-
-                //foreach (var role in roles) identity.AddClaim(new Claim(ClaimTypes.Role, role));
-
+                var roles = new List<string> { "Usuario" };          
                 var principal = new GenericPrincipal(identity, roles.ToArray());
-                Thread.CurrentPrincipal = principal;
 
+                identity.AddClaim(new Claim(ClaimTypes.Name, login));
+                Thread.CurrentPrincipal = principal;
                 context.Validated(identity);
             }
             catch (Exception ex)

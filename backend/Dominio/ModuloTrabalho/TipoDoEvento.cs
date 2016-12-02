@@ -4,7 +4,7 @@
     {
         Entrada = 0,
         Saida = 1,
-        SaidaAlmoco = 2,
-        EntradaAlmoco = 3,
+        EntradaDoAlmoco = 2,
+        SaidaDoAlmoco = 3        
     }
 }
