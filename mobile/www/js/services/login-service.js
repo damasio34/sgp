@@ -58,10 +58,10 @@
             $http.post(self.urlBase, data, { headers:_headers })
             .success(function(data, status) {
                 if (status == 200 && !!data.access_token) _setToken(data.access_token, lembrarSenha)
-                deferred.resolve(data);
+                deferred.resolve(data, status);
             })
             .error(function (data, status) {
-                deferred.reject(data);
+                deferred.reject(data, status);
             });
 
             return deferred.promise;

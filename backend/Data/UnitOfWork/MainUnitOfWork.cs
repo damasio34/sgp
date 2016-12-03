@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
@@ -40,7 +39,7 @@ namespace Damasio34.SGP.Data.UnitOfWork
             this.Configuration.ProxyCreationEnabled = true;
             this.Configuration.LazyLoadingEnabled = true;
 
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MainUnitOfWork>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MainUnitOfWork>());
         }
 
         #endregion

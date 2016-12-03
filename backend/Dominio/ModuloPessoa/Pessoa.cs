@@ -10,6 +10,6 @@ namespace Damasio34.SGP.Dominio.ModuloPessoa
 
         public virtual Usuario Usuario { get; set; }
 
-        public virtual ICollection<Trabalho> Emprego { get; set; }
+        public virtual ICollection<Trabalho> Trabalhos { get; set; } = new List<Trabalho>();
     }
 }

@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
+using Damasio34.Seedwork.Extensions;
 using Damasio34.SGP.Data.Repositories.ModuloPessoa;
 using Damasio34.SGP.Data.UnitOfWork;
 using Microsoft.Owin.Security.OAuth;
@@ -27,9 +28,10 @@ namespace Damasio34.SGP.API.Autenticacao
             {
                 var login = context.UserName;
                 var senha = context.Password;
-                var repository = new UsuarioRepository(new MainUnitOfWork());
+                var usuarioRepository = new UsuarioRepository(new MainUnitOfWork());
+                var usuario = usuarioRepository.Selecionar(p => p.Login.Equals(login) && p.Senha.Equals(senha));
 
-                if (!repository.Existe(p => p.Login.Equals(login) && p.Senha.Equals(senha)))
+                if (usuario.IsNull())
                 {
                     context.SetError("invalid_grant", "Usuário ou senha inválidos");
                     return;
@@ -38,6 +40,7 @@ namespace Damasio34.SGP.API.Autenticacao
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
                 var roles = new List<string> { "Usuario" };          
                 var principal = new GenericPrincipal(identity, roles.ToArray());
+                
 
                 identity.AddClaim(new Claim(ClaimTypes.Name, login));
                 Thread.CurrentPrincipal = principal;

@@ -4,7 +4,8 @@ namespace Damasio34.SGP.Aplicacao.Interfaces
 {
     public interface ITrabalhoAppService
     {
-        void MarcarPonto(Guid idTrabalho);
-        PontosDoDiaDto GetPontosDoDia(string login);
+        PontosDoDiaDto MarcarPonto(Guid idTrabalho);
+        PontosDoDiaDto GetPontosDoDia(Guid idTrabalho);
+        Guid GetPadrao(string login);
     }
 }

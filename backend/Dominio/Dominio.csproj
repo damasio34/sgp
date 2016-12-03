@@ -73,7 +73,7 @@
     <Compile Include="ModuloPessoa\Usuario.cs" />
     <Compile Include="ModuloTrabalho\ContraCheque.cs" />
     <Compile Include="ModuloTrabalho\Factories\ContraChequeFactory.cs" />
-    <Compile Include="ModuloTrabalho\Factories\EmpregoFactory.cs" />
+    <Compile Include="ModuloTrabalho\Factories\TrabalhoFactory.cs" />
     <Compile Include="ModuloTrabalho\Factories\PontoFactory.cs" />
     <Compile Include="ModuloTrabalho\Interfaces\IContraChequeRepository.cs" />
     <Compile Include="ModuloTrabalho\Interfaces\IPontoRepository.cs" />

@@ -20,17 +20,19 @@ namespace Damasio34.SGP.Aplicacao.Services
             this._usuarioRepository = usuarioRepository;
         }
 
-        public void MarcarPonto(Guid idTrabalho)
+        public PontosDoDiaDto MarcarPonto(Guid idTrabalho)
         {
             var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
 
             try
             {
-                if (trabalho.IsNull()) return;
+                if (trabalho.IsNull()) throw new Exception("Trabalho não encontrado.");
                 else trabalho.AdicionarPonto();
 
                 _trabalhoRepository.Alterar(trabalho);
                 _trabalhoRepository.Commit();
+
+                return this.GetPontosDoDia(idTrabalho);
             }
             catch (Exception)
             {
@@ -38,12 +40,11 @@ namespace Damasio34.SGP.Aplicacao.Services
                 throw;
             }            
         }
-        public PontosDoDiaDto GetPontosDoDia(string login)
+        public PontosDoDiaDto GetPontosDoDia(Guid idTrabalho)
         {
             try
-            {
-                var usuario = _usuarioRepository.Selecionar(p => p.Login.Equals(login));
-                var trabalho = _trabalhoRepository.Selecionar(p => p.IdUsuario.Equals(usuario.Id));
+            {                
+                var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
 
                 var pontos = trabalho.Pontos.Where(p => p.DataHora.CompareTo(DateTime.Today) >= 0);
                 var deHoje = pontos as Ponto[] ?? pontos.ToArray();
@@ -62,6 +63,17 @@ namespace Damasio34.SGP.Aplicacao.Services
             {                
                 throw ex;
             }
+        }  
+        public Guid GetPadrao(string login)
+        {
+            try
+            {
+                return _usuarioRepository.Selecionar(p => p.Login.Equals(login)).Trabalhos.First(p => p.Padrao).Id;
+            }
+            catch (Exception ex)
+            {                
+                throw ex;
+            }            
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
-using Damasio34.SGP.Dominio.ModuloPessoa;
 using Damasio34.SGP.Dominio.ModuloPessoa.Factories;
-using Damasio34.SGP.Dominio.ModuloTrabalho;
+using Damasio34.SGP.Dominio.ModuloTrabalho.Factories;
 
 namespace Damasio34.SGP.Data.UnitOfWork.SeedDatabase
 {
@@ -12,37 +11,19 @@ namespace Damasio34.SGP.Data.UnitOfWork.SeedDatabase
         public void Seed(MainUnitOfWork context)
         {
             this._context = context;
-            var usuario = InserirUsuario();
-            var emprego = InserirEmprego(usuario);
+
+            InserirUsuario();
         }
 
-        private Usuario InserirUsuario()
+        private void InserirUsuario()
         {
-            var usuario = UsuarioFactory.Criar("damasio34", "1235");
-            this._context.RegisterNew(usuario);                
-            _context.Commit();
-
-            return usuario;
-        }
-        private Trabalho InserirEmprego(Usuario usuario)
-        {
-            var trabalho = new Trabalho
-            {
-                Usuario = usuario,
-                CargaHorariaDiaria = new TimeSpan(8, 0, 0),
-                ControlaAlmoco = true,
-                HorarioEntrada = new TimeSpan(9, 0, 0),
-                HorarioSaida = new TimeSpan(18, 0, 0),
-                TempoAlmoco = new TimeSpan(1, 0, 0),
-                MesesCiclo = 4,
-                SalarioBruto = 1000M                
-            };
-            trabalho.GerarId();
+            var trabalho = TrabalhoFactory.Criar(1000M, new TimeSpan(8, 0, 0), new TimeSpan(1, 0, 0),
+                new TimeSpan(9, 0, 0), new TimeSpan(18, 0, 0), 4);
+            var usuario = UsuarioFactory.Criar("damasio34", "1235", trabalho);
 
             this._context.RegisterNew(trabalho);
-            _context.Commit();
-
-            return trabalho;
+            this._context.RegisterNew(usuario);
+            this._context.Commit();
         }
     }
 }

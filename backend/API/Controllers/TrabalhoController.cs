@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Http;
 using Damasio34.SGP.Aplicacao;
 using Damasio34.SGP.Aplicacao.Interfaces;
-using Damasio34.SGP.Dominio.ModuloTrabalho;
+using Damasio34.SGP.Dominio.ModuloPessoa;
 
 namespace Damasio34.SGP.API.Controllers
 {
-    [RoutePrefix("api/trabalho")]
     [Authorize]
+    [RoutePrefix("api/trabalho")]    
     public class TrabalhoController : ApiController
     {
         private readonly ITrabalhoAppService _trabalhoAppService;
@@ -18,18 +17,25 @@ namespace Damasio34.SGP.API.Controllers
             this._trabalhoAppService = trabalhoAppService;
         }
 
-        [Route("ponto/dodia")]
+        [Route("padrao")]
         [HttpGet]
-        public PontosDoDiaDto Get()
+        public Guid GetPadrao()
         {
-            return _trabalhoAppService.GetPontosDoDia(User.Identity.Name);
+            return _trabalhoAppService.GetPadrao(User.Identity.Name);
+        }
+
+        [Route("{idtrabalho}/ponto/dodia")]
+        [HttpGet]
+        public PontosDoDiaDto Get([FromUri] Guid idTrabalho)
+        {
+            return _trabalhoAppService.GetPontosDoDia(idTrabalho);
         }
 
         [HttpPost]
-        [Route("ponto/marcar")]
-        public void Post([FromUri] Guid id)
+        [Route("{idtrabalho}/ponto/marcar")]
+        public PontosDoDiaDto Post([FromUri] Guid idTrabalho)
         {
-            _trabalhoAppService.MarcarPonto(id);
+            return _trabalhoAppService.MarcarPonto(idTrabalho);
         }
     }
 }

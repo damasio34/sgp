@@ -5,9 +5,10 @@
         .module('sgp.controllers')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$timeout', '$filter', 'ClockService', 'TrabalhoService'];
-    function DashboardController($timeout, $filter, ClockService, TrabalhoService) {
+    DashboardController.$inject = ['$timeout', '$filter', 'ClockService', 'TrabalhoService', 'WebStorageService'];
+    function DashboardController($timeout, $filter, ClockService, TrabalhoService, WebStorageService) {
         var vm = this;
+        var idTrabalhoPadrao = WebStorageService.getStorage('IdTrabalhoPadrao');
 
         vm.MarcarPonto = MarcarPonto;
 
@@ -25,7 +26,7 @@
             // Start the timer
             $timeout(tick, tickInterval);
 
-            TrabalhoService.getPontosDoDia(function(pontosDoDia) {
+            TrabalhoService.getPontosDoDia(idTrabalhoPadrao).success(function(pontosDoDia) {
                 vm.PontosDoDia = pontosDoDia;
             });
 
@@ -41,7 +42,7 @@
             //     });
         };
         function MarcarPonto() {
-            TrabalhoService.postMarcarPonto(function(pontosDoDia) {
+            TrabalhoService.postMarcarPonto(idTrabalhoPadrao).success(function(pontosDoDia) {
                 vm.PontosDoDia = pontosDoDia;
             });
             // var data = localStorage.getItem('_IdTrabalho');

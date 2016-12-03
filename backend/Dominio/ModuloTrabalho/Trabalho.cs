@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Damasio34.Seedwork.Domain;
 using Damasio34.SGP.Dominio.ModuloPessoa;
 
@@ -10,18 +11,30 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
     {
         #region [ Contrutores ]
 
-        public Trabalho() { ControlaAlmoco = true; }
+        internal Trabalho() {}
+        internal Trabalho(decimal salario, TimeSpan cargaHorariaTrabalho, TimeSpan tempoAlmoco, 
+            TimeSpan entrada, TimeSpan saida, uint mesesDoCliclo)
+        {
+            this.SalarioBruto = salario;
+            this.CargaHorariaDiaria = cargaHorariaTrabalho;
+            this.TempoAlmoco = tempoAlmoco;
+            this.HorarioDeEntrada = entrada;
+            this.HorarioDeSaida = saida;
+            this.MesesCiclo = mesesDoCliclo;
+
+            this.ControlaAlmoco = true;
+            this.Padrao = true;
+        }
 
         #endregion
 
         #region [ Propriedades ]
 
-        public int MesesCiclo { get; set; }
-        public TimeSpan HorarioEntrada { get; set; }
-        public TimeSpan HorarioSaida { get; set; }
+        public uint MesesCiclo { get; set; }
+        public TimeSpan HorarioDeEntrada { get; set; }
+        public TimeSpan HorarioDeSaida { get; set; }
         public TimeSpan CargaHorariaDiaria { get; set; }        
-        public TimeSpan TempoAlmoco { get; set; }
-        public uint HoraMes { get; set; }
+        public TimeSpan TempoAlmoco { get; set; }        
         public decimal SalarioBruto { get; set; }
         public bool ControlaAlmoco { get; set; }
         public decimal ValorHora { 
@@ -39,16 +52,15 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
             get
             {
                 var total = TimeSpan.Zero;
-
-                if (!Pontos.Any(s => s.TipoDoEvento.Equals(TipoDoEvento.Entrada)))
-                    return TimeSpan.Zero;
-
-                return Pontos.GroupBy(s => s.DataHora.Date).Aggregate(total, (current, item) => current + CalcularBancoHoras(item));
+                return !Pontos.Any(s => s.TipoDoEvento.Equals(TipoDoEvento.Entrada)) ? TimeSpan.Zero : Pontos.GroupBy(s => s.DataHora.Date).Aggregate(total, (current, item) => current + CalcularBancoHoras(item));
             }
         }
-        public decimal ValorBancoHoras => (decimal) SaldoBancoHoras.TotalHours * ValorHora;
         public Guid IdUsuario { get; set; }
         public Usuario Usuario { get; set; }
+        public bool Padrao { get; set; }
+
+        public uint HoraMes => this.HoraMes.Equals(null) ? 220 : this.HoraMes;
+        public decimal ValorBancoHoras => (decimal)SaldoBancoHoras.TotalHours * ValorHora;        
 
         #endregion
 

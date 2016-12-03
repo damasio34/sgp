@@ -13,12 +13,16 @@
             this.mainRoute = 'trabalho';
             this.urlBase = UrlDefault.Uri;
 
-            this.getPontosDoDia = function() {
-                return $http.get(self.urlBase + self.mainRoute + '/ponto/dodia', { headers: self.headers });
+            this.getTrabalhoPadrao = function() {
+                return $http.get(self.urlBase + self.mainRoute + '/padrao', { headers: self.headers });
             };
 
-            this.postMarcarPonto = function() {
-                return $http.post(self.urlBase + self.mainRoute + '/ponto/marcar', { headers: self.headers });
+            this.getPontosDoDia = function(idTrabalho) {
+                return $http.get(self.urlBase + self.mainRoute + '/' + idTrabalho + '/ponto/dodia', { headers: self.headers });
+            };
+
+            this.postMarcarPonto = function(idTrabalho) {
+                return $http.post(self.urlBase + self.mainRoute + '/' + idTrabalho + '/ponto/marcar', { headers: self.headers });
             };
         };
 		return new _service();
