@@ -34,7 +34,7 @@
             TrabalhoService.postMarcarPonto().success(function(pontosDoDia) {
                 vm.PontosDoDia = pontosDoDia;
                 $ionicPopup.alert({
-                    title: 'Clube Palace Diz!',
+                    title: 'Parabéns :)',
                     cssClass: 'custom-popup',
                     content: '<div class="text-center">Ponto marcado com sucesso.</div>',
                     buttons: [

@@ -56,7 +56,7 @@
                     views: {
                         'MainContent': {
                             templateUrl: 'views/configuracao-view.html',
-                            controller: 'ConfiguracaoController'
+                            controller: 'ConfiguracaoController as vm'
                         }
                     }
                 });

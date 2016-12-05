@@ -13,5 +13,7 @@ namespace Damasio34.SGP.Aplicacao.Interfaces
         Guid GetPadrao(string login);
         ContraCheque CalcularContraCheque(Guid idTrabalho);
         ContraCheque CalcularContraCheque(Guid idTrabalho, int mes);
+        ConfiguracaoDto SelecionarConfiguracao(Guid idTrabalho);
+        ConfiguracaoDto AtualizarConfiguracao(Guid idTrabalho, ConfiguracaoDto configuracaoDto);
     }
 }

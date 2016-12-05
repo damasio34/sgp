@@ -11,7 +11,7 @@ namespace Damasio34.SGP.Testes
         public void CalcularSalarioLiquidoDeMilReais()
         {
             var salarioBruto = 1000.00;
-            var trabalho = TrabalhoFactory.Criar(salarioBruto);
+            var trabalho = TrabalhoFactory.Criar(null, salarioBruto);
             var contraCheque = ContraChequeFactory.Criar(trabalho, DateTime.Now.AddMonths(-1));
             contraCheque.Calcular();
 
@@ -23,7 +23,7 @@ namespace Damasio34.SGP.Testes
         public void CalcularSalarioLiquidoDeTresMilReais()
         {
             var salarioBruto = 3000.00;
-            var trabalho = TrabalhoFactory.Criar(salarioBruto);
+            var trabalho = TrabalhoFactory.Criar(null, salarioBruto);
             var contraCheque = ContraChequeFactory.Criar(trabalho, DateTime.Now.AddMonths(-1));
             contraCheque.Calcular();
 
@@ -35,7 +35,7 @@ namespace Damasio34.SGP.Testes
         public void CalcularSalarioLiquidoDeSeteMilEQuinhentosReais()
         {
             var salarioBruto = 7500.00;
-            var trabalho = TrabalhoFactory.Criar(salarioBruto);
+            var trabalho = TrabalhoFactory.Criar(null, salarioBruto);
             var contraCheque = ContraChequeFactory.Criar(trabalho, DateTime.Now.AddMonths(-1));
             contraCheque.Calcular();
 
@@ -47,7 +47,7 @@ namespace Damasio34.SGP.Testes
         public void CalcularSalarioLiquidoDeDezMilReais()
         {
             var salarioBruto = 10000.00;
-            var trabalho = TrabalhoFactory.Criar(salarioBruto);
+            var trabalho = TrabalhoFactory.Criar(null, salarioBruto);
             var contraCheque = ContraChequeFactory.Criar(trabalho, DateTime.Now.AddMonths(-1));
             contraCheque.Calcular();
 

@@ -19,12 +19,20 @@ namespace Damasio34.SGP.API.Controllers
         {
             this._trabalhoAppService = trabalhoAppService;
         }
+    
 
         [Route("padrao")]
         [HttpGet]
         public Guid GetPadrao()
         {
             return _trabalhoAppService.GetPadrao(User.Identity.Name);
+        }
+
+        [Route("{idtrabalho}/configuracao")]
+        [HttpGet]
+        public ConfiguracaoDto GetConfiguracao([FromUri] Guid idTrabalho)
+        {
+            return _trabalhoAppService.SelecionarConfiguracao(idTrabalho);
         }
 
         [Route("{idtrabalho}/ponto")]
@@ -46,6 +54,13 @@ namespace Damasio34.SGP.API.Controllers
         public PontosDoDiaDto Post([FromUri] Guid idTrabalho)
         {
             return _trabalhoAppService.MarcarPonto(idTrabalho);
+        }
+
+        [Route("{idtrabalho}/configuracao")]
+        [HttpPut]
+        public ConfiguracaoDto PutConfiguracao([FromUri] Guid idTrabalho, [FromBody] ConfiguracaoDto configuracaoDto)
+        {
+            return _trabalhoAppService.AtualizarConfiguracao(idTrabalho, configuracaoDto);
         }
 
         [Route("{idtrabalho}/contracheque")]

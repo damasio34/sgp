@@ -17,6 +17,11 @@
                 return $http.get(self.urlBase + self.mainRoute + '/padrao', { headers: self.headers });
             };
 
+
+            this.getConfiguracao = function() {
+                var idTrabalho = WebStorageService.getStorage('IdTrabalhoPadrao');
+                return $http.get(self.urlBase + self.mainRoute + '/' + idTrabalho + '/configuracao', { headers: self.headers });
+            };
             this.getPontos = function() {
                 var idTrabalho = WebStorageService.getStorage('IdTrabalhoPadrao');
                 return $http.get(self.urlBase + self.mainRoute + '/' + idTrabalho + '/ponto', { headers: self.headers });
@@ -25,9 +30,15 @@
                 var idTrabalho = WebStorageService.getStorage('IdTrabalhoPadrao');
                 return $http.get(self.urlBase + self.mainRoute + '/' + idTrabalho + '/ponto/dodia', { headers: self.headers });
             };
+
             this.postMarcarPonto = function() {
                 var idTrabalho = WebStorageService.getStorage('IdTrabalhoPadrao');
                 return $http.post(self.urlBase + self.mainRoute + '/' + idTrabalho + '/ponto/marcar', { headers: self.headers });
+            };
+
+            this.putConfiguracao = function(model) {
+                var idTrabalho = WebStorageService.getStorage('IdTrabalhoPadrao');
+                return $http.put(self.urlBase + self.mainRoute + '/' + idTrabalho + '/configuracao', model, { headers: self.headers });
             };
         };
 		return new _service();

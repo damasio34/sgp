@@ -40,6 +40,34 @@ namespace Damasio34.SGP.Aplicacao.Services
                 default: throw new Exception("Tipo do próximo ponto não identificado.");
             }
         }
+        private ConfiguracaoDto TrabalhoToConfiguracaoDto(Trabalho trabalho)
+        {
+            var configuracaoDto = new ConfiguracaoDto
+            {
+                IdTrabalho = trabalho.Id,
+                HorarioDeEntrada = trabalho.HorarioDeEntrada,
+                HorarioDeSaida = trabalho.HorarioDeSaida,
+                ControlaAlmoco = trabalho.ControlaAlmoco,
+                SalarioBruto = trabalho.SalarioBruto,
+                MesesDoCiclo = trabalho.MesesDoCiclo,
+                HorarioDeEntradaDoAlmoco = trabalho.HorarioDeEntradaDoAlmoco,
+                HorarioDeSaidaDoAlmoco = trabalho.HorarioDeSaidaDoAlmoco
+            };
+
+            return configuracaoDto;
+        }
+        private Trabalho ConfiguracaoDtoToTrabalho(ConfiguracaoDto configuracaoDto, Trabalho trabalho)
+        {
+            trabalho.HorarioDeEntrada = configuracaoDto.HorarioDeEntrada;
+            trabalho.HorarioDeSaida = configuracaoDto.HorarioDeSaida;
+            trabalho.ControlaAlmoco = configuracaoDto.ControlaAlmoco;
+            trabalho.SalarioBruto = configuracaoDto.SalarioBruto;
+            trabalho.MesesDoCiclo = configuracaoDto.MesesDoCiclo;
+            trabalho.HorarioDeEntradaDoAlmoco = configuracaoDto.HorarioDeEntradaDoAlmoco;
+            trabalho.HorarioDeSaidaDoAlmoco = configuracaoDto.HorarioDeSaidaDoAlmoco;
+
+            return trabalho;
+        }
 
         public PontosDoDiaDto MarcarPonto(Guid idTrabalho)
         {        
@@ -129,6 +157,35 @@ namespace Damasio34.SGP.Aplicacao.Services
             }
             catch (Exception ex)
             {               
+                throw ex;
+            }
+        }
+        public ConfiguracaoDto SelecionarConfiguracao(Guid idTrabalho)
+        {
+            try
+            {
+                var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
+                var configuracaoDto = TrabalhoToConfiguracaoDto(trabalho);
+
+                return configuracaoDto;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public ConfiguracaoDto AtualizarConfiguracao(Guid idTrabalho, ConfiguracaoDto configuracaoDto)
+        {
+            try
+            {
+                var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
+                trabalho = ConfiguracaoDtoToTrabalho(configuracaoDto, trabalho);
+                _trabalhoRepository.Alterar(trabalho);
+
+                return configuracaoDto;
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }

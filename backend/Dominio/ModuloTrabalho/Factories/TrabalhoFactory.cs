@@ -1,19 +1,21 @@
 ﻿using System;
+using Damasio34.SGP.Dominio.ModuloPessoa;
 
 namespace Damasio34.SGP.Dominio.ModuloTrabalho.Factories
 {
     public static class TrabalhoFactory
     {
-        public static Trabalho Criar(double salario = 0, TimeSpan? cargaHorariaTrabalho = null, 
-            TimeSpan? tempoAlmoco = null, TimeSpan? horarioDeEntrada = null, TimeSpan? horarioDeSaida = null, uint mesesDoCliclo = 1)
+        public static Trabalho Criar(Usuario usuario, double salario = 0, TimeSpan? horarioDeEntrada = null, 
+            TimeSpan? horarioDeSaida = null, uint mesesDoCliclo = 1, TimeSpan? horarioDeEntradaDoAlmoco = null,
+            TimeSpan? horarioDeSaidaDoAlmoco = null)
         {
-            cargaHorariaTrabalho = cargaHorariaTrabalho ?? new TimeSpan(8, 0, 0);
-            tempoAlmoco = tempoAlmoco ?? new TimeSpan(1, 0, 0);
             horarioDeEntrada = horarioDeEntrada ?? new TimeSpan(9, 0, 0);
             horarioDeSaida = horarioDeSaida ?? new TimeSpan(18, 0, 0);
-            
-            var trabalho = new Trabalho(salario, cargaHorariaTrabalho.Value, tempoAlmoco.Value, 
-                horarioDeEntrada.Value, horarioDeSaida.Value, mesesDoCliclo);
+            horarioDeEntradaDoAlmoco = horarioDeEntradaDoAlmoco ?? new TimeSpan(12, 0, 0);
+            horarioDeSaidaDoAlmoco = horarioDeSaidaDoAlmoco ?? new TimeSpan(13, 0, 0);
+
+            var trabalho = new Trabalho(usuario, salario, horarioDeEntrada.Value, horarioDeSaida.Value, mesesDoCliclo,
+                horarioDeEntradaDoAlmoco.Value, horarioDeSaidaDoAlmoco.Value);
             trabalho.GerarId();
             return trabalho;
         }

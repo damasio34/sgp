@@ -5,10 +5,19 @@
         .module('sgp.controllers')
         .controller('ConfiguracaoController', ConfiguracaoController);
 
-    ConfiguracaoController.$inject = ['$scope'];
+    ConfiguracaoController.$inject = ['TrabalhoService'];
+    function ConfiguracaoController(TrabalhoService) {
+        var vm = this;
 
-    function ConfiguracaoController($scope) {
+        _init();
 
+        // -------------------------------------------------------------------
+
+        function _init() {
+            TrabalhoService.getConfiguracao().success(function(configuracao) {
+                vm.Configuracao = configuracao;
+            });
+        }
     };
 
 })(angular);
