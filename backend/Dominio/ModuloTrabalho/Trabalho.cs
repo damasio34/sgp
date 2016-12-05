@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Damasio34.Seedwork.Domain;
 using Damasio34.SGP.Dominio.ModuloPessoa;
+using Damasio34.SGP.Dominio.ModuloTrabalho.Factories;
 
 namespace Damasio34.SGP.Dominio.ModuloTrabalho
 {
@@ -58,6 +59,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public Guid IdUsuario { get; set; }
         public Usuario Usuario { get; set; }
         public bool Padrao { get; set; }
+        public int DiaDeFechamento => 1;
 
         public uint HoraMes => this.HoraMes.Equals(null) ? 220 : this.HoraMes;
         public double ValorBancoHoras => SaldoBancoHoras.TotalHours * ValorHora;
@@ -109,5 +111,14 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         }
 
         #endregion
+
+        public ContraCheque GerarContraCheque(int mes)
+        {
+            var contraCheque = ContraChequeFactory.Criar(this,
+                new DateTime(this.DiaDeFechamento, mes, DateTime.Today.Year));
+            //this.ContraCheques.Add(contraCheque);
+
+            return contraCheque;
+        }        
     }
 }

@@ -9,6 +9,8 @@ namespace Damasio34.SGP.Aplicacao.Interfaces
         PontosDoDiaDto MarcarPonto(Guid idTrabalho);
         IEnumerable<Ponto> GetPontos(Guid idTrabalho);
         PontosDoDiaDto GetPontosDoDia(Guid idTrabalho);
-        Guid GetPadrao(string login);        
+        Guid GetPadrao(string login);
+        ContraCheque CalcularContraCheque(Guid idTrabalho);
+        ContraCheque CalcularContraCheque(Guid idTrabalho, int mes);
     }
 }

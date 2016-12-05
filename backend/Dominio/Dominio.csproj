@@ -75,12 +75,17 @@
     <Compile Include="ModuloTrabalho\Factories\ContraChequeFactory.cs" />
     <Compile Include="ModuloTrabalho\Factories\TrabalhoFactory.cs" />
     <Compile Include="ModuloTrabalho\Factories\PontoFactory.cs" />
+    <Compile Include="ModuloTrabalho\IImposto.cs" />
+    <Compile Include="ModuloTrabalho\Imposto.cs" />
+    <Compile Include="ModuloTrabalho\Inss.cs" />
     <Compile Include="ModuloTrabalho\Interfaces\IContraChequeRepository.cs" />
     <Compile Include="ModuloTrabalho\Interfaces\IPontoRepository.cs" />
     <Compile Include="ModuloTrabalho\Interfaces\ITrabalhoRepository.cs" />
+    <Compile Include="ModuloTrabalho\Irrf.cs" />
     <Compile Include="ModuloTrabalho\Ponto.cs" />
     <Compile Include="ModuloTrabalho\Resources\Mensagens.Designer.cs" />
     <Compile Include="ModuloTrabalho\TipoDoEvento.cs" />
+    <Compile Include="ModuloTrabalho\TipoDoImposto.cs" />
     <Compile Include="ModuloTrabalho\Trabalho.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

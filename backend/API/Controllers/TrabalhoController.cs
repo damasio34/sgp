@@ -40,12 +40,25 @@ namespace Damasio34.SGP.API.Controllers
             return _trabalhoAppService.GetPontosDoDia(idTrabalho);
         }
 
-
         [HttpPost]
         [Route("{idtrabalho}/ponto/marcar")]
         public PontosDoDiaDto Post([FromUri] Guid idTrabalho)
         {
             return _trabalhoAppService.MarcarPonto(idTrabalho);
+        }
+
+        [Route("{idtrabalho}/contracheque")]
+        [HttpGet]
+        public ContraCheque GetContraCheque([FromUri] Guid idTrabalho)
+        {
+            return _trabalhoAppService.CalcularContraCheque(idTrabalho);
+        }
+
+        [Route("{idtrabalho}/contracheque/{mes}")]
+        [HttpGet]
+        public ContraCheque GetContraCheque([FromUri] Guid idTrabalho, [FromUri] int mes)
+        {
+            return _trabalhoAppService.CalcularContraCheque(idTrabalho, mes);
         }
     }
 }

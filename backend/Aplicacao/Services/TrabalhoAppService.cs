@@ -109,5 +109,26 @@ namespace Damasio34.SGP.Aplicacao.Services
                 throw ex;
             }            
         }
+
+        public ContraCheque CalcularContraCheque(Guid idTrabalho)
+        {
+            return this.CalcularContraCheque(idTrabalho, DateTime.Today.Month - 1);
+        }
+
+        public ContraCheque CalcularContraCheque(Guid idTrabalho, int mes)
+        {
+            try
+            {
+                var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
+                var contracheque = trabalho.ContraCheques.FirstOrDefault(p => p.DataDeReferencia.Month.Equals(mes));            
+                if (contracheque.IsNotNull()) return contracheque;
+
+                return trabalho.GerarContraCheque(mes);
+            }
+            catch (Exception ex)
+            {               
+                throw ex;
+            }
+        }
     }
 }

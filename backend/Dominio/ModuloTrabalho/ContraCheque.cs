@@ -43,10 +43,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public void Finalizar()
         {
             throw new NotImplementedException();
-        }
-
-        #endregion
-
+        }            
         public void Calcular()
         {
             var inss = new Inss(this.ValorLiquido).Valor;
@@ -56,59 +53,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
             var lancamentoDeIrrf = new Lancamento(irrf, TipoLancamento.Saida, "IRRF");
             this.AdiconarLancamento(lancamentoDeIrrf);
         }
-    }
 
-    public class Irrf : Imposto
-    {
-        public Irrf(double valor) : base(TipoDoImposto.Irrf) { this.CalcularAliquota(valor); }
-
-        protected sealed override void CalcularAliquota(double valor)
-        {            
-            if (valor <= 1903.98) this.Valor = 0;
-            else if (valor >= 1903.99 && valor < 2826.65) this.Valor = (0.075 * valor) - 142.80;
-            else if (valor >= 2826.66 && valor < 3751.05) this.Valor = (0.15 * valor) - 354.80;
-            else if (valor >= 3751.06 && valor < 4664.68) this.Valor = (0.225 * valor) - 636.13;
-            else this.Valor = (0.275 * valor) - 869.36;
-        }
-    }
-
-    public class Inss : Imposto
-    {
-        public Inss(double valor) : base(TipoDoImposto.Inss) { this.CalcularAliquota(valor); }
-
-        protected sealed override void CalcularAliquota(double valor)
-        {
-            if (valor <= 1556.94) this.Valor = valor * 0.08;
-            else if (valor >= 1556.95 && valor < 2594.92) this.Valor = valor * 0.09;
-            else if (valor >= 1556.95 && valor < 2594.92) this.Valor = valor * 0.09;
-            else if (valor >= 2594.93 && valor < 5189.82) this.Valor = valor * 0.11;
-            else this.Valor = 570.88;
-        }
-    }
-
-    public abstract class Imposto : IImposto
-    {
-        protected Imposto(TipoDoImposto tipoDoImposto)
-        {
-            this.TipoDoImposto = tipoDoImposto;
-        }
-
-        public TipoDoImposto TipoDoImposto { get; protected set; }
-        public double Valor { get; protected set; }
-
-        protected abstract void CalcularAliquota(double valor);
-    }
-
-    public interface IImposto
-    {
-        TipoDoImposto TipoDoImposto { get; }
-        double Valor { get; }
-
-    }
-
-    public enum TipoDoImposto
-    {
-        Inss = 1,
-        Irrf = 2
+        #endregion
     }
 }
