@@ -59,7 +59,7 @@
             var tickInterval = 1000;
             var tick = function() {
                 var horasTrabalhadas = _calcularHorasTrabalhadas(vm.PontosDoDia);
-                vm.Relogio = $filter('date')(horasTrabalhadas, 'HH:mm:ss'); // get the current time
+                vm.Relogio = $filter('date')(horasTrabalhadas, 'HH:mm:ss') || "00:00:00"; // get the current time
 
                 if (vm.PontosDoDia.HorarioDeSaida ||
                     (vm.PontosDoDia.HorarioDeEntradaDoAlmoco && !vm.PontosDoDia.HorarioDeSaidaDoAlmoco))
@@ -67,7 +67,7 @@
                     $timeout.cancel(tick); // Stop the timer
                     return;
                 }
-                else $timeout(tick, tickInterval); // restart the timer                
+                else $timeout(tick, tickInterval); // restart the timer
             };
             $timeout(tick, tickInterval); // Start the timer
         }
