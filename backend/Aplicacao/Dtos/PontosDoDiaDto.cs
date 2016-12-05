@@ -7,6 +7,7 @@ namespace Damasio34.SGP.Aplicacao.Dtos
         public Guid IdTrabalho { get; set; }
         public DateTime? HorarioDeEntrada { get; set; }
         public DateTime? HorarioDeSaida { get; set; }
+        public bool ControlaAlmoco { get; set; }
         public DateTime? HorarioDeEntradaDoAlmoco { get; set; }
         public DateTime? HorarioDeSaidaDoAlmoco { get; set; }
     }

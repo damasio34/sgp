@@ -43,8 +43,10 @@ namespace Damasio34.SGP.Data.UnitOfWork.SeedDatabase
                 dataAtual = dataAtual.AddDays(1);
             }
 
-            this._context.RegisterNew(trabalho);
+            this._context.RegisterNew(pessoa);
             this._context.RegisterNew(usuario);
+            this._context.RegisterNew(trabalho);
+
             this._context.Commit();
         }
     }

@@ -14,12 +14,14 @@ namespace Damasio34.SGP.Aplicacao.Services
     {
         private readonly ITrabalhoRepository _trabalhoRepository;
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IPessoaRepository _pessoaRepository;
 
         public TrabalhoAppService(ITrabalhoRepository trabalhoRepository, 
-            IUsuarioRepository usuarioRepository)
+            IUsuarioRepository usuarioRepository, IPessoaRepository pessoaRepository    )
         {
             this._trabalhoRepository = trabalhoRepository;
             this._usuarioRepository = usuarioRepository;
+            this._pessoaRepository = pessoaRepository;
         }
 
         private TipoDoEvento IdentificarProximoEvento(Trabalho trabalho)
@@ -116,6 +118,7 @@ namespace Damasio34.SGP.Aplicacao.Services
                 var configuracoesDoUsuarioDto = new PontosDoDiaDto
                 {
                     IdTrabalho = trabalho.Id,
+                    ControlaAlmoco = trabalho.ControlaAlmoco,
                     HorarioDeEntrada = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.Entrada))?.DataHora,
                     HorarioDeSaida = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.Saida))?.DataHora,
                     HorarioDeEntradaDoAlmoco = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.EntradaDoAlmoco))?.DataHora,
@@ -133,7 +136,8 @@ namespace Damasio34.SGP.Aplicacao.Services
         {
             try
             {
-                var pessoa = _usuarioRepository.Selecionar(p => p.Login.Equals(login)).Pessoa;
+                var usuario = _usuarioRepository.Selecionar(p => p.Login.Equals(login));
+                var pessoa = _pessoaRepository.Selecionar(p => p.Id.Equals(usuario.IdPessoa));
                 return pessoa.Trabalhos.First(p => p.Padrao).Id;
             }
             catch (Exception ex)

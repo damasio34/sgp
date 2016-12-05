@@ -13,7 +13,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
     {
         #region [ Contrutores ]
 
-        public Trabalho() {}
+        protected Trabalho() {}
         internal Trabalho(Pessoa pessoa, double salario, TimeSpan entrada, TimeSpan saida, int mesesDoDoCliclo,
             TimeSpan? entradaDoAlmoco, TimeSpan? saidaDoAlmoco)
         {

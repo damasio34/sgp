@@ -16,25 +16,68 @@
         // -------------------------------------------------------------
 
         function _init() {
-            var tickInterval = 1000;
-            var tick = function() {
-                vm.Relogio = $filter('date')(Date.now(), 'HH:mm:ss'); // get the current time
-                $timeout(tick, tickInterval); // reset the timer
-            };
-
-            // Start the timer
-            $timeout(tick, tickInterval);
-
             TrabalhoService.getPontosDoDia().success(function(pontosDoDia) {
+                vm.Relogio = "00:00:00";
                 vm.PontosDoDia = pontosDoDia;
+                _exibeHorasTrabalhadas();
             });
         };
+
+        function _calcularHorasTrabalhadas(pontosDoDia) {
+            if (!pontosDoDia) return;
+            var horasTrabalhadas;
+            var almoco;
+
+            var horarioDeEntrada = pontosDoDia.HorarioDeEntrada ? new Date(pontosDoDia.HorarioDeEntrada) : null;
+            var horarioDeSaida = pontosDoDia.HorarioDeSaida ? new Date(pontosDoDia.HorarioDeSaida) : null;
+            var horarioDeEntradaDoAlmoco = pontosDoDia.HorarioDeEntradaDoAlmoco ? new Date(pontosDoDia.HorarioDeEntradaDoAlmoco) : null;
+            var horarioDeSaidaDoAlmoco = pontosDoDia.HorarioDeSaidaDoAlmoco ? new Date(pontosDoDia.HorarioDeSaidaDoAlmoco) : null;
+
+            if (horarioDeEntrada && (!pontosDoDia.ControlaAlmoco || !horarioDeEntradaDoAlmoco) && !horarioDeSaida)
+            {
+                horasTrabalhadas = new Date() - horarioDeEntrada;
+            }
+            else if (horarioDeEntrada && pontosDoDia.ControlaAlmoco && horarioDeEntradaDoAlmoco && !horarioDeSaidaDoAlmoco)
+            {
+                horasTrabalhadas = horarioDeEntradaDoAlmoco - horarioDeEntrada;
+            }
+            else if (horarioDeEntrada && pontosDoDia.ControlaAlmoco && horarioDeEntradaDoAlmoco && horarioDeSaidaDoAlmoco)
+            {
+                almoco = horarioDeSaidaDoAlmoco - horarioDeEntradaDoAlmoco;
+                horasTrabalhadas = new Date() - horarioDeEntrada - almoco;
+            }
+            else if ((horarioDeEntrada && pontosDoDia.ControlaAlmoco &&
+                horarioDeEntradaDoAlmoco && horarioDeSaidaDoAlmoco && horarioDeSaida) ||
+                (horarioDeEntrada && !pontosDoDia.ControlaAlmoco && horarioDeSaida))
+            {
+                horasTrabalhadas = horarioDeSaida - horarioDeEntrada;
+            }
+
+            return horasTrabalhadas;
+        }
+        function _exibeHorasTrabalhadas() {
+            var tickInterval = 1000;
+            var tick = function() {
+                var horasTrabalhadas = _calcularHorasTrabalhadas(vm.PontosDoDia);
+                vm.Relogio = $filter('date')(horasTrabalhadas, 'HH:mm:ss'); // get the current time
+
+                if (vm.PontosDoDia.HorarioDeSaida ||
+                    (vm.PontosDoDia.HorarioDeEntradaDoAlmoco && !vm.PontosDoDia.HorarioDeSaidaDoAlmoco))
+                {
+                    $timeout.cancel(tick); // Stop the timer
+                    return;
+                }
+                else $timeout(tick, tickInterval); // restart the timer                
+            };
+            $timeout(tick, tickInterval); // Start the timer
+        }
 
         function MarcarPonto() {
             TrabalhoService.postMarcarPonto().success(function(pontosDoDia) {
                 vm.PontosDoDia = pontosDoDia;
+                _exibeHorasTrabalhadas();
                 $ionicPopup.alert({
-                    title: 'Parabéns :)',
+                    title: 'Mensagem',
                     cssClass: 'custom-popup',
                     content: '<div class="text-center">Ponto marcado com sucesso.</div>',
                     buttons: [

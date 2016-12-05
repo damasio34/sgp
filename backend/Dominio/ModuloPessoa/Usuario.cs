@@ -1,4 +1,5 @@
-﻿using Damasio34.Seedwork.Domain;
+﻿using System;
+using Damasio34.Seedwork.Domain;
 
 namespace Damasio34.SGP.Dominio.ModuloPessoa
 {
@@ -13,7 +14,8 @@ namespace Damasio34.SGP.Dominio.ModuloPessoa
             this.Senha = senha;
         }
 
-        public virtual Pessoa Pessoa { get; private set; }
+        public Guid IdPessoa { get; set; }
+        public virtual Pessoa Pessoa { get; protected set; }
 
         public string Login { get; set; }
         public string Senha { get; set; }        

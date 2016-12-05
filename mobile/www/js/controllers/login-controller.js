@@ -10,7 +10,7 @@
     function LoginController($state, $ionicPopup, WebStorageService, LoginService, TrabalhoService) {
         var vm = this;
 
-        vm.Usuario = { Login: 'damasio34', Senha: 1235 };
+        vm.Usuario = { Login: 'damasio34', Senha: 1235, LembrarSenha: true };
         vm.Login = Login;
 
         _init();

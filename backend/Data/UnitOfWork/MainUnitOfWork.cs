@@ -61,9 +61,9 @@ namespace Damasio34.SGP.Data.UnitOfWork
             modelBuilder.Configurations.Add(new PontoTypeConfiguration());
 
             // Modulo Financeiro
-            modelBuilder.Configurations.Add(new BancoTypeConfiguration());
-            modelBuilder.Configurations.Add(new CategoriaTypeConfiguration());
-            modelBuilder.Configurations.Add(new ContaTypeConfiguration());
+            //modelBuilder.Configurations.Add(new BancoTypeConfiguration());
+            //modelBuilder.Configurations.Add(new CategoriaTypeConfiguration());
+            //modelBuilder.Configurations.Add(new ContaTypeConfiguration());
             modelBuilder.Configurations.Add(new LancamentoTypeConfiguration());
             // Modulo Pessoa
             modelBuilder.Configurations.Add(new PessoaTypeConfiguration());

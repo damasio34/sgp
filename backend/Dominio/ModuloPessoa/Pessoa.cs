@@ -6,8 +6,7 @@ namespace Damasio34.SGP.Dominio.ModuloPessoa
 {
     public class Pessoa : EntidadeBase
     {
-        protected internal Pessoa() { }
-
+        protected Pessoa() { }
         internal Pessoa(string nome, string cpf, string email)
         {
             this.Nome = nome;
@@ -19,7 +18,6 @@ namespace Damasio34.SGP.Dominio.ModuloPessoa
         public string Cpf { get; set; }
         public string Email { get; set; }
 
-        public virtual Usuario Usuario { get; set; }
         public virtual IList<Trabalho> Trabalhos { get; set; } = new List<Trabalho>();
 
         public void AdicionarTrabalho(Trabalho trabalho)
