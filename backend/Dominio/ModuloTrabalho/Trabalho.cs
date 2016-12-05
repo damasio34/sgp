@@ -14,11 +14,11 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         #region [ Contrutores ]
 
         public Trabalho() {}
-        internal Trabalho(Usuario usuario, double salario, TimeSpan entrada, TimeSpan saida, uint mesesDoDoCliclo,
+        internal Trabalho(Pessoa pessoa, double salario, TimeSpan entrada, TimeSpan saida, int mesesDoDoCliclo,
             TimeSpan? entradaDoAlmoco, TimeSpan? saidaDoAlmoco)
         {
-            this.Usuario = usuario;
-            this.IdUsuario = usuario.Id;
+            this.Pessoa = pessoa;
+            this.IdPessoa = pessoa.Id;
 
             this.SalarioBruto = salario;
             this.HorarioDeEntrada = entrada;
@@ -35,7 +35,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 
         #region [ Propriedades ]
 
-        public uint MesesDoCiclo { get; set; }
+        public int MesesDoCiclo { get; set; }
         public TimeSpan HorarioDeEntrada { get; set; }
         public TimeSpan HorarioDeSaida { get; set; }        
         public TimeSpan? HorarioDeEntradaDoAlmoco { get; set; }
@@ -44,8 +44,8 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public bool ControlaAlmoco { get; set; }
         public virtual IList<Ponto> Pontos { get; private set; } = new List<Ponto>();
         public virtual IList<ContraCheque> ContraCheques { get; private set; } = new List<ContraCheque>();
-        public Guid IdUsuario { get; set; }
-        public Usuario Usuario { get; set; }
+        public Guid IdPessoa { get; set; }
+        public Pessoa Pessoa { get; set; }
         public bool Padrao { get; set; }
 
         public int DiaDeFechamento => 1;

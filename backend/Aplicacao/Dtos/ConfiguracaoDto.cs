@@ -10,7 +10,7 @@ namespace Damasio34.SGP.Aplicacao.Dtos
         public TimeSpan HorarioDeSaida { get; set; }
         public TimeSpan? HorarioDeEntradaDoAlmoco { get; set; }
         public TimeSpan? HorarioDeSaidaDoAlmoco { get; set; }
-        public uint MesesDoCiclo { get; set; }
+        public int MesesDoCiclo { get; set; }
         public double SalarioBruto { get; set; }
         public bool ControlaAlmoco { get; set; }
     }

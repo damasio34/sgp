@@ -96,11 +96,10 @@ namespace Damasio34.SGP.Aplicacao.Services
             try
             {
                 var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
-
                 return trabalho.Pontos.Select(p => new PontoDto
                 {
                     Id = p.Id, DataHora = p.DataHora, TipoDoEvento = p.TipoDoEvento, Justificativa = p.Justificativa
-                }).ToList();
+                }).OrderBy(p => p.DataHora).ToList();
             }
             catch (Exception ex)
             {                
@@ -134,7 +133,8 @@ namespace Damasio34.SGP.Aplicacao.Services
         {
             try
             {
-                return _usuarioRepository.Selecionar(p => p.Login.Equals(login)).Trabalhos.First(p => p.Padrao).Id;
+                var pessoa = _usuarioRepository.Selecionar(p => p.Login.Equals(login)).Pessoa;
+                return pessoa.Trabalhos.First(p => p.Padrao).Id;
             }
             catch (Exception ex)
             {                

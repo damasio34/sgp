@@ -66,6 +66,7 @@
     <Compile Include="ModuloFinanceiro\Specifications\ValorLancamentoMaiorQueZeroSpec.cs" />
     <Compile Include="ModuloFinanceiro\Specifications\ValorLancamentoMenorQueZeroSpec.cs" />
     <Compile Include="ModuloFinanceiro\TipoLancamento.cs" />
+    <Compile Include="ModuloPessoa\Factories\PessoaFactory.cs" />
     <Compile Include="ModuloPessoa\Factories\UsuarioFactory.cs" />
     <Compile Include="ModuloPessoa\Interfaces\IPessoaRepository.cs" />
     <Compile Include="ModuloPessoa\Interfaces\IUsuarioRepository.cs" />
