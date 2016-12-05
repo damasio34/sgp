@@ -1,7 +1,6 @@
 ﻿using System;
-using Damasio34.SGP.Dominio.ModuloTrabalho;
 
-namespace Damasio34.SGP.Aplicacao
+namespace Damasio34.SGP.Aplicacao.Dtos
 {
     public class PontosDoDiaDto
     {

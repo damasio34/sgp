@@ -41,6 +41,16 @@
                     }
                 })
 
+                .state('app.contracheque', {
+                    url: '/contracheque',
+                    views: {
+                        'MainContent': {
+                            templateUrl: 'views/contracheque-view.html',
+                            controller: 'ContrachequeController as vm'
+                        }
+                    }
+                })
+
                 .state('app.configuracao', {
                     url: '/configuracao',
                     views: {

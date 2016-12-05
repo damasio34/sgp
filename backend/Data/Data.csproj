@@ -58,9 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
-    <Compile Include="Migrations\201612031954352_Migracao.cs" />
-    <Compile Include="Migrations\201612031954352_Migracao.Designer.cs">
-      <DependentUpon>201612031954352_Migracao.cs</DependentUpon>
+    <Compile Include="Migrations\201612050239509_Migracao.cs" />
+    <Compile Include="Migrations\201612050239509_Migracao.Designer.cs">
+      <DependentUpon>201612050239509_Migracao.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,8 +107,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612031954352_Migracao.resx">
-      <DependentUpon>201612031954352_Migracao.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612050239509_Migracao.resx">
+      <DependentUpon>201612050239509_Migracao.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

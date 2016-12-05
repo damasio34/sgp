@@ -48,9 +48,9 @@ namespace Damasio34.SGP.Data.UnitOfWork
         {
             base.OnModelCreating(modelBuilder);
 
-            //Database.SetInitializer(new CreateDatabaseIfNotExistsInitializer());
+            Database.SetInitializer(new CreateDatabaseIfNotExistsInitializer());
             //Database.SetInitializer(new DropCreateDatabaseAlwaysInitializer());
-            Database.SetInitializer(new DropCreateDatabaseIfModelChangesInitializer());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChangesInitializer());
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

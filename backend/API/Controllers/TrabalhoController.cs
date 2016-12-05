@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Damasio34.SGP.Aplicacao;
+using Damasio34.SGP.Aplicacao.Dtos;
 using Damasio34.SGP.Aplicacao.Interfaces;
 using Damasio34.SGP.Dominio.ModuloPessoa;
 using Damasio34.SGP.Dominio.ModuloTrabalho;
@@ -28,7 +29,7 @@ namespace Damasio34.SGP.API.Controllers
 
         [Route("{idtrabalho}/ponto")]
         [HttpGet]
-        public IEnumerable<Ponto> GetPontos([FromUri] Guid idTrabalho)
+        public IEnumerable<PontoDto> GetPontos([FromUri] Guid idTrabalho)
         {
             return _trabalhoAppService.GetPontos(idTrabalho);
         }

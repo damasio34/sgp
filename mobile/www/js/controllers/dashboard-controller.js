@@ -5,8 +5,8 @@
         .module('sgp.controllers')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$timeout', '$filter', 'ClockService', 'TrabalhoService'];
-    function DashboardController($timeout, $filter, ClockService, TrabalhoService) {
+    DashboardController.$inject = ['$ionicPopup', '$timeout', '$filter', 'ClockService', 'TrabalhoService'];
+    function DashboardController($ionicPopup, $timeout, $filter, ClockService, TrabalhoService) {
         var vm = this;
 
         vm.MarcarPonto = MarcarPonto;
@@ -33,6 +33,17 @@
         function MarcarPonto() {
             TrabalhoService.postMarcarPonto().success(function(pontosDoDia) {
                 vm.PontosDoDia = pontosDoDia;
+                $ionicPopup.alert({
+                    title: 'Clube Palace Diz!',
+                    cssClass: 'custom-popup',
+                    content: '<div class="text-center">Ponto marcado com sucesso.</div>',
+                    buttons: [
+                        {
+                            text: '<b>Ok</b>',
+                            type: 'btn-amarelo',
+                        },
+                    ]
+                });
             });
         };
     };

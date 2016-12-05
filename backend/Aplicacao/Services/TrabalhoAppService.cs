@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Damasio34.Seedwork.Extensions;
+using Damasio34.SGP.Aplicacao.Dtos;
 using Damasio34.SGP.Aplicacao.Interfaces;
 using Damasio34.SGP.Dominio.ModuloPessoa.Interfaces;
 using Damasio34.SGP.Dominio.ModuloTrabalho;
@@ -23,7 +24,7 @@ namespace Damasio34.SGP.Aplicacao.Services
 
         private TipoDoEvento IdentificarProximoEvento(Trabalho trabalho)
         {
-            var ultimoPonto = trabalho.PontosDoDia.LastOrDefault();
+            var ultimoPonto = trabalho.PontosDoDia.OrderBy(p => p.DataHora).LastOrDefault();
             if (ultimoPonto.IsNull()) return TipoDoEvento.Entrada;
             switch (ultimoPonto.TipoDoEvento)
             {
@@ -36,7 +37,7 @@ namespace Damasio34.SGP.Aplicacao.Services
                 case TipoDoEvento.Saida:
                     return TipoDoEvento.Entrada;
 
-                default: return TipoDoEvento.Entrada;
+                default: throw new Exception("Tipo do próximo ponto não identificado.");
             }
         }
 
@@ -62,13 +63,16 @@ namespace Damasio34.SGP.Aplicacao.Services
                 throw ex;
             }            
         }
-        public IEnumerable<Ponto> GetPontos(Guid idTrabalho)
+        public IEnumerable<PontoDto> GetPontos(Guid idTrabalho)
         {
             try
             {
                 var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
-                var pontos = trabalho.Pontos;
-                return pontos;
+
+                return trabalho.Pontos.Select(p => new PontoDto
+                {
+                    Id = p.Id, DataHora = p.DataHora, TipoDoEvento = p.TipoDoEvento, Justificativa = p.Justificativa
+                }).ToList();
             }
             catch (Exception ex)
             {                
@@ -109,12 +113,10 @@ namespace Damasio34.SGP.Aplicacao.Services
                 throw ex;
             }            
         }
-
         public ContraCheque CalcularContraCheque(Guid idTrabalho)
         {
             return this.CalcularContraCheque(idTrabalho, DateTime.Today.Month - 1);
         }
-
         public ContraCheque CalcularContraCheque(Guid idTrabalho, int mes)
         {
             try
