@@ -5,6 +5,7 @@
     "ionic": "driftyco/ionic-bower#1.1.0"
   },
   "dependencies": {
-    "angular-input-masks": "^2.5.0"
+    "angular-input-masks": "^2.5.0",
+    "angular-filter": "^0.5.12"
   }
 }

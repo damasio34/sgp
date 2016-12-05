@@ -2,7 +2,7 @@
 {
     public static class ContaFactory
     {
-        public static ContaCorrente Criar(decimal saldoInicial)
+        public static ContaCorrente Criar(double saldoInicial)
         {
             var conta = new ContaCorrente();
             conta.Creditar(saldoInicial);

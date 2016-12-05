@@ -11,8 +11,8 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
     {
         #region [ Contrutores ]
 
-        internal Trabalho() {}
-        internal Trabalho(decimal salario, TimeSpan cargaHorariaTrabalho, TimeSpan tempoAlmoco, 
+        public Trabalho() {}
+        internal Trabalho(double salario, TimeSpan cargaHorariaTrabalho, TimeSpan tempoAlmoco, 
             TimeSpan entrada, TimeSpan saida, uint mesesDoCliclo)
         {
             this.SalarioBruto = salario;
@@ -35,9 +35,9 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public TimeSpan HorarioDeSaida { get; set; }
         public TimeSpan CargaHorariaDiaria { get; set; }        
         public TimeSpan TempoAlmoco { get; set; }        
-        public decimal SalarioBruto { get; set; }
+        public double SalarioBruto { get; set; }
         public bool ControlaAlmoco { get; set; }
-        public decimal ValorHora { 
+        public double ValorHora { 
             get {
                 if (SalarioBruto.Equals(0))
                     return 0;
@@ -45,8 +45,8 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
                     return SalarioBruto / HoraMes;
             }
         }
-        public virtual ICollection<Ponto> Pontos { get; private set; } = new List<Ponto>();
-        public virtual ICollection<ContraCheque> ContraCheques { get; set; } = new List<ContraCheque>();
+        public virtual IList<Ponto> Pontos { get; private set; } = new List<Ponto>();
+        public virtual IList<ContraCheque> ContraCheques { get; private set; } = new List<ContraCheque>();
         public TimeSpan SaldoBancoHoras
         {
             get
@@ -60,7 +60,8 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public bool Padrao { get; set; }
 
         public uint HoraMes => this.HoraMes.Equals(null) ? 220 : this.HoraMes;
-        public decimal ValorBancoHoras => (decimal)SaldoBancoHoras.TotalHours * ValorHora;        
+        public double ValorBancoHoras => SaldoBancoHoras.TotalHours * ValorHora;
+        public IEnumerable<Ponto> PontosDoDia => this.Pontos.Where(p => p.DataHora.CompareTo(DateTime.Today) >= 0);
 
         #endregion
 
@@ -96,13 +97,12 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 
         #region [ Métodos Públicos ]
 
-        public void AdicionarPonto()
+        public void AdicionarPonto(TipoDoEvento tipoDoEvento)
         {
             var ponto = new Ponto
             {
                 DataHora = DateTime.Now,
-                IdTrabalho = this.Id,
-                TipoDoEvento = TipoDoEvento.Entrada
+                TipoDoEvento = tipoDoEvento
             };
             ponto.GerarId();
             this.Pontos.Add(ponto);

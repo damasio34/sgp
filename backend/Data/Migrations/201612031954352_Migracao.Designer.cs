@@ -13,7 +13,7 @@ namespace Damasio34.SGP.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201612021418208_Migracao"; }
+            get { return "201612031954352_Migracao"; }
         }
         
         string IMigrationMetadata.Source

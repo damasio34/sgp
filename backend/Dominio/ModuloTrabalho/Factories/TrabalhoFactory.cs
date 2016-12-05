@@ -4,7 +4,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho.Factories
 {
     public static class TrabalhoFactory
     {
-        public static Trabalho Criar(decimal salario = 0, TimeSpan? cargaHorariaTrabalho = null, 
+        public static Trabalho Criar(double salario = 0, TimeSpan? cargaHorariaTrabalho = null, 
             TimeSpan? tempoAlmoco = null, TimeSpan? horarioDeEntrada = null, TimeSpan? horarioDeSaida = null, uint mesesDoCliclo = 1)
         {
             cargaHorariaTrabalho = cargaHorariaTrabalho ?? new TimeSpan(8, 0, 0);

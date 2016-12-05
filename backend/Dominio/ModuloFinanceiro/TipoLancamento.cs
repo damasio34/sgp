@@ -2,9 +2,9 @@
 {
     public enum TipoLancamento
     {
-        Entrada = 0,
-        Saida = 1,
-        Transferencia = 2,
-        Ajuste = 3,
+        Entrada = 1,
+        Saida = 2,
+        Transferencia = 3,
+        Ajuste = 4
     }
 }

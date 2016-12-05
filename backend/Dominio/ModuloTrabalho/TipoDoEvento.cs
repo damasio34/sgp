@@ -2,9 +2,9 @@
 {
     public enum TipoDoEvento
     {
-        Entrada = 0,
-        Saida = 1,
-        EntradaDoAlmoco = 2,
-        SaidaDoAlmoco = 3        
+        Entrada = 1,
+        Saida = 2,
+        EntradaDoAlmoco = 3,
+        SaidaDoAlmoco = 4       
     }
 }

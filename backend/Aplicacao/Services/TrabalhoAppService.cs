@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Damasio34.Seedwork.Extensions;
 using Damasio34.SGP.Aplicacao.Interfaces;
@@ -20,39 +21,72 @@ namespace Damasio34.SGP.Aplicacao.Services
             this._usuarioRepository = usuarioRepository;
         }
 
-        public PontosDoDiaDto MarcarPonto(Guid idTrabalho)
+        private TipoDoEvento IdentificarProximoEvento(Trabalho trabalho)
         {
-            var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
+            var ultimoPonto = trabalho.PontosDoDia.LastOrDefault();
+            if (ultimoPonto.IsNull()) return TipoDoEvento.Entrada;
+            switch (ultimoPonto.TipoDoEvento)
+            {
+                case TipoDoEvento.Entrada:
+                    return TipoDoEvento.EntradaDoAlmoco;
+                case TipoDoEvento.EntradaDoAlmoco:
+                    return TipoDoEvento.SaidaDoAlmoco;
+                case TipoDoEvento.SaidaDoAlmoco:
+                    return TipoDoEvento.Saida;
+                case TipoDoEvento.Saida:
+                    return TipoDoEvento.Entrada;
 
+                default: return TipoDoEvento.Entrada;
+            }
+        }
+
+        public PontosDoDiaDto MarcarPonto(Guid idTrabalho)
+        {        
             try
             {
+                var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
                 if (trabalho.IsNull()) throw new Exception("Trabalho não encontrado.");
-                else trabalho.AdicionarPonto();
+                else
+                {
+                    var tipoDoEvento = IdentificarProximoEvento(trabalho);
+                    trabalho.AdicionarPonto(tipoDoEvento);
+                }
 
                 _trabalhoRepository.Alterar(trabalho);
                 _trabalhoRepository.Commit();
 
                 return this.GetPontosDoDia(idTrabalho);
             }
-            catch (Exception)
-            {
-                
-                throw;
+            catch (Exception ex)
+            {                
+                throw ex;
             }            
+        }
+        public IEnumerable<Ponto> GetPontos(Guid idTrabalho)
+        {
+            try
+            {
+                var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
+                var pontos = trabalho.Pontos;
+                return pontos;
+            }
+            catch (Exception ex)
+            {                
+                throw ex;
+            }
         }
         public PontosDoDiaDto GetPontosDoDia(Guid idTrabalho)
         {
             try
-            {                
+            {
                 var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
-
-                var pontos = trabalho.Pontos.Where(p => p.DataHora.CompareTo(DateTime.Today) >= 0);
-                var deHoje = pontos as Ponto[] ?? pontos.ToArray();
+                var pontosDoDia = trabalho.PontosDoDia;
+                var deHoje = pontosDoDia as Ponto[] ?? pontosDoDia.ToArray();
                 var configuracoesDoUsuarioDto = new PontosDoDiaDto
                 {
                     IdTrabalho = trabalho.Id,
                     HorarioDeEntrada = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.Entrada))?.DataHora,
-                    HorarioDeSaida = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.Entrada))?.DataHora,
+                    HorarioDeSaida = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.Saida))?.DataHora,
                     HorarioDeEntradaDoAlmoco = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.EntradaDoAlmoco))?.DataHora,
                     HorarioDeSaidaDoAlmoco = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.SaidaDoAlmoco))?.DataHora
                 };
@@ -60,10 +94,10 @@ namespace Damasio34.SGP.Aplicacao.Services
                 return configuracoesDoUsuarioDto;
             }
             catch (Exception ex)
-            {                
+            {
                 throw ex;
             }
-        }  
+        }
         public Guid GetPadrao(string login)
         {
             try

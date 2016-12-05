@@ -9,16 +9,16 @@
 		<div class="card">
 			<div class="list card">
 				<span class="item item-icon-left">
-					<i class="icon ion-arrow-right-c"></i> Entrada: {{ vm.PontosDoDia.HorarioDeEntrada | date }}
+					<i class="icon ion-arrow-right-c"></i> Entrada: {{ vm.PontosDoDia.HorarioDeEntrada | date : 'HH:mm' }}
 				</span>
 				<span class="item item-icon-left">
-					<i class="icon ion-arrow-return-right"></i> Entrada almoço: {{ vm.PontosDoDia.HorarioDeEntradaDoAlmoco }}
+					<i class="icon ion-arrow-return-right"></i> Entrada almoço: {{ vm.PontosDoDia.HorarioDeEntradaDoAlmoco | date : 'HH:mm' }}
 				</span>
 				<span class="item item-icon-left">
-					<i class="icon ion-arrow-return-left"></i> Saída almoço: {{ vm.PontosDoDia.HorarioDeSaidaDoAlmoco }}
+					<i class="icon ion-arrow-return-left"></i> Saída almoço: {{ vm.PontosDoDia.HorarioDeSaidaDoAlmoco | date : 'HH:mm' }}
 				</span>
 				<span class="item item-icon-left">
-					<i class="icon ion-arrow-left-c"></i> Saída: {{ vm.PontosDoDia.HorarioDeSaida }}
+					<i class="icon ion-arrow-left-c"></i> Saída: {{ vm.PontosDoDia.HorarioDeSaida | date : 'HH:mm' }}
 				</span>
 			</div>
 		</div>

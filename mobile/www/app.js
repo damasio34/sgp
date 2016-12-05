@@ -3,6 +3,7 @@
 
     angular.module('sgp', [
         'ionic',
+        'angular.filter',
         'ui.utils.masks',
 
         'sgp.interceptors',

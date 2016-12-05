@@ -28,9 +28,7 @@ namespace Damasio34.SGP.Dominio.ModuloFinanceiro
         public string Descricao { get; set; }
         public virtual ICollection<Lancamento> Lancamentos { get; protected set; }
         public bool AceitaSaldoNegativo { get; protected set; }
-        public decimal Saldo {
-            get { return Lancamentos.Sum(s => s.Valor); }          
-        }        
+        public double Saldo => Lancamentos.Sum(s => s.Valor);        
 
         #endregion
 
@@ -47,7 +45,7 @@ namespace Damasio34.SGP.Dominio.ModuloFinanceiro
 
             this.Lancamentos.Add(lancamento);
         }
-        public virtual void Creditar(decimal valor)
+        public virtual void Creditar(double valor)
         {
             var lancamento = LancamentoFactory.Criar(valor, TipoLancamento.Entrada);
             this.Lancamentos.Add(lancamento);
@@ -67,17 +65,17 @@ namespace Damasio34.SGP.Dominio.ModuloFinanceiro
             
             this.Lancamentos.Add(lancamento);
         }
-        public virtual void Debitar(decimal valor)
+        public virtual void Debitar(double valor)
         {
             var lancamento = LancamentoFactory.Criar(valor, TipoLancamento.Saida);
             this.Lancamentos.Add(lancamento);
         }
 
-        public virtual void Transferir(decimal valor, Conta contaDestino)
+        public virtual void Transferir(double valor, Conta contaDestino)
         {
             try
             {
-                var lancamentoDebito = LancamentoFactory.Criar(decimal.Negate(valor), TipoLancamento.Transferencia);
+                var lancamentoDebito = LancamentoFactory.Criar(valor * -1, TipoLancamento.Transferencia);
 
                 if (this.Saldo < valor && !this.AceitaSaldoNegativo)
                     throw new SpecificationException(Mensagens.SaldoInsuficiente);

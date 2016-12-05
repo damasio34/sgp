@@ -38,9 +38,10 @@
             LoginService.login({ username: usuario.Login, password: usuario.Senha }, usuario.LembrarSenha)
                 .then(function(result, status) {
                     if (result.access_token) {
-                        TrabalhoService.getTrabalhoPadrao().success(function(idTrabalho) {
-                            if (usuario.LembrarSenha) WebStorageService.setLocalStorage('IdTrabalhoPadrao', idTrabalho);
-                            else WebStorageService.setSessionStorage('IdTrabalhoPadrao', idTrabalho);
+                        // ToDo: Colocar toda a lógica dentro do serviço
+                        TrabalhoService.setIdTrabalhoPadrao().success(function(idTrabalhoPadrao) {
+                            if (usuario.LembrarSenha) WebStorageService.setLocalStorage('IdTrabalhoPadrao', idTrabalhoPadrao);
+                            else WebStorageService.setSessionStorage('IdTrabalhoPadrao', idTrabalhoPadrao);
 
                             $state.go('app.dashboard');
                         });

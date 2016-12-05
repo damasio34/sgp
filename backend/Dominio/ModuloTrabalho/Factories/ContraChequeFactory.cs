@@ -7,12 +7,12 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho.Factories
 {
     public static class ContraChequeFactory
     {
-        public static ContraCheque Criar(Trabalho emprego, DateTime dataReferencia)
+        public static ContraCheque Criar(Trabalho trabalho, DateTime dataDeReferencia)
         {
-            if (!dataReferencia.EhValida())
+            if (!dataDeReferencia.EhValida())
                 throw new DomainException(Mensagens.DataInvalida);
 
-            var contraCheque = new ContraCheque(emprego, dataReferencia);
+            var contraCheque = new ContraCheque(trabalho, dataDeReferencia);
             return contraCheque;
         }
     }

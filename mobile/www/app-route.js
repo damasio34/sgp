@@ -31,6 +31,16 @@
                     }
                 })
 
+                .state('app.pontos', {
+                    url: '/pontos',
+                    views: {
+                        'MainContent': {
+                            templateUrl: 'views/ponto-listar-view.html',
+                            controller: 'PontoListarController as vm'
+                        }
+                    }
+                })
+
                 .state('app.configuracao', {
                     url: '/configuracao',
                     views: {

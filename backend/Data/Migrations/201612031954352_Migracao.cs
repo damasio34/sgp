@@ -52,16 +52,13 @@ namespace Damasio34.SGP.Data.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        IdTrabalho = c.Guid(nullable: false),
                         TipoDoEvento = c.Int(nullable: false),
                         DataHora = c.DateTime(nullable: false),
                         Justificativa = c.String(),
                         DataDeCadastro = c.DateTime(nullable: false),
                         Ativo = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Trabalho", t => t.IdTrabalho)
-                .Index(t => t.IdTrabalho);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Usuario",
@@ -165,6 +162,19 @@ namespace Damasio34.SGP.Data.Migrations
                 .Index(t => t.Trabalho_Id)
                 .Index(t => t.ContraCheque_Id);
             
+            CreateTable(
+                "dbo.TrabalhoPonto",
+                c => new
+                    {
+                        Trabalho_Id = c.Guid(nullable: false),
+                        Ponto_Id = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Trabalho_Id, t.Ponto_Id })
+                .ForeignKey("dbo.Trabalho", t => t.Trabalho_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Ponto", t => t.Ponto_Id, cascadeDelete: true)
+                .Index(t => t.Trabalho_Id)
+                .Index(t => t.Ponto_Id);
+            
         }
         
         public override void Down()
@@ -176,19 +186,22 @@ namespace Damasio34.SGP.Data.Migrations
             DropForeignKey("dbo.Lancamento", "ContraCheque_Id", "dbo.ContraCheque");
             DropForeignKey("dbo.ContraCheque", "Emprego_Id", "dbo.Trabalho");
             DropForeignKey("dbo.Trabalho", "IdUsuario", "dbo.Usuario");
-            DropForeignKey("dbo.Ponto", "IdTrabalho", "dbo.Trabalho");
+            DropForeignKey("dbo.TrabalhoPonto", "Ponto_Id", "dbo.Ponto");
+            DropForeignKey("dbo.TrabalhoPonto", "Trabalho_Id", "dbo.Trabalho");
             DropForeignKey("dbo.TrabalhoContraCheque", "ContraCheque_Id", "dbo.ContraCheque");
             DropForeignKey("dbo.TrabalhoContraCheque", "Trabalho_Id", "dbo.Trabalho");
+            DropIndex("dbo.TrabalhoPonto", new[] { "Ponto_Id" });
+            DropIndex("dbo.TrabalhoPonto", new[] { "Trabalho_Id" });
             DropIndex("dbo.TrabalhoContraCheque", new[] { "ContraCheque_Id" });
             DropIndex("dbo.TrabalhoContraCheque", new[] { "Trabalho_Id" });
             DropIndex("dbo.Pessoa", new[] { "Usuario_Id" });
             DropIndex("dbo.Conta", new[] { "Banco_Id" });
             DropIndex("dbo.Lancamento", new[] { "Conta_Id" });
             DropIndex("dbo.Lancamento", new[] { "ContraCheque_Id" });
-            DropIndex("dbo.Ponto", new[] { "IdTrabalho" });
             DropIndex("dbo.Trabalho", new[] { "Pessoa_Id" });
             DropIndex("dbo.Trabalho", new[] { "IdUsuario" });
             DropIndex("dbo.ContraCheque", new[] { "Emprego_Id" });
+            DropTable("dbo.TrabalhoPonto");
             DropTable("dbo.TrabalhoContraCheque");
             DropTable("dbo.Pessoa");
             DropTable("dbo.Conta");
