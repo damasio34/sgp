@@ -6,7 +6,6 @@
         .controller('LoginController', LoginController);
 
     LoginController.$inject = ['$state', '$ionicPopup', 'WebStorageService', 'LoginService', 'TrabalhoService'];
-
     function LoginController($state, $ionicPopup, WebStorageService, LoginService, TrabalhoService) {
         var vm = this;
 
@@ -35,7 +34,7 @@
             };
         };
         function Login(usuario) {
-            LoginService.login({ username: usuario.Login, password: usuario.Senha }, usuario.LembrarSenha)
+            LoginService.login(usuario.Login, usuario.Senha, usuario.LembrarSenha)
                 .then(function(result, status) {
                     if (result.access_token) {
                         // ToDo: Colocar toda a lógica dentro do serviço

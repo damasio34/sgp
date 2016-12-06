@@ -5,9 +5,8 @@
         .module('sgp.services')
         .factory('LoginService', LoginService);
 
-    LoginService.$inject = ['$q', '$rootElement', '$http', 'WebStorageService', 'UrlDefault'];
-
-    function LoginService($q, $rootElement, $http, WebStorageService, UrlDefault) {
+    LoginService.$inject = ['$q', '$rootElement', '$http', 'CryptSha1Service', 'WebStorageService', 'UrlDefault'];
+    function LoginService($q, $rootElement, $http, CryptSha1Service, WebStorageService, UrlDefault) {
         var self = this;
         var appName = $rootElement.attr('ng-app');
         this.urlBase = UrlDefault.Uri + 'security/token';
@@ -16,10 +15,9 @@
         var _service = {
             getToken: _getToken,
             setToken: _setToken,
-            incluir: incluir,
             login: login,
             logout: logout,
-            recuperarSenha: recuperarSenha,
+            // recuperarSenha: recuperarSenha,
             usuarioAutenticado: usuarioAutenticado
         };
 
@@ -33,23 +31,9 @@
             else WebStorageService.setSessionStorage(appName + '_$token', token);
         }
 
-        function incluir(model) {
-            var user = {
-                username: model.usuario,
-                password: CryptSha1Service.hash(model.senha),
-                email: model.email
-            };
-
-            return $http.post('https://api.parse.com/1/users', user, { headers: _headers })
-            .success(function(data, status) {
-                if (status == 201 && !!data.sessionToken) _setToken(data.sessionToken, model.salvarSenha)
-            }).error(function (data, status) {
-                if (status === 400 && status === 202) console.warn('O nome de usuário ' + model.usuario + ' já está cadastrado.');
-            });
-        }
-        function login(model, lembrarSenha) {
+        function login(username, password, lembrarSenha) {
             var deferred = $q.defer();
-            var data = "grant_type=password&username=" + model.username + "&password=" + model.password;
+            var data = "grant_type=password&username=" + username + "&password=" + CryptSha1Service.hash(password);
             var _headers = angular.copy(self.headers, _headers);
             _headers['Content-Type'] = 'application/x-www-form-urlencoded';
 

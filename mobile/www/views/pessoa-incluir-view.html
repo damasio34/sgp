@@ -1,0 +1,25 @@
+<ion-view class="has-footer" hide-nav-bar="true">
+	<ion-content class="padding">
+		<div class="list">
+			<label class="item item-input">
+				<input type="text" placeholder="Nome completo" ng-model="vm.pessoa.Nome">
+			</label>
+			<label class="item item-input">
+				<input type="email" placeholder="CPF" ng-model="vm.pessoa.Cpf">
+			</label>
+			<label class="item item-input">
+				<input type="text" placeholder="E-mail" ng-model="vm.pessoa.Email">
+			</label>
+			<label class="item item-input">
+				<input type="text" placeholder="Login" ng-model="vm.pessoa.Login">
+			</label>
+			<label class="item item-input">
+				<input type="password" placeholder="Senha" ng-model="vm.pessoa.Senha">
+			</label>
+		</div>
+	</ion-content>
+	<ion-footer-bar>
+		<button class="button" style="width:49%" ng-click="vm.Cadastrar(vm.pessoa)">Cadastrar</button>
+		<button class="button" style="width:49%" ui-sref="login">Cancelar</button>
+	</ion-footer-bar>
+</ion-view>

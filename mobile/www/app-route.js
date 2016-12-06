@@ -12,6 +12,12 @@
                     controller: 'LoginController as vm'
                 })
 
+                .state('singin', {
+                    url: '/singin',
+                    templateUrl: 'views/pessoa-incluir-view.html',
+                    controller: 'PessoaIncluirController as vm'
+                })
+
                 // --------------------------------------------
 
                 .state('app', {

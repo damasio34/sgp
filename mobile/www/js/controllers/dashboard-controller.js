@@ -25,6 +25,8 @@
         };
         //ToDo: Colocar método no DateTimeService
         function _exibeHorasTrabalhadas(pontosDoDia) {
+            if (!pontosDoDia.HorarioDeEntrada) return;
+            
             var tickInterval = 1000;
             vm.PontosDoDia = pontosDoDia;
             if (pontosDoDia.HorarioDeSaida) vm.bloqueiaBotao = true;
@@ -47,7 +49,7 @@
 
         function MarcarPonto() {
             vm.bloqueiaBotao = true;
-            
+
             TrabalhoService.postMarcarPonto().success(function(pontosDoDia) {
                 _exibeHorasTrabalhadas(pontosDoDia);
                 $ionicPopup.alert({

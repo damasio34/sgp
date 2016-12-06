@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dtos\ConfiguracaoDto.cs" />
+    <Compile Include="Dtos\PessoaDto.cs" />
     <Compile Include="Dtos\PontoDto.cs" />
     <Compile Include="Dtos\PontosDoDiaDto.cs" />
     <Compile Include="Interfaces\IContraChequeAppService.cs" />

@@ -113,7 +113,7 @@
         function _calcularHorasTrabalhadas(pontosDoDia) {
             if (!pontosDoDia) return;
 
-            var horasTrabalhadas, almoco;
+            var horasTrabalhadas;
             var horarioDeEntrada = _getDateTime(pontosDoDia.HorarioDeEntrada);
             var horarioDeEntradaDoAlmoco = _getDateTime(pontosDoDia.HorarioDeEntradaDoAlmoco);
             var horarioDeSaida = _getDateTime(pontosDoDia.HorarioDeSaida);
@@ -121,7 +121,7 @@
 
             if (horarioDeEntrada && (!pontosDoDia.ControlaAlmoco || !horarioDeEntradaDoAlmoco) && !horarioDeSaida)
             {
-                horasTrabalhadas = _calculaDiferencaEntreHoras(horarioDeEntrada, moment().format("YYYY-MM-DDTHH:mm:ss"));
+                horasTrabalhadas = _calculaDiferencaEntreHoras(horarioDeEntrada, _getDateTime(moment().format("YYYY-MM-DDTHH:mm:ss")));
             }
             else if (horarioDeEntrada && pontosDoDia.ControlaAlmoco && horarioDeEntradaDoAlmoco && !horarioDeSaidaDoAlmoco)
             {
