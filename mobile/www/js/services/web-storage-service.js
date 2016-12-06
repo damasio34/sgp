@@ -13,10 +13,15 @@
 			getLocalStorage: getLocalStorage,
 			getSessionStorage: getSessionStorage,
 
-			getStorage: getStorage
+			getStorage: getStorage,
+			clear: clear
 		};
 		return _service;
 
+		function clear(key, value){
+			sessionStorage.clear();
+			localStorage.clear();
+		}
 		function setLocalStorage(key, value){
 			if (!!value) localStorage[key] = JSON.stringify(value);
 		}

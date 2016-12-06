@@ -40,6 +40,11 @@
                 var idTrabalho = WebStorageService.getStorage('IdTrabalhoPadrao');
                 return $http.put(self.urlBase + self.mainRoute + '/' + idTrabalho + '/configuracao', model, { headers: self.headers });
             };
+
+            this.deletePonto = function(idPonto) {
+                var idTrabalho = WebStorageService.getStorage('IdTrabalhoPadrao');
+                return $http.delete(self.urlBase + self.mainRoute + '/' + idTrabalho + '/ponto/' + idPonto, { headers: self.headers });
+            };
         };
 		return new _service();
 	};

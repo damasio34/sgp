@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using Damasio34.SGP.Aplicacao;
 using Damasio34.SGP.Aplicacao.Dtos;
 using Damasio34.SGP.Aplicacao.Interfaces;
-using Damasio34.SGP.Dominio.ModuloPessoa;
 using Damasio34.SGP.Dominio.ModuloTrabalho;
 
 namespace Damasio34.SGP.API.Controllers
@@ -40,6 +38,12 @@ namespace Damasio34.SGP.API.Controllers
         public IEnumerable<PontoDto> GetPontos([FromUri] Guid idTrabalho)
         {
             return _trabalhoAppService.GetPontos(idTrabalho);
+        }
+        [Route("{idtrabalho}/ponto/{idPonto}")]
+        [HttpDelete]
+        public void DeletePonto([FromUri] Guid idTrabalho, [FromUri] Guid idPonto)
+        {
+            _trabalhoAppService.DeletePonto(idTrabalho, idPonto);
         }
 
         [Route("{idtrabalho}/ponto/dodia")]

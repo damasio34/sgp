@@ -25,7 +25,8 @@
     </body>
 
     <script src="lib/moment/moment.js"></script>
-    <!-- <script src="lib/moment/locale/pt-br.js"></script> -->
+    <script src="lib/moment/locale/pt-br.js"></script>
+    <script src="lib/moment-duration-format/lib/moment-duration-format.js"></script>
     <script src="lib/angular-input-masks/angular-input-masks-standalone.js"></script>
     <script src="lib/angular-filter/dist/angular-filter.min.js"></script>
 
@@ -39,15 +40,14 @@
     <!-- Services -->
     <script src="js/services/services.js"></script>
     <script src="js/services/web-storage-service.js"></script>
-    <script src="js/services/clock-service.js"></script>
+    <script src="js/services/datetime-service.js"></script>
     <script src="js/services/login-service.js"></script>
     <script src="js/services/rest-base-service.js"></script>
     <script src="js/services/trabalho-service.js"></script>
 
     <!-- Interceptors -->
     <script src="js/interceptors/interceptors.js"></script>
-    <script src="js/interceptors/loader-interceptor.js"></script>
-    <script src="js/interceptors/login-interceptor.js"></script>
+    <script src="js/interceptors/http-interceptor.js"></script>
 
     <!-- Directives -->
     <script src="js/directives/directives.js"></script>

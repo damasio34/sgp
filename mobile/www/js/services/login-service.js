@@ -74,8 +74,7 @@
                 $http.post(self.urlBase + '/logout', null, { headers: _headers });
             }
 
-            sessionStorage.clear();
-            localStorage.clear();
+            WebStorageService.clear();
         };
         function recuperarSenha(model) { return; }
         function usuarioAutenticado() {

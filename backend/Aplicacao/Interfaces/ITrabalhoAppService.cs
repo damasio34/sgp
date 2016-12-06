@@ -15,5 +15,6 @@ namespace Damasio34.SGP.Aplicacao.Interfaces
         ContraCheque CalcularContraCheque(Guid idTrabalho, int mes);
         ConfiguracaoDto SelecionarConfiguracao(Guid idTrabalho);
         ConfiguracaoDto AtualizarConfiguracao(Guid idTrabalho, ConfiguracaoDto configuracaoDto);
+        void DeletePonto(Guid idTrabalho, Guid idPonto);
     }
 }
