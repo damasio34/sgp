@@ -17,9 +17,9 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         internal Trabalho(Pessoa pessoa, double salarioBruto, TimeSpan horarioDeEentrada, TimeSpan horarioDeSaida, 
             int mesesDoDoCliclo, TimeSpan? horarioDeEntradaDoAlmoco, TimeSpan? horarioDeSaidaDoAlmoco)
         {
-            this.Pessoa = pessoa;
-            this.IdPessoa = pessoa.Id;
+            pessoa.Trabalho = this;
 
+            this.Pessoa = pessoa;
             this.SalarioBruto = salarioBruto;
 
             this.HorarioDeEntrada = horarioDeEentrada;
@@ -40,7 +40,6 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public TimeSpan? HorarioDeEntradaDoAlmoco { get; set; }
         public TimeSpan? HorarioDeSaidaDoAlmoco { get; set; }
 
-        public Guid IdPessoa { get; set; }
         public Pessoa Pessoa { get; set; }
 
         public int MesesDoCiclo { get; set; }
@@ -54,7 +53,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public int HorasPorMes => 220;        
         public TimeSpan CargaHorariaDiaria => new TimeSpan(8, 0, 0);
         public double ValorHora => this.SalarioBruto.Equals(0) ? 0 : this.SalarioBruto / this.HorasPorMes;                       
-        public IEnumerable<Ponto> PontosDoDia => this.Pontos(DateTime.Today).Where(p => p.DataHora.CompareTo(DateTime.Today) >= 0);        
+        public IEnumerable<Ponto> PontosDoDia => this.Pontos().Where(p => p.DataHora.Date.CompareTo(DateTime.Today) >= 0);        
         public TimeSpan TempoDeAlmoco => this.HorarioDeEntradaDoAlmoco.IsNotNull() && this.HorarioDeSaidaDoAlmoco.IsNotNull() ?
             HorarioDeSaidaDoAlmoco.Value - HorarioDeEntradaDoAlmoco.Value : new TimeSpan(1, 0, 0);
 
@@ -67,6 +66,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
             var ciclo = new Ciclo(this, dataDeInicio, dataDeTermino, this.ControlaAlmoco,
                 this.CargaHorariaDiaria, this.TempoDeAlmoco);
             ciclo.GerarId();
+            this.Ciclos.Add(ciclo);
 
             return ciclo;
         }
@@ -74,7 +74,8 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public virtual IEnumerable<Ponto> Pontos(DateTime? dataDeReferencia = null)
         {
             var cicloAtual = BuscaAtual(dataDeReferencia);
-            return cicloAtual.IsNull() ? new List<Ponto>() : cicloAtual.Pontos;
+            var pontos = cicloAtual.IsNull() ? new List<Ponto>() : cicloAtual.Pontos;
+            return pontos;
         }            
         public Ciclo BuscaAtual(DateTime? dataDeReferencia = null)
         {
@@ -88,7 +89,6 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
                 var dataFinal = new DateTime(dtReferencia.Year, dtReferencia.Month, utimoDiaDoMes);
                 var dataInicial = new DateTime(dtReferencia.Year, dtReferencia.Month, 1);
                 var novoCiclo = this.NovoCiclo(dataInicial, dataFinal);
-                Ciclos.Add(novoCiclo);
                 cicloAtual = novoCiclo;
             }
 
@@ -114,10 +114,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         {
             var cicloAtual = BuscaAtual(ponto.DataHora);
             if (cicloAtual.IsNull())
-            {                
-                cicloAtual = this.NovoCiclo(ponto.DataHora.Date, ponto.DataHora.Date.AddMonths(MesesDoCiclo).AddDays(-1));
-                this.Ciclos.Add(cicloAtual);
-            }
+                cicloAtual = this.NovoCiclo(ponto.DataHora.Date, ponto.DataHora.Date.AddMonths(MesesDoCiclo).AddDays(-1));            
 
             cicloAtual.Pontos.Add(ponto);
         }

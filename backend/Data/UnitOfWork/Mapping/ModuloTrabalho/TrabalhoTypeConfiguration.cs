@@ -12,7 +12,7 @@ namespace Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloTrabalho
             Property(p => p.SalarioBruto).IsRequired();
             Property(p => p.ControlaAlmoco).IsRequired();
 
-            HasRequired(p => p.Pessoa).WithMany();
+            HasRequired(p => p.Pessoa).WithOptional(p => p.Trabalho).Map(p => p.MapKey("IdPessoa"));
         }
     }
 }

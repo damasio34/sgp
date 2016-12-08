@@ -2,9 +2,9 @@
 
 namespace Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloTrabalho
 {
-    class LancamentoDoContrachequeTypeConfiguration : EntidadeBaseTypeConfiguration<LancamentoDoContracheque>
+    class LancamentoDoContraChequeTypeConfiguration : EntidadeBaseTypeConfiguration<LancamentoDoContraCheque>
     {
-        public LancamentoDoContrachequeTypeConfiguration() : base()
+        public LancamentoDoContraChequeTypeConfiguration() : base()
         {
             Property(p => p.Descricao).IsRequired();
             Property(p => p.Valor).IsRequired();

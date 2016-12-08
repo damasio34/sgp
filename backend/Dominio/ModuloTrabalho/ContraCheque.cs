@@ -13,6 +13,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         internal ContraCheque() { }
         internal ContraCheque(Ciclo ciclo)
         {
+            ciclo.ContraCheque = this;
             this.Ciclo = ciclo;
         }
 
@@ -24,7 +25,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public virtual Ciclo Ciclo { get; protected set; }
         public DateTime? DataFinalizacao { get; set; }        
 
-        public virtual IList<LancamentoDoContracheque> Lancamentos { get; set; } = new List<LancamentoDoContracheque>();
+        public virtual IList<LancamentoDoContraCheque> Lancamentos { get; set; } = new List<LancamentoDoContraCheque>();
 
         // Propriedades calculadas
         public double ValorLiquido => Math.Round(Ciclo.Trabalho.SalarioBruto + Lancamentos.Sum(s => s.Valor), 2);
@@ -35,7 +36,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 
         public void AdiconarLancamento(Imposto imposto, TipoDeLancamento tipoDeLancamento)
         {
-            var lancamento = new LancamentoDoContracheque(this, imposto.Valor, tipoDeLancamento, 
+            var lancamento = new LancamentoDoContraCheque(this, imposto.Valor, tipoDeLancamento, 
                 imposto.TipoDoImposto.ToString());
             this.Lancamentos.Add(lancamento);
         }

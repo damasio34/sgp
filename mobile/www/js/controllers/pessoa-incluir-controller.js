@@ -5,11 +5,13 @@
         .module('sgp.controllers')
         .controller('PessoaIncluirController', PessoaIncluirController);
 
-    PessoaIncluirController.$inject = ['$state', 'WebStorageService', 'CryptSha1Service', 'PessoaService', 'LoginService', 'TrabalhoService'];
-    function PessoaIncluirController($state, WebStorageService, CryptSha1Service, PessoaService, LoginService, TrabalhoService) {
+    PessoaIncluirController.$inject = ['$state', 'WebStorageService', 'CryptSha1Service', 'PessoaService', 'LoginService'];
+    function PessoaIncluirController($state, WebStorageService, CryptSha1Service, PessoaService, LoginService) {
         var vm = this;
 
         vm.Cadastrar = cadastrar;
+
+        // -------------------------------------------------------------
 
         _init();
 
@@ -23,18 +25,10 @@
 
             PessoaService.incluir(_pessoa).success(function() {
                 LoginService.login(pessoa.Login, pessoa.Senha, false).then(function(result, status) {
-                    if (result.access_token) {
-                        // ToDo: Colocar toda a lógica dentro do serviço
-                        TrabalhoService.setIdTrabalhoPadrao().success(function(idTrabalhoPadrao) {
-                            WebStorageService.setSessionStorage('IdTrabalhoPadrao', idTrabalhoPadrao);
-                            $state.go('app.dashboard');
-                        });
-                    };
+                    if (result.access_token) $state.go('app.dashboard');
                 });
             });
         }
-
-        // model.Senha = CryptSha1Service.hash(model.senha);
     };
 
 })(angular);

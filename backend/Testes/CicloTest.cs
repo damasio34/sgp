@@ -3,6 +3,7 @@ using System.Linq;
 using Damasio34.SGP.Dominio.ModuloPessoa;
 using Damasio34.SGP.Dominio.ModuloPessoa.Factories;
 using Damasio34.SGP.Dominio.ModuloTrabalho;
+using Damasio34.SGP.Dominio.ModuloTrabalho.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Damasio34.SGP.Testes
@@ -21,7 +22,7 @@ namespace Damasio34.SGP.Testes
         [TestMethod]
         public void CalcularBancoDeHorasComAlmoco()
         {
-            var trabalho = _pessoa.Trabalho;
+            var trabalho = TrabalhoFactory.Criar(_pessoa);
             trabalho.AdicionarPonto(TipoDoEvento.Entrada, DateTime.Now.AddHours(-9));
             trabalho.AdicionarPonto(TipoDoEvento.EntradaDoAlmoco, DateTime.Now.AddHours(-5));
             trabalho.AdicionarPonto(TipoDoEvento.SaidaDoAlmoco, DateTime.Now.AddHours(-4));
@@ -32,7 +33,7 @@ namespace Damasio34.SGP.Testes
         [TestMethod]
         public void CalcularBancoDeHorasSemAlmoco()
         {
-            var trabalho = _pessoa.Trabalho;
+            var trabalho = TrabalhoFactory.Criar(_pessoa);
             trabalho.ControlaAlmoco = false;
             trabalho.AdicionarPonto(TipoDoEvento.Entrada, DateTime.Now.AddHours(-9));
             trabalho.AdicionarPonto(TipoDoEvento.Saida, DateTime.Now);

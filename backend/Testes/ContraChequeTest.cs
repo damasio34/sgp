@@ -2,6 +2,7 @@
 using Damasio34.SGP.Dominio.ModuloPessoa;
 using Damasio34.SGP.Dominio.ModuloPessoa.Factories;
 using Damasio34.SGP.Dominio.ModuloTrabalho;
+using Damasio34.SGP.Dominio.ModuloTrabalho.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Damasio34.SGP.Testes
@@ -21,8 +22,7 @@ namespace Damasio34.SGP.Testes
         public void CalcularSalarioLiquidoDeMilReais()
         {
             var salarioBruto = 1000.00;
-            var trabalho = _pessoa.Trabalho;
-            trabalho.SalarioBruto = salarioBruto;
+            var trabalho = TrabalhoFactory.Criar(_pessoa, salarioBruto);
             var contraCheque = trabalho.GerarContraCheque();
 
              var salarioLiquido = contraCheque.ValorLiquido;
@@ -33,8 +33,7 @@ namespace Damasio34.SGP.Testes
         public void CalcularSalarioLiquidoDeTresMilReais()
         {
             var salarioBruto = 3000.00;
-            var trabalho = _pessoa.Trabalho;
-            trabalho.SalarioBruto = salarioBruto;
+            var trabalho = TrabalhoFactory.Criar(_pessoa, salarioBruto);
             var contraCheque = trabalho.GerarContraCheque();            
 
             var salarioLiquido = contraCheque.ValorLiquido;
@@ -45,8 +44,7 @@ namespace Damasio34.SGP.Testes
         public void CalcularSalarioLiquidoDeSeteMilEQuinhentosReais()
         {
             var salarioBruto = 7500.00;
-            var trabalho = _pessoa.Trabalho;
-            trabalho.SalarioBruto = salarioBruto;
+            var trabalho = TrabalhoFactory.Criar(_pessoa, salarioBruto);
             var contraCheque = trabalho.GerarContraCheque();
 
             var salarioLiquido = contraCheque.ValorLiquido;
@@ -57,8 +55,7 @@ namespace Damasio34.SGP.Testes
         public void CalcularSalarioLiquidoDeDezMilReais()
         {
             var salarioBruto = 10000.00;
-            var trabalho = _pessoa.Trabalho;
-            trabalho.SalarioBruto = salarioBruto;
+            var trabalho = TrabalhoFactory.Criar(_pessoa, salarioBruto);
             var contraCheque = trabalho.GerarContraCheque();
 
             var salarioLiquido = contraCheque.ValorLiquido;
@@ -69,8 +66,7 @@ namespace Damasio34.SGP.Testes
         public void CalcularSalarioLiquidoDeMilReaisComBancoDeHoras()
         {
             var salarioBruto = 1000.00;
-            var trabalho = _pessoa.Trabalho;
-            trabalho.SalarioBruto = salarioBruto;
+            var trabalho = TrabalhoFactory.Criar(_pessoa, salarioBruto);
 
             var dataAtual = new DateTime(2016, 11, 1);
             var dataFinal = new DateTime(2016, 11, 30);

@@ -14,7 +14,7 @@ namespace Damasio34.SGP.Data.UnitOfWork.SeedDatabase
             this._context = context;
 
             var pessoa = PessoaFactory.Criar("Darlan Damasio", "05829757788", "darlan@damasio34.com");
-            var usuario = UsuarioFactory.Criar(pessoa, "damasio34", "1235");
+            var usuario = UsuarioFactory.Criar(pessoa, "damasio34", "ac1ab23d6288711be64a25bf13432baf1e60b2bd");
             var trabalho = TrabalhoFactory.Criar(pessoa, 1000, new TimeSpan(9, 0, 0), new TimeSpan(18, 0, 0),
                 4, new TimeSpan(12, 0, 0), new TimeSpan(13, 0, 0));
 
@@ -43,10 +43,10 @@ namespace Damasio34.SGP.Data.UnitOfWork.SeedDatabase
                 dataAtual = dataAtual.AddDays(1);
             }
 
+
             this._context.RegisterNew(pessoa);
             this._context.RegisterNew(usuario);
             this._context.RegisterNew(trabalho);
-
             this._context.Commit();
         }
     }

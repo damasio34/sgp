@@ -7,8 +7,7 @@ namespace Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloTrabalho
         public ContraChequeTypeConfiguration() : base()
         {
             Property(p => p.ValorBruto).IsRequired();
-
-            HasRequired(p => p.Ciclo).WithMany();
+            HasRequired(p => p.Ciclo).WithOptional(p => p.ContraCheque).Map(p => p.MapKey("IdCiclo"));
         }
     }
 }

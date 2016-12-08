@@ -6,11 +6,12 @@
         .controller('AppController', AppController);
 
     AppController.$inject = ['$ionicModal', '$ionicPopover', '$timeout', 'LoginService'];
-
     function AppController($ionicModal, $ionicPopover, $timeout, LoginService) {
         var vm = this;
 
         vm.Logout = Logout;
+
+        // -------------------------------------------------------------
 
         // Form data for the login modal
         vm.loginData = {};
@@ -27,8 +28,6 @@
         vm.hideHeader = hideHeader;
         vm.showHeader = showHeader;
         vm.clearFabs = clearFabs;
-
-        // -------------------------------------------------------------
 
         _init();
 

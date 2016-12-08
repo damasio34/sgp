@@ -1,6 +1,4 @@
-﻿using Damasio34.Seedwork.Extensions;
-using Damasio34.SGP.Dominio.ModuloTrabalho;
-using Damasio34.SGP.Dominio.ModuloTrabalho.Factories;
+﻿using Damasio34.SGP.Dominio.ModuloTrabalho;
 
 namespace Damasio34.SGP.Dominio.ModuloPessoa.Factories
 {
@@ -10,9 +8,6 @@ namespace Damasio34.SGP.Dominio.ModuloPessoa.Factories
         {
             var pessoa = new Pessoa(nome, cpf, email);
             pessoa.GerarId();
-
-            if (trabalho.IsNull()) trabalho = TrabalhoFactory.Criar(pessoa);
-            pessoa.AssociarTrabalho(trabalho);
 
             return pessoa;
         }

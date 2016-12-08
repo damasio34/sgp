@@ -1,4 +1,7 @@
-﻿using Damasio34.Seedwork.UnitOfWork;
+﻿using System.Data.Entity;
+using System.Linq;
+using System.Threading;
+using Damasio34.Seedwork.UnitOfWork;
 using Damasio34.SGP.Dominio.ModuloTrabalho;
 using Damasio34.SGP.Dominio.ModuloTrabalho.Interfaces;
 

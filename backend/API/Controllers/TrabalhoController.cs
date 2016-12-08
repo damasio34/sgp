@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using Damasio34.Seedwork.Domain;
 using Damasio34.SGP.Aplicacao.Dtos;
 using Damasio34.SGP.Aplicacao.Interfaces;
+using Damasio34.SGP.Dominio.ModuloPessoa.Interfaces;
 using Damasio34.SGP.Dominio.ModuloTrabalho;
 
 namespace Damasio34.SGP.API.Controllers
@@ -14,71 +16,64 @@ namespace Damasio34.SGP.API.Controllers
         private readonly ITrabalhoAppService _trabalhoAppService;
         
         public TrabalhoController(ITrabalhoAppService trabalhoAppService)
-        {
+        {            
             this._trabalhoAppService = trabalhoAppService;
         }
-    
+   
 
-        [Route("padrao")]
+        [Route("configuracao")]
         [HttpGet]
-        public Guid GetPadrao()
+        public ConfiguracaoDto GetConfiguracao()
         {
-            return _trabalhoAppService.GetPadrao(User.Identity.Name);
+            return _trabalhoAppService.SelecionarConfiguracao();
         }
 
-        [Route("{idtrabalho}/configuracao")]
+        [Route("ponto")]
         [HttpGet]
-        public ConfiguracaoDto GetConfiguracao([FromUri] Guid idTrabalho)
+        public IEnumerable<PontoDto> GetPontos()
         {
-            return _trabalhoAppService.SelecionarConfiguracao(idTrabalho);
+            return _trabalhoAppService.GetPontos();
         }
-
-        [Route("{idtrabalho}/ponto")]
-        [HttpGet]
-        public IEnumerable<PontoDto> GetPontos([FromUri] Guid idTrabalho)
-        {
-            return _trabalhoAppService.GetPontos(idTrabalho);
-        }
-        [Route("{idtrabalho}/ponto/{idPonto}")]
+        [Route("ponto/{idPonto}")]
         [HttpDelete]
-        public void DeletePonto([FromUri] Guid idTrabalho, [FromUri] Guid idPonto)
+        public void DeletePonto([FromUri] Guid idPonto)
         {
-            _trabalhoAppService.DeletePonto(idTrabalho, idPonto);
+            _trabalhoAppService.DeletePonto(idPonto);
         }
 
-        [Route("{idtrabalho}/ponto/dodia")]
+        [Route("ponto/dodia")]
         [HttpGet]
-        public PontosDoDiaDto GetPontosDoDia([FromUri] Guid idTrabalho)
+        public PontosDoDiaDto GetPontosDoDia()
         {
-            return _trabalhoAppService.GetPontosDoDia(idTrabalho);
+            return _trabalhoAppService.GetPontosDoDia();
         }
 
         [HttpPost]
-        [Route("{idtrabalho}/ponto/marcar")]
-        public PontosDoDiaDto Post([FromUri] Guid idTrabalho)
+        [Route("ponto/marcar")]
+        public PontosDoDiaDto Post()
         {
-            return _trabalhoAppService.MarcarPonto(idTrabalho);
+            return _trabalhoAppService.MarcarPonto();
         }
 
-        [Route("{idtrabalho}/configuracao")]
+        [Route("configuracao")]
         [HttpPut]
-        public ConfiguracaoDto PutConfiguracao([FromUri] Guid idTrabalho, [FromBody] ConfiguracaoDto configuracaoDto)
+        public ConfiguracaoDto PutConfiguracao([FromBody] ConfiguracaoDto configuracaoDto)
         {
-            return _trabalhoAppService.AtualizarConfiguracao(idTrabalho, configuracaoDto);
+            return _trabalhoAppService.AtualizarConfiguracao(configuracaoDto);
         }
 
-        [Route("{idtrabalho}/contracheque")]
+        [Route("contracheque")]
         [HttpGet]
-        public ContraCheque GetContraCheque([FromUri] Guid idTrabalho)
+        public ContraCheque GetContraCheque()
         {
-            return _trabalhoAppService.CalcularContraCheque(idTrabalho);
+            return _trabalhoAppService.CalcularContraCheque();
         }
 
-        [Route("{idtrabalho}/contracheque/{mes}")]
+        [Route("contracheque/{dataDeReferencia}")]
         [HttpGet]
-        public ContraCheque GetContraCheque([FromUri] Guid idTrabalho, [FromUri] DateTime dataDeReferencia)
+        public ContraCheque GetContraCheque([FromUri] DateTime dataDeReferencia)
         {
-            return _trabalhoAppService.CalcularContraCheque(idTrabalho, dataDeReferencia);
+            return _trabalhoAppService.CalcularContraCheque(dataDeReferencia);
         }
     }
 }

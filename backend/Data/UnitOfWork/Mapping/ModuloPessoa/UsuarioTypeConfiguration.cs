@@ -9,7 +9,7 @@ namespace Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloPessoa
             Property(p => p.Login).IsRequired();
             Property(p => p.Senha).IsRequired();
 
-            HasRequired(p => p.Pessoa).WithMany().HasForeignKey(p => p.IdPessoa);
+            HasRequired(p => p.Pessoa).WithOptional(p => p.Usuario).Map(p => p.MapKey("IdPessoa"));
         }
     }
 }

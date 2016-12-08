@@ -3,10 +3,10 @@ using Damasio34.Seedwork.Domain;
 
 namespace Damasio34.SGP.Dominio.ModuloTrabalho
 {
-    public class LancamentoDoContracheque : EntidadeBase
+    public class LancamentoDoContraCheque : EntidadeBase
     {
-        internal LancamentoDoContracheque() { }
-        internal LancamentoDoContracheque(ContraCheque contraCheque, double valor, 
+        internal LancamentoDoContraCheque() { }
+        internal LancamentoDoContraCheque(ContraCheque contraCheque, double valor, 
             TipoDeLancamento tipoDeLancamento, string descricao)
         {
             this.ContraCheque = contraCheque;

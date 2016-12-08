@@ -39,10 +39,10 @@ namespace Damasio34.SGP.API.Autenticacao
 
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
                 var roles = new List<string> { "Usuario" };          
-                var principal = new GenericPrincipal(identity, roles.ToArray());
-                
+                var principal = new GenericPrincipal(identity, roles.ToArray());                
 
                 identity.AddClaim(new Claim(ClaimTypes.Name, login));
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()));
                 Thread.CurrentPrincipal = principal;
                 context.Validated(identity);
             }

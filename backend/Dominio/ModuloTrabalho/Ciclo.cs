@@ -14,8 +14,9 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         internal Ciclo() { }
         public Ciclo(Trabalho trabalho, DateTime dataDeInicio, DateTime dataDeTermino, bool controlaAlmoco, 
             TimeSpan cargaHorariaDiaria, TimeSpan tempoDoAlmoco)
-        {
+        {            
             this.Trabalho = trabalho;
+            this.IdTrabalho = trabalho.Id;
             
             this.DataDeInicio = dataDeInicio;
             this.DateDeTermino = dataDeTermino;
@@ -30,15 +31,15 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         #region [ Propriedades ]
         
         public Guid IdTrabalho { get; protected set; }
-        public Trabalho Trabalho { get; protected set; }
+        public virtual Trabalho Trabalho { get; protected set; }
         public DateTime DataDeInicio { get; set; }
         public DateTime DateDeTermino { get; set; }        
         public bool ControlaAlmoco { get; set; }
         public TimeSpan CargaHorariaDiaria { get; set; }
         public TimeSpan TempoDeAlmoco { get; set; }
-        public ContraCheque ContraCheque { get; set; }        
+        public virtual ContraCheque ContraCheque { get; set; }        
 
-        public IList<Ponto> Pontos { get; set; } = new List<Ponto>();
+        public virtual ICollection<Ponto> Pontos { get; set; } = new List<Ponto>();
 
         // Propriedades calculadas
         public TimeSpan SaldoDeHoras => this.CalcularHorasTrabalhadasNoCliclo();

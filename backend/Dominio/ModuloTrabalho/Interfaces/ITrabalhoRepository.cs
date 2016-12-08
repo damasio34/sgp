@@ -2,7 +2,5 @@
 
 namespace Damasio34.SGP.Dominio.ModuloTrabalho.Interfaces
 {
-    public interface ITrabalhoRepository : ISgpRepository<Trabalho>
-    {
-    }
+    public interface ITrabalhoRepository : ISgpRepository<Trabalho> { }
 }

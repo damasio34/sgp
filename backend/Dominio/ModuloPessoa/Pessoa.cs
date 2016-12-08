@@ -18,13 +18,7 @@ namespace Damasio34.SGP.Dominio.ModuloPessoa
         public string Cpf { get; set; }
         public string Email { get; set; }
 
-        public virtual Trabalho Trabalho { get; set; }
-
-        public void AssociarTrabalho(Trabalho trabalho)
-        {
-            trabalho.Pessoa = this;
-            this.Trabalho = trabalho;
-        }
-
+        public Trabalho Trabalho { get; set; }
+        public Usuario Usuario { get; set; }
     }
 }

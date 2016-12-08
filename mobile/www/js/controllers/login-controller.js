@@ -5,8 +5,8 @@
         .module('sgp.controllers')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$state', '$ionicPopup', 'WebStorageService', 'LoginService', 'TrabalhoService'];
-    function LoginController($state, $ionicPopup, WebStorageService, LoginService, TrabalhoService) {
+    LoginController.$inject = ['$state', '$ionicPopup', 'WebStorageService', 'LoginService'];
+    function LoginController($state, $ionicPopup, WebStorageService, LoginService) {
         var vm = this;
 
         vm.Usuario = { Login: 'damasio34', Senha: 1235, LembrarSenha: true };
@@ -34,18 +34,9 @@
             };
         };
         function Login(usuario) {
-            LoginService.login(usuario.Login, usuario.Senha, usuario.LembrarSenha)
-                .then(function(result, status) {
-                    if (result.access_token) {
-                        // ToDo: Colocar toda a lógica dentro do serviço
-                        TrabalhoService.setIdTrabalhoPadrao().success(function(idTrabalhoPadrao) {
-                            if (usuario.LembrarSenha) WebStorageService.setLocalStorage('IdTrabalhoPadrao', idTrabalhoPadrao);
-                            else WebStorageService.setSessionStorage('IdTrabalhoPadrao', idTrabalhoPadrao);
-
-                            $state.go('app.dashboard');
-                        });
-                    };
-                });
+            LoginService.login(usuario.Login, usuario.Senha, usuario.LembrarSenha).then(function(result, status) {
+                if (result.access_token) $state.go('app.dashboard');
+            });
         };
     };
 

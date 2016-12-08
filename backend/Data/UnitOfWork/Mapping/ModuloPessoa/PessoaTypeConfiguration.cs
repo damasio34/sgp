@@ -9,6 +9,9 @@ namespace Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloPessoa
             Property(p => p.Nome).IsRequired();
             Property(p => p.Cpf).IsRequired();
             Property(p => p.Email).IsRequired();
+
+            //HasRequired(p => p.Trabalho).WithRequiredDependent().Map(p => p.MapKey("IdTrabalho"));
+            //HasRequired(p => p.Usuario).WithRequiredDependent().Map(p => p.MapKey("IdUsuario"));
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Damasio34.SGP.Data.UnitOfWork
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
+        {            
             base.OnModelCreating(modelBuilder);
 
             Database.SetInitializer(new CreateDatabaseIfNotExistsInitializer());
@@ -65,7 +65,7 @@ namespace Damasio34.SGP.Data.UnitOfWork
             //modelBuilder.Configurations.Add(new BancoTypeConfiguration());
             //modelBuilder.Configurations.Add(new CategoriaTypeConfiguration());
             //modelBuilder.Configurations.Add(new ContaTypeConfiguration());
-            modelBuilder.Configurations.Add(new LancamentoDoContrachequeTypeConfiguration());
+            modelBuilder.Configurations.Add(new LancamentoDoContraChequeTypeConfiguration());
 
             // Modulo Pessoa
             modelBuilder.Configurations.Add(new PessoaTypeConfiguration());
