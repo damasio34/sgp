@@ -60,7 +60,6 @@
     <Compile Include="ModuloTrabalho\Imposto.cs" />
     <Compile Include="ModuloTrabalho\Inss.cs" />
     <Compile Include="ModuloTrabalho\Interfaces\IContraChequeRepository.cs" />
-    <Compile Include="ModuloTrabalho\Interfaces\IPontoRepository.cs" />
     <Compile Include="ModuloTrabalho\Interfaces\ITrabalhoRepository.cs" />
     <Compile Include="ModuloTrabalho\Irrf.cs" />
     <Compile Include="ModuloTrabalho\Ponto.cs" />
