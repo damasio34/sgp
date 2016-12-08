@@ -110,7 +110,7 @@ namespace Damasio34.SGP.Aplicacao.Services
             try
             {
                 var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
-                return trabalho.Pontos.Select(p => new PontoDto
+                return trabalho.Pontos().Select(p => new PontoDto
                 {
                     Id = p.Id, DataHora = p.DataHora, TipoDoEvento = p.TipoDoEvento, Justificativa = p.Justificativa
                 }).OrderByDescending(p => p.DataHora).ToList();
@@ -210,8 +210,8 @@ namespace Damasio34.SGP.Aplicacao.Services
             try
             {
                 var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
-                var ponto = trabalho.Pontos.Single(p => p.Id.Equals(idPonto));
-                trabalho.Pontos.Remove(ponto);
+                var ponto = trabalho.Pontos().Single(p => p.Id.Equals(idPonto));
+                trabalho.RemoverPonto(ponto);
 
                 _trabalhoRepository.Alterar(trabalho);
                 _trabalhoRepository.Commit();

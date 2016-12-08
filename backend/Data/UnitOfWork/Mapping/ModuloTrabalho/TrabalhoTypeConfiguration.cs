@@ -6,9 +6,7 @@ namespace Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloTrabalho
     {
         public TrabalhoTypeConfiguration() : base()
         {
-            HasRequired(p => p.Pessoa).WithMany(p => p.Trabalhos).HasForeignKey(p => p.IdPessoa);
-
-            HasMany(p => p.Pontos).WithMany();
+            HasRequired(p => p.Pessoa).WithMany(p => p.Trabalhos).HasForeignKey(p => p.IdPessoa);            
             HasMany(p => p.ContraCheques).WithMany();
         }
     }
