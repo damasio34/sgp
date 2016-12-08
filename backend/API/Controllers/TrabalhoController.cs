@@ -76,9 +76,9 @@ namespace Damasio34.SGP.API.Controllers
 
         [Route("{idtrabalho}/contracheque/{mes}")]
         [HttpGet]
-        public ContraCheque GetContraCheque([FromUri] Guid idTrabalho, [FromUri] int mes)
+        public ContraCheque GetContraCheque([FromUri] Guid idTrabalho, [FromUri] DateTime dataDeReferencia)
         {
-            return _trabalhoAppService.CalcularContraCheque(idTrabalho, mes);
+            return _trabalhoAppService.CalcularContraCheque(idTrabalho, dataDeReferencia);
         }
     }
 }

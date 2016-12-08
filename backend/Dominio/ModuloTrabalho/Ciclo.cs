@@ -8,6 +8,8 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 {
     public class Ciclo : EntidadeBase
     {
+        #region [ Construtores ]
+        
         internal Ciclo() { }
         public Ciclo(DateTime dataDeInicio, DateTime dataDeTermino, bool controlaAlmoco, 
             TimeSpan cargaHorariaDiaria, TimeSpan tempoDoAlmoco)
@@ -20,16 +22,25 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
             this.TempoDeAlmoco = tempoDoAlmoco;
         }
 
+        #endregion
+
+        public Guid IdTrabalho { get; protected set; }
+        public Trabalho Trabalho { get; protected set; }
         public DateTime DataDeInicio { get; set; }
-        public DateTime DateDeTermino { get; set; }
-        public IList<Ponto> Pontos { get; set; } = new List<Ponto>();        
+        public DateTime DateDeTermino { get; set; }        
         public bool ControlaAlmoco { get; set; }
-        public TimeSpan? TempoDeAlmoco { get; set; }
         public TimeSpan CargaHorariaDiaria { get; set; }
-        
+        public TimeSpan TempoDeAlmoco { get; set; }
+        public ContraCheque ContraCheque { get; set; }        
+
+        public IList<Ponto> Pontos { get; set; } = new List<Ponto>();
+
+        // Propriedades calculadas
         public TimeSpan SaldoDeHoras => this.CalcularHorasTrabalhadasNoCliclo();
         public TimeSpan SaldoDeHorasExtras => this.SaldoDeHoras - this.CalcularHorasUteisDoCicloAteHoje();
 
+        #region [ Métodos ]
+        
         private TimeSpan CalcularHorasUteisDoCicloAteHoje()
         {
             var quantidadeDeDias = 0;
@@ -68,11 +79,13 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
                     var entrada = pontosDoDia.Single(p => p.TipoDoEvento == TipoDoEvento.Entrada);
                     var saida = pontosDoDia.Single(p => p.TipoDoEvento == TipoDoEvento.Saida);
                     if (this.TempoDeAlmoco.IsNull()) banco += saida.DataHora.TimeOfDay - entrada.DataHora.TimeOfDay;
-                    else banco += saida.DataHora.TimeOfDay - entrada.DataHora.TimeOfDay - TempoDeAlmoco.Value;
+                    else banco += saida.DataHora.TimeOfDay - entrada.DataHora.TimeOfDay - TempoDeAlmoco;
                 }
             }
 
             return banco;
-        }        
+        }
+
+        #endregion
     }
 }

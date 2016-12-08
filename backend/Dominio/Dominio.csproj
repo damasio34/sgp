@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ISgpRepository.cs" />
+    <Compile Include="ModuloTrabalho\LancamentoDoContracheque.cs" />
+    <Compile Include="ModuloTrabalho\TipoDeLancamento.cs" />
     <Compile Include="ModuloPessoa\Factories\PessoaFactory.cs" />
     <Compile Include="ModuloPessoa\Factories\UsuarioFactory.cs" />
     <Compile Include="ModuloPessoa\Interfaces\IPessoaRepository.cs" />

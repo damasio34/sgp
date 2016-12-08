@@ -6,8 +6,13 @@ namespace Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloTrabalho
     {
         public TrabalhoTypeConfiguration() : base()
         {
-            HasRequired(p => p.Pessoa).WithMany(p => p.Trabalhos).HasForeignKey(p => p.IdPessoa);            
-            HasMany(p => p.ContraCheques).WithMany();
+            Property(p => p.MesesDoCiclo).IsRequired();
+            Property(p => p.HorarioDeEntrada).IsRequired();
+            Property(p => p.HorarioDeSaida).IsRequired();
+            Property(p => p.SalarioBruto).IsRequired();
+            Property(p => p.ControlaAlmoco).IsRequired();
+
+            HasRequired(p => p.Pessoa).WithMany();
         }
     }
 }

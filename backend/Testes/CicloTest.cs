@@ -21,7 +21,7 @@ namespace Damasio34.SGP.Testes
         [TestMethod]
         public void CalcularBancoDeHorasComAlmoco()
         {
-            var trabalho = _pessoa.Trabalhos.First();
+            var trabalho = _pessoa.Trabalho;
             trabalho.AdicionarPonto(TipoDoEvento.Entrada, DateTime.Now.AddHours(-9));
             trabalho.AdicionarPonto(TipoDoEvento.EntradaDoAlmoco, DateTime.Now.AddHours(-5));
             trabalho.AdicionarPonto(TipoDoEvento.SaidaDoAlmoco, DateTime.Now.AddHours(-4));
@@ -32,7 +32,7 @@ namespace Damasio34.SGP.Testes
         [TestMethod]
         public void CalcularBancoDeHorasSemAlmoco()
         {
-            var trabalho = _pessoa.Trabalhos.First();
+            var trabalho = _pessoa.Trabalho;
             trabalho.ControlaAlmoco = false;
             trabalho.AdicionarPonto(TipoDoEvento.Entrada, DateTime.Now.AddHours(-9));
             trabalho.AdicionarPonto(TipoDoEvento.Saida, DateTime.Now);

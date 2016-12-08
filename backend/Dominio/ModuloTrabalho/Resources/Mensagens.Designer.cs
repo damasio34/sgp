@@ -68,5 +68,49 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho.Resources {
                 return ResourceManager.GetString("DataInvalida", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to O tipo de lançamento incorreto para a operação solicitada..
+        /// </summary>
+        internal static string TipoDeLancamentoIncorreto
+        {
+            get
+            {
+                return ResourceManager.GetString("TipoDeLancamentoIncorreto", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to O valor do lançamento não pode ser igual a zero..
+        /// </summary>
+        internal static string ValorLancamentoIgualZero
+        {
+            get
+            {
+                return ResourceManager.GetString("ValorLancamentoIgualZero", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to O valor do lançamento de crédito precisa ser maior que zero..
+        /// </summary>
+        internal static string ValorLancamentoPrecisaSerMaiorQueZero
+        {
+            get
+            {
+                return ResourceManager.GetString("ValorLancamentoPrecisaSerMaiorQueZero", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to O valor do lançamento de débito precisa ser menor que zero..
+        /// </summary>
+        internal static string ValorLancamentoPrecisaSerMenorQueZero
+        {
+            get
+            {
+                return ResourceManager.GetString("ValorLancamentoPrecisaSerMenorQueZero", resourceCulture);
+            }
+        }
     }
 }

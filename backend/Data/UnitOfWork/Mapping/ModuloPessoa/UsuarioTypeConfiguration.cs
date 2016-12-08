@@ -6,6 +6,9 @@ namespace Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloPessoa
     {
         public UsuarioTypeConfiguration() : base()
         {
+            Property(p => p.Login).IsRequired();
+            Property(p => p.Senha).IsRequired();
+
             HasRequired(p => p.Pessoa).WithMany().HasForeignKey(p => p.IdPessoa);
         }
     }

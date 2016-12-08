@@ -11,7 +11,6 @@ using Damasio34.Seedwork.Aggregates;
 using Damasio34.Seedwork.Repositories.Queryable;
 using Damasio34.Seedwork.UnitOfWork;
 using Damasio34.SGP.Data.UnitOfWork.Initializers;
-using Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloFinanceiro;
 using Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloPessoa;
 using Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloTrabalho;
 
@@ -55,16 +54,19 @@ namespace Damasio34.SGP.Data.UnitOfWork
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
-            // Modulo Emprego
+            // Modulo Trabalho
             modelBuilder.Configurations.Add(new ContraChequeTypeConfiguration());
             modelBuilder.Configurations.Add(new TrabalhoTypeConfiguration());
             modelBuilder.Configurations.Add(new PontoTypeConfiguration());
+            modelBuilder.Configurations.Add(new CicloTypeConfiguration());
+            modelBuilder.Configurations.Add(new ImpostoTypeConfiguration());
 
             // Modulo Financeiro
             //modelBuilder.Configurations.Add(new BancoTypeConfiguration());
             //modelBuilder.Configurations.Add(new CategoriaTypeConfiguration());
             //modelBuilder.Configurations.Add(new ContaTypeConfiguration());
-            modelBuilder.Configurations.Add(new LancamentoTypeConfiguration());
+            modelBuilder.Configurations.Add(new LancamentoDoContrachequeTypeConfiguration());
+
             // Modulo Pessoa
             modelBuilder.Configurations.Add(new PessoaTypeConfiguration());
             modelBuilder.Configurations.Add(new UsuarioTypeConfiguration());

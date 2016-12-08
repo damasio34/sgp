@@ -150,7 +150,7 @@ namespace Damasio34.SGP.Aplicacao.Services
             {
                 var usuario = _usuarioRepository.Selecionar(p => p.Login.Equals(login));
                 var pessoa = _pessoaRepository.Selecionar(p => p.Id.Equals(usuario.IdPessoa));
-                return pessoa.Trabalhos.First(p => p.Padrao).Id;
+                return pessoa.Trabalho.Id;
             }
             catch (Exception ex)
             {                
@@ -159,22 +159,23 @@ namespace Damasio34.SGP.Aplicacao.Services
         }
         public ContraCheque CalcularContraCheque(Guid idTrabalho)
         {
-            return this.CalcularContraCheque(idTrabalho, DateTime.Today.Month - 1);
+            return this.CalcularContraCheque(idTrabalho, DateTime.Today);
         }
-        public ContraCheque CalcularContraCheque(Guid idTrabalho, int mes)
+        public ContraCheque CalcularContraCheque(Guid idTrabalho, DateTime dataDeReferencia)
         {
-            try
-            {
-                var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
-                var contracheque = trabalho.ContraCheques.FirstOrDefault(p => p.DataDeReferencia.Month.Equals(mes));            
-                if (contracheque.IsNotNull()) return contracheque;
+            //try
+            //{
+            //    var trabalho = _trabalhoRepository.Selecionar(p => p.Id.Equals(idTrabalho));
+            //    var contracheque = trabalho.ContraCheque.FirstOrDefault(p => p.DataDeReferencia.Month.Equals(mes));            
+            //    if (contracheque.IsNotNull()) return contracheque;
 
-                return trabalho.GerarContraCheque(mes);
-            }
-            catch (Exception ex)
-            {               
-                throw ex;
-            }
+            //    return trabalho.GerarContraCheque(mes);
+            //}
+            //catch (Exception ex)
+            //{               
+            //    throw ex;
+            //}
+            throw new NotImplementedException();
         }
         public ConfiguracaoDto SelecionarConfiguracao(Guid idTrabalho)
         {

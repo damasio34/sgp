@@ -12,7 +12,7 @@ namespace Damasio34.SGP.Dominio.ModuloPessoa.Factories
             pessoa.GerarId();
 
             if (trabalho.IsNull()) trabalho = TrabalhoFactory.Criar(pessoa);
-            pessoa.AdicionarTrabalho(trabalho);
+            pessoa.AssociarTrabalho(trabalho);
 
             return pessoa;
         }

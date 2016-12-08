@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Damasio34.Seedwork.Domain;
-using Damasio34.SGP.Dominio.Interfaces;
-using Damasio34.SGP.Dominio.ModuloFinanceiro;
+using Damasio34.SGP.Dominio.ModuloTrabalho.Factories;
 
 namespace Damasio34.SGP.Dominio.ModuloTrabalho
 {
@@ -12,42 +11,41 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         #region [ Contrutores ]
 
         internal ContraCheque() { }
-        internal ContraCheque(Trabalho trabalho, DateTime dataDeReferencia)
+        internal ContraCheque(Ciclo ciclo)
         {
-            this.Trabalho = trabalho;
-            this.IdTrabalho = trabalho.Id;
-
-            this.DataDeReferencia = dataDeReferencia;            
+            this.Ciclo = ciclo;
         }
 
         #endregion
 
         #region [ Propriedades ]
 
-        public decimal ValorBruto { get; private set; }                
-        public DateTime? DataFinalizacao { get; set; }
-        public DateTime DataDeReferencia { get; set; }
-        public Guid IdTrabalho { get; set; }
-        public virtual Trabalho Trabalho { get; protected set; }
-        public virtual IList<Lancamento> Lancamentos { get; set; } = new List<Lancamento>();
-        public double ValorLiquido => Math.Round(Trabalho.SalarioBruto + Lancamentos.Sum(s => s.Valor), 2);
+        public double ValorBruto { get; set; }
+        public virtual Ciclo Ciclo { get; protected set; }
+        public DateTime? DataFinalizacao { get; set; }        
+
+        public virtual IList<LancamentoDoContracheque> Lancamentos { get; set; } = new List<LancamentoDoContracheque>();
+
+        // Propriedades calculadas
+        public double ValorLiquido => Math.Round(Ciclo.Trabalho.SalarioBruto + Lancamentos.Sum(s => s.Valor), 2);
 
         #endregion
 
         #region [ Métodos públicos ]
 
-        public void AdiconarLancamento(Lancamento lancamento)
+        public void AdiconarLancamento(Imposto imposto, TipoDeLancamento tipoDeLancamento)
         {
+            var lancamento = new LancamentoDoContracheque(this, imposto.Valor, tipoDeLancamento, 
+                imposto.TipoDoImposto.ToString());
             this.Lancamentos.Add(lancamento);
         }
         public void Calcular()
         {
-            var inss = new Inss(this.ValorLiquido).Valor;
-            var lancamentoDeInss = new Lancamento(inss, TipoLancamento.Saida, "INSS");
-            this.AdiconarLancamento(lancamentoDeInss);
-            var irrf = new Irrf(this.ValorLiquido).Valor;
-            var lancamentoDeIrrf = new Lancamento(irrf, TipoLancamento.Saida, "IRRF");
-            this.AdiconarLancamento(lancamentoDeIrrf);
+            var inss = new Inss(this.ValorLiquido);
+            this.AdiconarLancamento(inss, TipoDeLancamento.Saida);
+
+            var irrf = new Irrf(this.ValorLiquido);
+            this.AdiconarLancamento(irrf, TipoDeLancamento.Saida);
         }
 
         #endregion

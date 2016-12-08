@@ -4,6 +4,11 @@ namespace Damasio34.SGP.Data.UnitOfWork.Mapping.ModuloTrabalho
 {
     class ContraChequeTypeConfiguration : EntidadeBaseTypeConfiguration<ContraCheque>
     {
-        public ContraChequeTypeConfiguration() : base() { }
+        public ContraChequeTypeConfiguration() : base()
+        {
+            Property(p => p.ValorBruto).IsRequired();
+
+            HasRequired(p => p.Ciclo).WithMany();
+        }
     }
 }

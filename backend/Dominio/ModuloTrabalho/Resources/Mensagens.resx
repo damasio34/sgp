@@ -120,4 +120,16 @@
   <data name="DataInvalida" xml:space="preserve">
     <value>A data informada é inválida.</value>
   </data>
+  <data name="TipoDeLancamentoIncorreto" xml:space="preserve">
+    <value>O tipo de lançamento incorreto para a operação solicitada.</value>
+  </data>
+  <data name="ValorLancamentoIgualZero" xml:space="preserve">
+    <value>O valor do lançamento não pode ser igual a zero.</value>
+  </data>
+  <data name="ValorLancamentoPrecisaSerMaiorQueZero" xml:space="preserve">
+    <value>O valor do lançamento de crédito precisa ser maior que zero.</value>
+  </data>
+  <data name="ValorLancamentoPrecisaSerMenorQueZero" xml:space="preserve">
+    <value>O valor do lançamento de débito precisa ser menor que zero.</value>
+  </data>
 </root>

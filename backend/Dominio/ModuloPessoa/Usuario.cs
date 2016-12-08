@@ -9,12 +9,13 @@ namespace Damasio34.SGP.Dominio.ModuloPessoa
         internal Usuario(Pessoa pessoa, string login, string senha)
         {
             this.Pessoa = pessoa;
+            this.IdPessoa = pessoa.Id;
 
             this.Login = login;
             this.Senha = senha;
         }
 
-        public Guid IdPessoa { get; set; }
+        public Guid IdPessoa { get; protected set; }
         public virtual Pessoa Pessoa { get; protected set; }
 
         public string Login { get; set; }

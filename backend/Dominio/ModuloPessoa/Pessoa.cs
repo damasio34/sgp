@@ -18,12 +18,12 @@ namespace Damasio34.SGP.Dominio.ModuloPessoa
         public string Cpf { get; set; }
         public string Email { get; set; }
 
-        public virtual IList<Trabalho> Trabalhos { get; set; } = new List<Trabalho>();
+        public virtual Trabalho Trabalho { get; set; }
 
-        public void AdicionarTrabalho(Trabalho trabalho)
+        public void AssociarTrabalho(Trabalho trabalho)
         {
             trabalho.Pessoa = this;
-            this.Trabalhos.Add(trabalho);
+            this.Trabalho = trabalho;
         }
 
     }
