@@ -5,11 +5,12 @@
         .module('sgp.controllers')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['$ionicPopup', '$timeout', 'DateTimeService', 'TrabalhoService'];
-    function DashboardController($ionicPopup, $timeout, DateTimeService, TrabalhoService) {
+    DashboardController.$inject = ['$ionicPopup', '$timeout', 'DateTimeService', 'TrabalhoService', 'NfcService'];
+    function DashboardController($ionicPopup, $timeout, DateTimeService, TrabalhoService, NfcService) {
         var vm = this;
 
         vm.MarcarPonto = MarcarPonto;
+        vm.tag = NfcService.tag;
 
         // -------------------------------------------------------------
 
@@ -22,11 +23,13 @@
                 vm.Relogio = "00:00:00";
                 _exibeHorasTrabalhadas(pontosDoDia);
             });
+
+            NfcService.setCallback(MarcarPonto);
         };
         //ToDo: Colocar método no DateTimeService
         function _exibeHorasTrabalhadas(pontosDoDia) {
             if (!pontosDoDia.HorarioDeEntrada) return;
-            
+
             var tickInterval = 1000;
             vm.PontosDoDia = pontosDoDia;
             if (pontosDoDia.HorarioDeSaida) vm.bloqueiaBotao = true;
