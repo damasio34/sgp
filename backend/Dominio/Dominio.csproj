@@ -44,28 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IFinalizavel.cs" />
     <Compile Include="Interfaces\ISgpRepository.cs" />
-    <Compile Include="ModuloFinanceiro\Banco.cs" />
-    <Compile Include="ModuloFinanceiro\Cartao.cs" />
-    <Compile Include="ModuloFinanceiro\Carteira.cs" />
-    <Compile Include="ModuloFinanceiro\Categoria.cs" />
-    <Compile Include="ModuloFinanceiro\Conta.cs" />
-    <Compile Include="ModuloFinanceiro\ContaBancaria.cs" />
-    <Compile Include="ModuloFinanceiro\ContaCorrente.cs" />
-    <Compile Include="ModuloFinanceiro\ContaPoupanca.cs" />
-    <Compile Include="ModuloFinanceiro\Factories\ContaFactory.cs" />
-    <Compile Include="ModuloFinanceiro\Factories\LancamentoFactory.cs" />
-    <Compile Include="ModuloFinanceiro\Interfaces\IBancoRepository.cs" />
-    <Compile Include="ModuloFinanceiro\Interfaces\ICategoriaRepository.cs" />
-    <Compile Include="ModuloFinanceiro\Interfaces\IContaRepository.cs" />
-    <Compile Include="ModuloFinanceiro\Interfaces\ILancamentoRepository.cs" />
-    <Compile Include="ModuloFinanceiro\Lancamento.cs" />
-    <Compile Include="ModuloFinanceiro\Resources\Mensagens.Designer.cs" />
-    <Compile Include="ModuloFinanceiro\Specifications\ValorLancamentoIgualZeroSpec.cs" />
-    <Compile Include="ModuloFinanceiro\Specifications\ValorLancamentoMaiorQueZeroSpec.cs" />
-    <Compile Include="ModuloFinanceiro\Specifications\ValorLancamentoMenorQueZeroSpec.cs" />
-    <Compile Include="ModuloFinanceiro\TipoLancamento.cs" />
     <Compile Include="ModuloPessoa\Factories\PessoaFactory.cs" />
     <Compile Include="ModuloPessoa\Factories\UsuarioFactory.cs" />
     <Compile Include="ModuloPessoa\Interfaces\IPessoaRepository.cs" />
@@ -92,12 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ModuloFinanceiro\Resources\Mensagens.resx" />
     <EmbeddedResource Include="ModuloTrabalho\Resources\Mensagens.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\Resources\Resources\" />
-    <Folder Include="Interfaces\Specifications\Specifications\" />
     <Folder Include="ModuloPessoa\Specifications\" />
     <Folder Include="ModuloTrabalho\Specifications\" />
   </ItemGroup>

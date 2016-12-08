@@ -7,7 +7,7 @@ using Damasio34.SGP.Dominio.ModuloFinanceiro;
 
 namespace Damasio34.SGP.Dominio.ModuloTrabalho
 {
-    public class ContraCheque : EntidadeBase, IFinalizavel
+    public class ContraCheque : EntidadeBase
     {
         #region [ Contrutores ]
 
@@ -40,10 +40,6 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         {
             this.Lancamentos.Add(lancamento);
         }
-        public void Finalizar()
-        {
-            throw new NotImplementedException();
-        }            
         public void Calcular()
         {
             var inss = new Inss(this.ValorLiquido).Valor;
