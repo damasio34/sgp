@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Damasio34.Seedwork.Domain;
 using Damasio34.Seedwork.Extensions;
@@ -11,9 +12,11 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         #region [ Construtores ]
         
         internal Ciclo() { }
-        public Ciclo(DateTime dataDeInicio, DateTime dataDeTermino, bool controlaAlmoco, 
+        public Ciclo(Trabalho trabalho, DateTime dataDeInicio, DateTime dataDeTermino, bool controlaAlmoco, 
             TimeSpan cargaHorariaDiaria, TimeSpan tempoDoAlmoco)
         {
+            this.Trabalho = trabalho;
+            
             this.DataDeInicio = dataDeInicio;
             this.DateDeTermino = dataDeTermino;
             this.ControlaAlmoco = controlaAlmoco;
@@ -24,6 +27,8 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 
         #endregion
 
+        #region [ Propriedades ]
+        
         public Guid IdTrabalho { get; protected set; }
         public Trabalho Trabalho { get; protected set; }
         public DateTime DataDeInicio { get; set; }
@@ -39,8 +44,10 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public TimeSpan SaldoDeHoras => this.CalcularHorasTrabalhadasNoCliclo();
         public TimeSpan SaldoDeHorasExtras => this.SaldoDeHoras - this.CalcularHorasUteisDoCicloAteHoje();
 
+        #endregion
+
         #region [ Métodos ]
-        
+
         private TimeSpan CalcularHorasUteisDoCicloAteHoje()
         {
             var quantidadeDeDias = 0;
@@ -86,6 +93,18 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
             return banco;
         }
 
-        #endregion
+        public ContraCheque GerarContraCheque()
+        {
+            if (this.ContraCheque.IsNotNull()) return this.ContraCheque;
+
+            var contraCheque = new ContraCheque(this);
+            contraCheque.GerarId();
+            contraCheque.Calcular();
+
+            this.ContraCheque = contraCheque;
+            return contraCheque;
+        }
+
+        #endregion         
     }
 }

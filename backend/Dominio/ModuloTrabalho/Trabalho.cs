@@ -50,7 +50,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public virtual IList<Ciclo> Ciclos { get; protected set; } = new List<Ciclo>();        
 
         // Propriedades calculadas
-        public int DiaDeFechamento => 1;
+        //public int DiaDeFechamento => 24;
         public int HorasPorMes => 220;        
         public TimeSpan CargaHorariaDiaria => new TimeSpan(8, 0, 0);
         public double ValorHora => this.SalarioBruto.Equals(0) ? 0 : this.SalarioBruto / this.HorasPorMes;                       
@@ -62,9 +62,9 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 
         #region [ Métodos Públicos ]
 
-        private Ciclo NovoCliclo(DateTime dataDeInicio, DateTime dataDeTermino)
+        private Ciclo NovoCiclo(DateTime dataDeInicio, DateTime dataDeTermino)
         {
-            var ciclo = new Ciclo(dataDeInicio, dataDeTermino, this.ControlaAlmoco,
+            var ciclo = new Ciclo(this, dataDeInicio, dataDeTermino, this.ControlaAlmoco,
                 this.CargaHorariaDiaria, this.TempoDeAlmoco);
             ciclo.GerarId();
 
@@ -81,6 +81,16 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
             var dtReferencia = dataDeReferencia.IsNull() ? DateTime.Today : dataDeReferencia.Value;
             var cicloAtual = this.Ciclos.SingleOrDefault(p => p.DataDeInicio.Date <= dtReferencia.Date && 
                 p.DateDeTermino.Date >= dtReferencia.Date);
+
+            if (cicloAtual.IsNull())
+            {
+                var utimoDiaDoMes = DateTime.DaysInMonth(dtReferencia.Year, dtReferencia.Month);
+                var dataFinal = new DateTime(dtReferencia.Year, dtReferencia.Month, utimoDiaDoMes);
+                var dataInicial = new DateTime(dtReferencia.Year, dtReferencia.Month, 1);
+                var novoCiclo = this.NovoCiclo(dataInicial, dataFinal);
+                Ciclos.Add(novoCiclo);
+                cicloAtual = novoCiclo;
+            }
 
             return cicloAtual;
         }
@@ -105,7 +115,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
             var cicloAtual = BuscaAtual(ponto.DataHora);
             if (cicloAtual.IsNull())
             {                
-                cicloAtual = this.NovoCliclo(ponto.DataHora.Date, ponto.DataHora.Date.AddMonths(MesesDoCiclo).AddDays(-1));
+                cicloAtual = this.NovoCiclo(ponto.DataHora.Date, ponto.DataHora.Date.AddMonths(MesesDoCiclo).AddDays(-1));
                 this.Ciclos.Add(cicloAtual);
             }
 
@@ -116,12 +126,10 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
             var ponto = PontoFactory.Criar(tipoDoEvento, dataHora);        
             this.AdicionarPonto(ponto);
         }
-        public ContraCheque GerarContraCheque(DateTime dataDeReferencia)
+        public ContraCheque GerarContraCheque(DateTime? dataDeReferencia = null)
         {
             var cicloAtual = BuscaAtual(dataDeReferencia);
-            var contraCheque = ContraChequeFactory.Criar(cicloAtual);
-
-            return contraCheque;
+            return cicloAtual.GerarContraCheque();
         }
         public void RemoverPonto(Ponto ponto)
         {

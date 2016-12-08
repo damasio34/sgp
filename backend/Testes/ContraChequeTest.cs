@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using Damasio34.SGP.Dominio.ModuloPessoa;
 using Damasio34.SGP.Dominio.ModuloPessoa.Factories;
 using Damasio34.SGP.Dominio.ModuloTrabalho;
-using Damasio34.SGP.Dominio.ModuloTrabalho.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Damasio34.SGP.Testes
@@ -25,8 +23,7 @@ namespace Damasio34.SGP.Testes
             var salarioBruto = 1000.00;
             var trabalho = _pessoa.Trabalho;
             trabalho.SalarioBruto = salarioBruto;
-            var contraCheque = ContraChequeFactory.Criar(trabalho.BuscaAtual());
-            contraCheque.Calcular();
+            var contraCheque = trabalho.GerarContraCheque();
 
              var salarioLiquido = contraCheque.ValorLiquido;
             Assert.AreEqual(salarioLiquido, 920.00);
@@ -38,8 +35,7 @@ namespace Damasio34.SGP.Testes
             var salarioBruto = 3000.00;
             var trabalho = _pessoa.Trabalho;
             trabalho.SalarioBruto = salarioBruto;
-            var contraCheque = ContraChequeFactory.Criar(trabalho.BuscaAtual());
-            contraCheque.Calcular();
+            var contraCheque = trabalho.GerarContraCheque();            
 
             var salarioLiquido = contraCheque.ValorLiquido;
             Assert.AreEqual(salarioLiquido, 2612.55);
@@ -51,8 +47,7 @@ namespace Damasio34.SGP.Testes
             var salarioBruto = 7500.00;
             var trabalho = _pessoa.Trabalho;
             trabalho.SalarioBruto = salarioBruto;
-            var contraCheque = ContraChequeFactory.Criar(trabalho.BuscaAtual());
-            contraCheque.Calcular();
+            var contraCheque = trabalho.GerarContraCheque();
 
             var salarioLiquido = contraCheque.ValorLiquido;
             Assert.AreEqual(salarioLiquido, 5892.97);
@@ -64,8 +59,7 @@ namespace Damasio34.SGP.Testes
             var salarioBruto = 10000.00;
             var trabalho = _pessoa.Trabalho;
             trabalho.SalarioBruto = salarioBruto;
-            var contraCheque = ContraChequeFactory.Criar(trabalho.BuscaAtual());
-            contraCheque.Calcular();
+            var contraCheque = trabalho.GerarContraCheque();
 
             var salarioLiquido = contraCheque.ValorLiquido;
             Assert.AreEqual(salarioLiquido, 7705.47);
@@ -97,8 +91,7 @@ namespace Damasio34.SGP.Testes
             }
 
             var totalDeHorasExtras = Math.Round(trabalho.SaldoBancoHorasExtras(dataFinal).TotalHours);
-            var contraCheque = ContraChequeFactory.Criar(trabalho.BuscaAtual());
-            contraCheque.Calcular();
+            var contraCheque = trabalho.GerarContraCheque();
 
             var horasExtras = trabalho.ValorBancoHoras(dataFinal);
             var salarioLiquido = contraCheque.ValorLiquido + horasExtras;
