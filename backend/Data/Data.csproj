@@ -72,10 +72,6 @@
     <Compile Include="UnitOfWork\Initializers\DropCreateDatabaseIfModelChangesInitializer.cs" />
     <Compile Include="UnitOfWork\MainUnitOfWork.cs" />
     <Compile Include="UnitOfWork\Mapping\EntidadeBaseTypeConfiguration.cs" />
-    <Compile Include="UnitOfWork\Mapping\ModuloFinanceiro\BancoTypeConfiguration.cs" />
-    <Compile Include="UnitOfWork\Mapping\ModuloFinanceiro\CategoriaTypeConfiguration.cs" />
-    <Compile Include="UnitOfWork\Mapping\ModuloFinanceiro\ContaTypeConfiguration.cs" />
-    <Compile Include="UnitOfWork\Mapping\ModuloFinanceiro\LancamentoTypeConfiguration.cs" />
     <Compile Include="UnitOfWork\Mapping\ModuloPessoa\PessoaTypeConfiguration.cs" />
     <Compile Include="UnitOfWork\Mapping\ModuloPessoa\UsuarioTypeConfiguration.cs" />
     <Compile Include="UnitOfWork\Mapping\ModuloTrabalho\ContraChequeTypeConfiguration.cs" />
