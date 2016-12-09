@@ -189,6 +189,8 @@ namespace Damasio34.SGP.Aplicacao.Services
                 _trabalho.RemoverPonto(ponto);
 
                 _trabalhoRepository.Alterar(_trabalho);
+                // GAMB
+                _trabalhoRepository.UnitOfWork.RegisterDeleted(ponto);
                 _trabalhoRepository.Commit();
             }
             catch (Exception ex)
