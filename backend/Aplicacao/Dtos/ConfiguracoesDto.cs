@@ -3,7 +3,7 @@ using Damasio34.SGP.Dominio.ModuloTrabalho;
 
 namespace Damasio34.SGP.Aplicacao.Dtos
 {
-    public class ConfiguracaoDto
+    public class ConfiguracoesDto
     {
         public Guid IdTrabalho { get; set; }        
         public TimeSpan HorarioDeEntrada { get; set; }

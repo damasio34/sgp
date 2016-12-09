@@ -7,32 +7,32 @@
             <div class="item item-divider">Configurações do trabalho</div>
             <label class="item item-input">
                 <span class="input-label">Horário de entrada</span>
-                <input type="datetime" ng-model="vm.Configuracao.HorarioDeEntrada" step="30"/>
+                <input type="datetime" ng-model="vm.Configuracoes.HorarioDeEntrada" step="30"/>
             </label>
             <label class="item item-input">
                 <span class="input-label">Horário de saída</span>
-                <input type="datetime" ng-model="vm.Configuracao.HorarioDeSaida" />
+                <input type="datetime" ng-model="vm.Configuracoes.HorarioDeSaida" />
             </label>
-            <ion-toggle ng-model="vm.Configuracao.ControlaAlmoco" toggle-class="toggle-positive">Controla almoço?</ion-toggle>
-            <label class="item item-input" ng-if="vm.Configuracao.ControlaAlmoco">
+            <ion-toggle ng-model="vm.Configuracoes.ControlaAlmoco" toggle-class="toggle-positive">Controla almoço?</ion-toggle>
+            <label class="item item-input" ng-if="vm.Configuracoes.ControlaAlmoco">
                 <span class="input-label">Horário de entrada do almoço</span>
-                <input type="datetime" ng-model="vm.Configuracao.HorarioDeEntradaDoAlmoco" />
+                <input type="datetime" ng-model="vm.Configuracoes.HorarioDeEntradaDoAlmoco" />
             </label>
-            <label class="item item-input" ng-if="vm.Configuracao.ControlaAlmoco">
+            <label class="item item-input" ng-if="vm.Configuracoes.ControlaAlmoco">
                 <span class="input-label">Horário de saída do almoço</span>
-                <input type="datetime" ng-model="vm.Configuracao.HorarioDeSaidaDoAlmoco" />
+                <input type="datetime" ng-model="vm.Configuracoes.HorarioDeSaidaDoAlmoco" />
             </label>
             <label class="item item-input">
                 <span class="input-label">Salário base</span>
-                <input type="text" ng-model="vm.Configuracao.SalarioBruto" ui-money-mask="2" />
+                <input type="text" ng-model="vm.Configuracoes.SalarioBruto" ui-money-mask="2" />
             </label>
             <label class="item item-input">
                 <span class="input-label">Número de meses do ciclo</span>
-                {{vm.Configuracao.MesesDoCiclo}}
+                {{vm.Configuracoes.MesesDoCiclo}}
             </label>
             <div class="item range range-positive">
                 <i class="icon ion-minus-round"></i>
-                <input type="range" ng-model="vm.Configuracao.MesesDoCiclo" min="1" max="12" />
+                <input type="range" ng-model="vm.Configuracoes.MesesDoCiclo" min="1" max="12" />
                 <i class="icon ion-plus-round"></i>
             </div>
 
@@ -61,8 +61,8 @@
                 <i class="icon ion-ios-sunny"></i>
             </div> -->
 
-            <div class="item item-divider"></div>
-            <button class="button button-block button-positive">
+            <!-- <div class="item item-divider"></div> -->
+            <button class="button button-block button-positive" ng-click="vm.Salvar(vm.Configuracoes)">
                 Salvar
             </button>
         </div>

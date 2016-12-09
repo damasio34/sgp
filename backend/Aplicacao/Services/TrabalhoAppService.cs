@@ -48,9 +48,9 @@ namespace Damasio34.SGP.Aplicacao.Services
                 default: throw new Exception("Tipo do próximo ponto não identificado.");
             }
         }
-        private ConfiguracaoDto TrabalhoToConfiguracaoDto(Trabalho trabalho)
+        private ConfiguracoesDto TrabalhoToConfiguracaoDto(Trabalho trabalho)
         {
-            var configuracaoDto = new ConfiguracaoDto
+            var configuracaoDto = new ConfiguracoesDto
             {
                 IdTrabalho = trabalho.Id,
                 HorarioDeEntrada = trabalho.HorarioDeEntrada,
@@ -64,15 +64,15 @@ namespace Damasio34.SGP.Aplicacao.Services
 
             return configuracaoDto;
         }
-        private Trabalho ConfiguracaoDtoToTrabalho(ConfiguracaoDto configuracaoDto, Trabalho trabalho)
+        private Trabalho ConfiguracaoDtoToTrabalho(ConfiguracoesDto configuracoesDto, Trabalho trabalho)
         {
-            trabalho.HorarioDeEntrada = configuracaoDto.HorarioDeEntrada;
-            trabalho.HorarioDeSaida = configuracaoDto.HorarioDeSaida;
-            trabalho.ControlaAlmoco = configuracaoDto.ControlaAlmoco;
-            trabalho.SalarioBruto = configuracaoDto.SalarioBruto;
-            trabalho.MesesDoCiclo = configuracaoDto.MesesDoCiclo;
-            trabalho.HorarioDeEntradaDoAlmoco = configuracaoDto.HorarioDeEntradaDoAlmoco;
-            trabalho.HorarioDeSaidaDoAlmoco = configuracaoDto.HorarioDeSaidaDoAlmoco;
+            trabalho.HorarioDeEntrada = configuracoesDto.HorarioDeEntrada;
+            trabalho.HorarioDeSaida = configuracoesDto.HorarioDeSaida;
+            trabalho.ControlaAlmoco = configuracoesDto.ControlaAlmoco;
+            trabalho.SalarioBruto = configuracoesDto.SalarioBruto;
+            trabalho.MesesDoCiclo = configuracoesDto.MesesDoCiclo;
+            trabalho.HorarioDeEntradaDoAlmoco = configuracoesDto.HorarioDeEntradaDoAlmoco;
+            trabalho.HorarioDeSaidaDoAlmoco = configuracoesDto.HorarioDeSaidaDoAlmoco;
 
             return trabalho;
         }
@@ -155,7 +155,7 @@ namespace Damasio34.SGP.Aplicacao.Services
             }
             catch (Exception ex) { throw ex; }
         }
-        public ConfiguracaoDto SelecionarConfiguracao()
+        public ConfiguracoesDto SelecionarConfiguracoes()
         {
             try
             {
@@ -167,14 +167,15 @@ namespace Damasio34.SGP.Aplicacao.Services
                 throw ex;
             }
         }
-        public ConfiguracaoDto AtualizarConfiguracao(ConfiguracaoDto configuracaoDto)
+        public ConfiguracoesDto AlterarConfiguracoes(ConfiguracoesDto configuracoesDto)
         {
             try
             {
-                var trabalho = ConfiguracaoDtoToTrabalho(configuracaoDto, _trabalho);
+                var trabalho = ConfiguracaoDtoToTrabalho(configuracoesDto, _trabalho);
                 _trabalhoRepository.Alterar(trabalho);
+                _trabalhoRepository.Commit();
 
-                return configuracaoDto;
+                return configuracoesDto;
             }
             catch (Exception ex)
             {

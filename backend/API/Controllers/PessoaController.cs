@@ -17,6 +17,20 @@ namespace Damasio34.SGP.API.Controllers
             this._pessoaAppService = pessoaAppService;
         }
 
+        [HttpGet]
+        [Route("")]
+        public PessoaDto GetPessoa()
+        {
+            return _pessoaAppService.Selecionar();
+        }
+
+        [HttpPut]
+        [Route("")]
+        public PessoaDto AlterarPessoa([FromBody] PessoaDto pessoaDto)
+        {
+            return _pessoaAppService.Alterar(pessoaDto);
+        }
+
         [HttpPost]
         [Route("")]
         public HttpResponseMessage Singin([FromBody] PessoaDto pessoaDto)

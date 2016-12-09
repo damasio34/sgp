@@ -11,8 +11,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', end
 
 }
 
-/*.app-logo{ max-width:100px; margin:auto; margin-top: 20px; margin-bottom:10px; background-repeat:no-repeat; background-position:center;}
-.top-content { padding-top: 10vh;  text-align: center;   }
+.app-logo{ max-width:100px; margin:auto; margin-top: 20px; margin-bottom:10px; background-repeat:no-repeat; background-position:center;}
+/*.top-content { padding-top: 10vh;  text-align: center;   }
 .loginButton{ padding-bottom:0px;}
 .remvoeBP{ padding-bottom:0px;}
 .removePM{ margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; }

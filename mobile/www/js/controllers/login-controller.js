@@ -19,7 +19,7 @@
         function _init() {
             if (LoginService.usuarioAutenticado()) {
                 $ionicPopup.alert({
-                    title: 'Clube Palace Diz!',
+                    title: 'Alerta',
                     cssClass: 'custom-popup',
                     content: '<div class="text-center">Você já está logado, para sair faça logout.</div>',
                     buttons: [

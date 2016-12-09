@@ -5,5 +5,7 @@ namespace Damasio34.SGP.Aplicacao.Interfaces
     public interface IPessoaAppService
     {
         void Incluir(PessoaDto pessoaDto);
+        PessoaDto Selecionar();
+        PessoaDto Alterar(PessoaDto pessoaDto);
     }
 }

@@ -57,6 +57,16 @@
                     }
                 })
 
+                .state('app.perfil', {
+                    url: '/perfil',
+                    views: {
+                        'MainContent': {
+                            templateUrl: 'views/pessoa-editar-view.html',
+                            controller: 'PessoaEditarController as vm'
+                        }
+                    }
+                })
+
                 .state('app.configuracao', {
                     url: '/configuracao',
                     views: {

@@ -5,8 +5,8 @@
         .module('sgp.controllers')
         .controller('ConfiguracaoController', ConfiguracaoController);
 
-    ConfiguracaoController.$inject = ['TrabalhoService'];
-    function ConfiguracaoController(TrabalhoService) {
+    ConfiguracaoController.$inject = ['$ionicPopup', 'TrabalhoService'];
+    function ConfiguracaoController($ionicPopup, TrabalhoService) {
         var vm = this;
 
         vm.Salvar = Salvar;
@@ -18,13 +18,25 @@
         // -------------------------------------------------------------------
 
         function _init() {
-            TrabalhoService.getConfiguracao().success(function(configuracao) {
-                vm.Configuracao = configuracao;
+            TrabalhoService.getConfiguracoes().success(function(configuracoes) {
+                vm.Configuracoes = configuracoes;
             });
         }
 
-        function Salvar() {
-            
+        function Salvar(configuracoes) {
+            TrabalhoService.putConfiguracoes(configuracoes).success(function() {
+                $ionicPopup.alert({
+                    title: 'Alerta',
+                    cssClass: 'custom-popup',
+                    content: '<div class="text-center">Configurações atualizadas com sucesso.</div>',
+                    buttons: [
+                        {
+                            text: '<b>Ok</b>',
+                            type: 'btn-amarelo',
+                        },
+                    ]
+                });
+            });
         }
     };
 

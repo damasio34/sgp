@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dtos\ConfiguracaoDto.cs" />
+    <Compile Include="Dtos\ConfiguracoesDto.cs" />
     <Compile Include="Dtos\AutenticacaoDto.cs" />
     <Compile Include="Dtos\PessoaDto.cs" />
     <Compile Include="Dtos\PontoDto.cs" />

@@ -11,16 +11,18 @@
         var tag = {};
 
         $ionicPlatform.ready(function() {
-            if (typeof variable === 'undefined') return;
-            
-            nfc.addNdefListener(function (nfcEvent) {
-                self.callback(nfcEvent);
-                preencheTag(nfcEvent);
-            }, function () {
-                // console.log("Listening for NDEF Tags.");
-            }, function (reason) {
-                console.log("Error adding NFC Listener " + reason);
-            });
+            if (window.cordova) {
+
+                nfc.addNdefListener(function (nfcEvent) {
+                    self.callback(nfcEvent);
+                    preencheTag(nfcEvent);
+                }, function () {
+                    // console.log("Listening for NDEF Tags.");
+                }, function (reason) {
+                    console.log("Error adding NFC Listener " + reason);
+                });
+
+            }
         });
 
         function clearTag() { angular.copy({}, this.tag); }

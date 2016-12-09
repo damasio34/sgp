@@ -12,8 +12,8 @@ namespace Damasio34.SGP.Aplicacao.Interfaces
         PontosDoDiaDto GetPontosDoDia();
         ContraCheque CalcularContraCheque();
         ContraCheque CalcularContraCheque(DateTime dataDeReferencia);
-        ConfiguracaoDto SelecionarConfiguracao();
-        ConfiguracaoDto AtualizarConfiguracao(ConfiguracaoDto configuracaoDto);
+        ConfiguracoesDto SelecionarConfiguracoes();
+        ConfiguracoesDto AlterarConfiguracoes(ConfiguracoesDto configuracoesDto);
         void DeletePonto(Guid idPonto);
     }
 }

@@ -13,8 +13,8 @@
             this.mainRoute = 'trabalho';
             this.urlBase = UrlDefault.Uri;
 
-            this.getConfiguracao = function() {
-                return $http.get(self.urlBase + self.mainRoute + '/configuracao', { headers: self.headers });
+            this.getConfiguracoes = function() {
+                return $http.get(self.urlBase + self.mainRoute + '/configuracoes', { headers: self.headers });
             };
             this.getPontos = function() {
                 return $http.get(self.urlBase + self.mainRoute + '/ponto', { headers: self.headers });
@@ -25,8 +25,8 @@
             this.postMarcarPonto = function() {
                 return $http.post(self.urlBase + self.mainRoute + '/ponto/marcar', { headers: self.headers });
             };
-            this.putConfiguracao = function(model) {
-                return $http.put(self.urlBase + self.mainRoute + '/configuracao', model, { headers: self.headers });
+            this.putConfiguracoes = function(model) {
+                return $http.put(self.urlBase + self.mainRoute + '/configuracoes', model, { headers: self.headers });
             };
             this.deletePonto = function(idPonto) {
                 return $http.delete(self.urlBase + self.mainRoute + '/ponto/' + idPonto, { headers: self.headers });

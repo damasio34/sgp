@@ -21,11 +21,11 @@ namespace Damasio34.SGP.API.Controllers
         }
    
 
-        [Route("configuracao")]
+        [Route("configuracoes")]
         [HttpGet]
-        public ConfiguracaoDto GetConfiguracao()
+        public ConfiguracoesDto GetConfiguracoes()
         {
-            return _trabalhoAppService.SelecionarConfiguracao();
+            return _trabalhoAppService.SelecionarConfiguracoes();
         }
 
         [Route("ponto")]
@@ -55,11 +55,11 @@ namespace Damasio34.SGP.API.Controllers
             return _trabalhoAppService.MarcarPonto();
         }
 
-        [Route("configuracao")]
+        [Route("configuracoes")]
         [HttpPut]
-        public ConfiguracaoDto PutConfiguracao([FromBody] ConfiguracaoDto configuracaoDto)
+        public ConfiguracoesDto PutConfiguracao([FromBody] ConfiguracoesDto configuracoesDto)
         {
-            return _trabalhoAppService.AtualizarConfiguracao(configuracaoDto);
+            return _trabalhoAppService.AlterarConfiguracoes(configuracoesDto);
         }
 
         [Route("contracheque")]

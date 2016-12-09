@@ -14,20 +14,20 @@
         // -------------------------------------------------------------
 
         // Form data for the login modal
-        vm.loginData = {};
-        vm.isExpanded = false;
-        vm.hasHeaderFabLeft = false;
-        vm.hasHeaderFabRight = false;
-
-        vm.hideNavBar = hideNavBar;
-        vm.showNavBar = showNavBar;
-        vm.noHeader = noHeader;
-        vm.setExpanded = setExpanded;
-        vm.setHeaderFab = setHeaderFab;
-        vm.hasHeader = hasHeader;
-        vm.hideHeader = hideHeader;
-        vm.showHeader = showHeader;
-        vm.clearFabs = clearFabs;
+        // vm.loginData = {};
+        // vm.isExpanded = false;
+        // vm.hasHeaderFabLeft = false;
+        // vm.hasHeaderFabRight = false;
+        //
+        // vm.hideNavBar = hideNavBar;
+        // vm.showNavBar = showNavBar;
+        // vm.noHeader = noHeader;
+        // vm.setExpanded = setExpanded;
+        // vm.setHeaderFab = setHeaderFab;
+        // vm.hasHeader = hasHeader;
+        // vm.hideHeader = hideHeader;
+        // vm.showHeader = showHeader;
+        // vm.clearFabs = clearFabs;
 
         _init();
 
