@@ -2,24 +2,23 @@
 	<ion-content class="padding">
         <div class="list">
 			<label class="item item-input">
-				<input type="text" placeholder="Nome completo" ng-model="vm.pessoa.Nome" />
+				<input type="text" placeholder="Nome completo" ng-model="vm.Pessoa.Nome" />
 			</label>
 			<label class="item item-input">
-				<input type="text" placeholder="CPF" ng-model="vm.pessoa.Cpf" ui-br-cpf-mask />
+				<input type="text" placeholder="CPF" ng-model="vm.Pessoa.Cpf" ui-br-cpf-mask />
 			</label>
 			<label class="item item-input">
-				<input type="email" placeholder="E-mail" ng-model="vm.pessoa.Email" />
+				<input type="email" placeholder="E-mail" ng-model="vm.Pessoa.Email" />
 			</label>
 			<label class="item item-input">
-				<input type="text" placeholder="Login" ng-model="vm.pessoa.Login" />
+				<input type="text" placeholder="Login" ng-model="vm.Pessoa.Login" />
 			</label>
 			<label class="item item-input">
-				<input type="password" placeholder="Senha" ng-model="vm.pessoa.Senha" />
+				<input type="password" placeholder="Senha" ng-model="vm.Pessoa.Senha" />
 			</label>
 		</div>
+		<button class="button button-block button-positive" ng-click="vm.Salvar(vm.Pessoa)">
+			Salvar
+		</button>
 	</ion-content>
-    <ion-footer-bar>
-        <button class="button" style="width:49%" ng-click="vm.Cadastrar(vm.pessoa)">Cadastrar</button>
-        <button class="button" style="width:49%" ui-sref="login">Cancelar</button>
-    </ion-footer-bar>
 </ion-view>

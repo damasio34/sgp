@@ -4,8 +4,8 @@
     angular.module('sgp')
         .constant('UrlDefault', {
             // Uri: 'http://www.damasio34.com/sgp/api/',
-            // Uri: 'http://api20161202112557.azurewebsites.net/api/',
-            Uri: 'http://localhost:30809/api/'
+            Uri: 'http://api20161202112557.azurewebsites.net/api/',
+            // Uri: 'http://localhost:30809/api/'
         })
         .constant('$ionicLoadingConfig', {
             template: '<ion-spinner icon="android"></ion-spinner>',
