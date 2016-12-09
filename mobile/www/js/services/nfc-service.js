@@ -11,7 +11,8 @@
         var tag = {};
 
         $ionicPlatform.ready(function() {
-            if (!nfc) return;
+            if (typeof variable === 'undefined') return;
+            
             nfc.addNdefListener(function (nfcEvent) {
                 self.callback(nfcEvent);
                 preencheTag(nfcEvent);

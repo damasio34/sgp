@@ -10,7 +10,7 @@
         var vm = this;
 
         vm.MarcarPonto = MarcarPonto;
-        vm.tag = NfcService.tag;
+        // vm.tag = NfcService.tag;
 
         // -------------------------------------------------------------
 

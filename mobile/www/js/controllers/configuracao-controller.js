@@ -9,6 +9,10 @@
     function ConfiguracaoController(TrabalhoService) {
         var vm = this;
 
+        vm.Salvar = Salvar;
+
+        // -------------------------------------------------------------------
+
         _init();
 
         // -------------------------------------------------------------------
@@ -17,6 +21,10 @@
             TrabalhoService.getConfiguracao().success(function(configuracao) {
                 vm.Configuracao = configuracao;
             });
+        }
+
+        function Salvar() {
+            
         }
     };
 

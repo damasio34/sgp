@@ -6,7 +6,6 @@
             // note that you can also chain configs
             $ionicConfigProvider.backButton.text('').icon('ion-chevron-left');
             $ionicConfigProvider.views.maxCache(0);
-
             $httpProvider.interceptors.push('HttpInterceptor');
         });
 
