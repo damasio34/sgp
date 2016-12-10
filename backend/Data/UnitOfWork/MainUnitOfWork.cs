@@ -38,7 +38,8 @@ namespace Damasio34.SGP.Data.UnitOfWork
             this.Configuration.ProxyCreationEnabled = true;
             this.Configuration.LazyLoadingEnabled = true;
 
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MainUnitOfWork>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MainUnitOfWork>());
+            Database.SetInitializer(new DropCreateDatabaseAlwaysInitializer());
         }
 
         #endregion
@@ -49,7 +50,7 @@ namespace Damasio34.SGP.Data.UnitOfWork
 
             //Database.SetInitializer(new CreateDatabaseIfNotExistsInitializer());
             //Database.SetInitializer(new DropCreateDatabaseAlwaysInitializer());
-            Database.SetInitializer(new DropCreateDatabaseIfModelChangesInitializer());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChangesInitializer());
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

@@ -1,21 +1,27 @@
 <ion-view view-title="Contracheque">
-	<ion-content class="padding">
-		<ion-list can-swipe="true">
-            <ion-list ng-repeat="(key, value) in vm.Pontos | groupBy: 'Dia '">
-              <div class="item item-divider">
-                {{key}}
-              </div>
-
-              <ion-item ng-repeat="ponto in value">
-                  <i class="icon ion-arrow-right-c" ng-if="ponto.TipoDoEvento === 1"></i>
-                  <i class="icon ion-arrow-return-right" ng-if="ponto.TipoDoEvento === 2"></i>
-                  <i class="icon ion-arrow-return-left" ng-if="ponto.TipoDoEvento === 3"></i>
-                  <i class="icon ion-arrow-left-c" ng-if="ponto.TipoDoEvento === 4"></i>
-                  {{ponto.DataHora | date : 'HH:mm'}}
-                  <ion-option-button class="button-positive" ng-click="share(item)">Editar</ion-option-button>
-                  <ion-option-button class="button-assertive" ng-click="edit(item)">Apagar</ion-option-button>
-              </ion-item>
-            </ion-list>
+	<ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
+    <ion-content class="padding">
+        <ion-list can-swipe="true">
+            <ion-item class="item-divider">{{vm.ContraCheque.DataFinalizacao | date : 'm'}}</ion-item>
+            <ion-item>
+                <span class="input-label">Salário bruto</span>
+                <label>{{vm.ContraCheque.SalarioBruto}}</label>
+            </ion-item>
+            <ion-item class="item-divider">Entradas</ion-item>
+            <ion-item ng-repeat="entrada in vm.ContraCheque.Entradas">
+                <span class="input-label">{{saida.Descricao}}</span>
+                <label>{{entrada.Valor}}</label>
+            </ion-item>
+            <ion-item class="item-divider">Saidas</ion-item>
+            <ion-item ng-repeat="saida in vm.ContraCheque.Saidas">
+                <span class="input-label">{{saida.Descricao}} <label>{{saida.Valor}}</label></span>
+            </ion-item>
+            <ion-item class="item-divider">Salário líquido</ion-item>
+            <ion-item>
+                <span class="input-label">Salário líquido <label>{{vm.ContraCheque.SalarioLiquido}}</label></span>
+            </ion-item>
         </ion-list>
-	</ion-content>
+    </ion-content>
 </ion-view>

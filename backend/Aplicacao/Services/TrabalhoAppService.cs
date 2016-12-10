@@ -76,6 +76,29 @@ namespace Damasio34.SGP.Aplicacao.Services
 
             return trabalho;
         }
+        private LancamentoDoContraChequeDto LancamentoToLancamentoDto(LancamentoDoContraCheque lancamentoDoContraCheque)
+        {
+            var lancamentoDoContraChequeDto = new LancamentoDoContraChequeDto
+            {
+                Descricao = lancamentoDoContraCheque.Descricao,
+                TipoDeLancamento = lancamentoDoContraCheque.TipoDeLancamento,
+                Valor = lancamentoDoContraCheque.Valor
+            };
+
+            return lancamentoDoContraChequeDto;
+        }
+        private ContraChequeDto ContraChequeToContraChequeDto(ContraCheque contraCheque)
+        {
+            var contraChequeDto = new ContraChequeDto
+            {
+                ValorLiquido = contraCheque.ValorBruto,
+                ValorBruto = contraCheque.ValorBruto,
+                LancamtentosDoContraChequeDto = contraCheque.Lancamentos.Select(LancamentoToLancamentoDto),
+                DataFinalizacao = contraCheque.DataFinalizacao,
+            };
+
+            return contraChequeDto;
+        }
 
         public PontosDoDiaDto MarcarPonto()
         {        
@@ -142,16 +165,17 @@ namespace Damasio34.SGP.Aplicacao.Services
                 throw ex;
             }
         }
-        public ContraCheque CalcularContraCheque()
+        public ContraChequeDto CalcularContraCheque()
         {
-            return this.CalcularContraCheque(DateTime.Today);
+            return this.CalcularContraCheque(DateTime.Today.AddMonths(-1));
         }
-        public ContraCheque CalcularContraCheque(DateTime dataDeReferencia)
+        public ContraChequeDto CalcularContraCheque(DateTime dataDeReferencia)
         {
             try
             {
                 var contracheque = _trabalho.GerarContraCheque(dataDeReferencia);
-                return contracheque;
+                var contraChequeDto = ContraChequeToContraChequeDto(contracheque);
+                return contraChequeDto;
             }
             catch (Exception ex) { throw ex; }
         }

@@ -16,8 +16,8 @@
         // -------------------------------------------------------------------
 
         function _init() {
-            TrabalhoService.getPontos().success(function(pontos) {
-                vm.Pontos = pontos;
+            TrabalhoService.getContraCheque().success(function(contraCheque) {
+                vm.ContraCheque = contraCheque;
             });
         }
     };

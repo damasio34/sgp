@@ -64,14 +64,14 @@ namespace Damasio34.SGP.API.Controllers
 
         [Route("contracheque")]
         [HttpGet]
-        public ContraCheque GetContraCheque()
+        public ContraChequeDto GetContraCheque()
         {
             return _trabalhoAppService.CalcularContraCheque();
         }
 
         [Route("contracheque/{dataDeReferencia}")]
         [HttpGet]
-        public ContraCheque GetContraCheque([FromUri] DateTime dataDeReferencia)
+        public ContraChequeDto GetContraCheque([FromUri] DateTime dataDeReferencia)
         {
             return _trabalhoAppService.CalcularContraCheque(dataDeReferencia);
         }

@@ -16,6 +16,9 @@
             this.getConfiguracoes = function() {
                 return $http.get(self.urlBase + self.mainRoute + '/configuracoes', { headers: self.headers });
             };
+            this.getContraCheque = function() {
+                return $http.get(self.urlBase + self.mainRoute + '/contracheque', { headers: self.headers });
+            };
             this.getPontos = function() {
                 return $http.get(self.urlBase + self.mainRoute + '/ponto', { headers: self.headers });
             };

@@ -53,9 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\ContraChequeDto.cs" />
     <Compile Include="Dtos\ConfiguracoesDto.cs" />
     <Compile Include="Dtos\AutenticacaoDto.cs" />
     <Compile Include="Dtos\PessoaDto.cs" />
+    <Compile Include="Dtos\LancamentoDoContraChequeDto.cs" />
     <Compile Include="Dtos\PontoDto.cs" />
     <Compile Include="Dtos\PontosDoDiaDto.cs" />
     <Compile Include="Extensions\ClaimsPrincipalExtension.cs" />

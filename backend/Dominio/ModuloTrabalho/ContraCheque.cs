@@ -23,7 +23,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 
         public double ValorBruto { get; set; }
         public virtual Ciclo Ciclo { get; protected set; }
-        public DateTime? DataFinalizacao { get; set; }        
+        public DateTime? DataFinalizacao { get; set; }
 
         public virtual IList<LancamentoDoContraCheque> Lancamentos { get; set; } = new List<LancamentoDoContraCheque>();
 
