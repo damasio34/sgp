@@ -32,7 +32,7 @@ namespace Damasio34.SGP.Aplicacao.Services
 
         private TipoDoEvento IdentificarProximoEvento(Trabalho trabalho)
         {
-            var ultimoPonto = trabalho.PontosDoDia.OrderBy(p => p.DataHora).LastOrDefault();
+            var ultimoPonto = trabalho.PontosDoDia().OrderBy(p => p.DataHora).LastOrDefault();
             if (ultimoPonto.IsNull()) return TipoDoEvento.Entrada;
             switch (ultimoPonto.TipoDoEvento)
             {
@@ -100,6 +100,27 @@ namespace Damasio34.SGP.Aplicacao.Services
             return contraChequeDto;
         }
 
+        public PontoDto GetPonto(Guid idPonto)
+        {
+            try
+            {
+                var pontos = _trabalho.Ciclos.SelectMany(p => p.Pontos);
+                var ponto = pontos.Single(p => p.Id.Equals(idPonto));
+                var pontoDto = new PontoDto
+                {
+                    Id = ponto.Id,
+                    DataHora = ponto.DataHora,
+                    TipoDoEvento = ponto.TipoDoEvento,
+                    Justificativa = ponto.Justificativa
+                };
+
+                return pontoDto;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public PontosDoDiaDto MarcarPonto()
         {        
             try
@@ -109,7 +130,7 @@ namespace Damasio34.SGP.Aplicacao.Services
                 _trabalhoRepository.Alterar(_trabalho);
                 _trabalhoRepository.Commit();
 
-                var pontosDoDia = _trabalho.PontosDoDia;
+                var pontosDoDia = _trabalho.PontosDoDia();
                 var deHoje = pontosDoDia as Ponto[] ?? pontosDoDia.ToArray();
                 var configuracoesDoUsuarioDto = new PontosDoDiaDto
                 {
@@ -150,7 +171,7 @@ namespace Damasio34.SGP.Aplicacao.Services
         {
             try
             {
-                var pontosDoDia = _trabalho.PontosDoDia;
+                var pontosDoDia = _trabalho.PontosDoDia();
                 var deHoje = pontosDoDia as Ponto[] ?? pontosDoDia.ToArray();
                 var configuracoesDoUsuarioDto = new PontosDoDiaDto
                 {
@@ -210,6 +231,28 @@ namespace Damasio34.SGP.Aplicacao.Services
                 throw ex;
             }
         }
+        public void AlterarPonto(Guid idPonto, PontoDto pontoDto)
+        {
+            try
+            {
+                var pontosDoDia = _trabalho.PontosDoDia(pontoDto.DataHora);
+                if (pontosDoDia.Any(p => p.TipoDoEvento.Equals(pontoDto.TipoDoEvento) && !p.Id.Equals(idPonto)))
+                throw new Exception("Não é possível marcar dois pontos do mesmo tipo no mesmo dia.");
+
+                var ponto = _trabalho.Pontos().Single(p => p.Id.Equals(idPonto));
+                ponto.DataHora = pontoDto.DataHora;
+                ponto.TipoDoEvento = pontoDto.TipoDoEvento;
+
+                _trabalhoRepository.Alterar(_trabalho);
+                // GAMB
+                _trabalhoRepository.UnitOfWork.RegisterDirty(ponto);
+                _trabalhoRepository.Commit();                
+            }
+            catch (Exception ex)
+            {                
+                throw ex;
+            }
+        }
         public void DeletePonto(Guid idPonto)
         {
             try
@@ -223,7 +266,7 @@ namespace Damasio34.SGP.Aplicacao.Services
                 _trabalhoRepository.Commit();
             }
             catch (Exception ex)
-            {                
+            {
                 throw ex;
             }
         }

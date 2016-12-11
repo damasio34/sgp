@@ -47,6 +47,19 @@
                     }
                 })
 
+                .state('app.editarPonto', {
+                    url: '/ponto/editar/{idPonto}',
+                    params: {
+                        idPonto: null
+                    },
+                    views: {
+                        'MainContent': {
+                            templateUrl: 'views/ponto-editar-view.html',
+                            controller: 'PontoEditarController as vm'
+                        }
+                    }
+                })
+
                 .state('app.contracheque', {
                     url: '/contracheque',
                     views: {

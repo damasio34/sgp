@@ -1,6 +1,6 @@
 <ion-view view-title="Meus pontos">
 	<ion-content class="padding">
-		<ion-list can-swipe="true">
+       <ion-list can-swipe="true">
             <ion-list ng-repeat="(key, value) in vm.Pontos | groupBy: 'Dia '">
               <div class="item item-divider">
                 {{key}}
@@ -12,7 +12,7 @@
                   <i class="icon ion-arrow-return-left" ng-if="ponto.TipoDoEvento === 4"></i>
                   <i class="icon ion-arrow-left-c" ng-if="ponto.TipoDoEvento === 2"></i>
                   {{ponto.DataHora | date : 'HH:mm'}}
-                  <ion-option-button class="button-positive" ng-click="share(item)">Editar</ion-option-button>
+                  <ion-option-button class="button-positive" ui-sref="app.editarPonto({idPonto: ponto.Id})">Editar</ion-option-button>
                   <ion-option-button class="button-assertive" ng-click="vm.ExcluirPonto(ponto.Id)">Apagar</ion-option-button>
               </ion-item>
             </ion-list>

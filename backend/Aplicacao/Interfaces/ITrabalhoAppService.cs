@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Damasio34.SGP.Aplicacao.Dtos;
-using Damasio34.SGP.Dominio.ModuloTrabalho;
 
 namespace Damasio34.SGP.Aplicacao.Interfaces
 {
     public interface ITrabalhoAppService
     {
+        PontoDto GetPonto(Guid idPonto);
         PontosDoDiaDto MarcarPonto();
         IEnumerable<PontoDto> GetPontos();
         PontosDoDiaDto GetPontosDoDia();
@@ -15,5 +15,6 @@ namespace Damasio34.SGP.Aplicacao.Interfaces
         ConfiguracoesDto SelecionarConfiguracoes();
         ConfiguracoesDto AlterarConfiguracoes(ConfiguracoesDto configuracoesDto);
         void DeletePonto(Guid idPonto);
+        void AlterarPonto(Guid idPonto, PontoDto pontoDto);
     }
 }

@@ -22,6 +22,12 @@
             this.getPontos = function() {
                 return $http.get(self.urlBase + self.mainRoute + '/ponto', { headers: self.headers });
             };
+            this.getPontoById = function(idPonto) {
+                return $http.get(self.urlBase + self.mainRoute + '/ponto/' + idPonto, { headers: self.headers });
+            };
+            this.putPonto = function(ponto) {
+                return $http.put(self.urlBase + self.mainRoute + '/ponto/' + ponto.Id, ponto, { headers: self.headers });
+            };
             this.getPontosDoDia = function() {
                 return $http.get(self.urlBase + self.mainRoute + '/ponto/dodia', { headers: self.headers });
             };

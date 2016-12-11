@@ -53,7 +53,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public int HorasPorMes => 220;        
         public TimeSpan CargaHorariaDiaria => new TimeSpan(8, 0, 0);
         public double ValorHora => this.SalarioBruto.Equals(0) ? 0 : this.SalarioBruto / this.HorasPorMes;                       
-        public IEnumerable<Ponto> PontosDoDia => this.Pontos().Where(p => p.DataHora.Date.CompareTo(DateTime.Today) >= 0);        
+        //public IEnumerable<Ponto> PontosDoDia => this.Pontos().Where(p => p.DataHora.Date.CompareTo(DateTime.Today) >= 0);        
         public TimeSpan TempoDeAlmoco => this.HorarioDeEntradaDoAlmoco.IsNotNull() && this.HorarioDeSaidaDoAlmoco.IsNotNull() ?
             HorarioDeSaidaDoAlmoco.Value - HorarioDeEntradaDoAlmoco.Value : new TimeSpan(1, 0, 0);
 
@@ -70,6 +70,11 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 
             return ciclo;
         }
+
+        public IEnumerable<Ponto> PontosDoDia(DateTime? dataDeReferencia = null)
+        {
+            return this.Pontos(dataDeReferencia).Where(p => p.DataHora.Date.CompareTo(DateTime.Today) >= 0);
+        } 
 
         public virtual IEnumerable<Ponto> Pontos(DateTime? dataDeReferencia = null)
         {

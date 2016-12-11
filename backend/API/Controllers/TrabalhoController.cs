@@ -36,6 +36,20 @@ namespace Damasio34.SGP.API.Controllers
         }
 
         [Route("ponto/{idPonto}")]
+        [HttpGet]
+        public PontoDto GetPontos(Guid idPonto)
+        {
+            return _trabalhoAppService.GetPonto(idPonto);
+        }
+
+        [Route("ponto/{idPonto}")]
+        [HttpPut]
+        public void PutPonto(Guid idPonto, [FromBody] PontoDto pontoDto)
+        {
+            _trabalhoAppService.AlterarPonto(idPonto, pontoDto);
+        }
+
+        [Route("ponto/{idPonto}")]
         [HttpDelete]
         public void DeletePonto([FromUri] Guid idPonto)
         {

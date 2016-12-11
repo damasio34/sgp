@@ -1,0 +1,38 @@
+<ion-view view-title="Editar ponto">
+	<ion-content class="padding">
+		<form name="pontoForm" ng-submit="vm.Salvar(pontoForm, vm.Ponto)" class="list card no-margin" novalidate="">
+			<div class="list">
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Data e hora</span>
+					<input type="datetime-local" name="DataHora" ng-model="vm.Ponto.DataHora" required />
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Tipo do evento</span>
+					<ion-radio ng-model="vm.Ponto.TipoDoEvento" ng-value=1>Entrada</ion-radio>
+					<ion-radio ng-model="vm.Ponto.TipoDoEvento" ng-value=2>Saída</ion-radio>
+					<ion-radio ng-model="vm.Ponto.TipoDoEvento" ng-value=3>Entrada do almoço</ion-radio>
+					<ion-radio ng-model="vm.Ponto.TipoDoEvento" ng-value=4>Saída do almoço</ion-radio>
+				</label>
+			</div>
+			<!-- Validações -->
+			<div class="error-container" ng-show="pontoForm.DataHora.$error && pontoForm.$submitted"
+				ng-messages="pontoForm.DataHora.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe a data e a hora
+				</div>
+			</div>
+			<div class="error-container" ng-show="pontoForm.TipoDoEvento.$error && pontoForm.$submitted"
+				ng-messages="pontoForm.TipoDoEvento.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe o tipo do evento
+				</div>
+			</div>
+			<ion-input class="item-input padding">
+				<input type="submit" class="button button-balanced" value="Salvar"
+					ng-disabled="pontoForm.$invalid && pontoForm.$submitted" />
+			</ion-input>
+		</form>
+	</ion-content>
+</ion-view>
