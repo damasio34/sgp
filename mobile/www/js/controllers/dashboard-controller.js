@@ -54,19 +54,22 @@
         function MarcarPonto() {
             vm.bloqueiaBotao = true;
 
-            TrabalhoService.postMarcarPonto().success(function(pontosDoDia) {
-                vm.PontosDoDia = {};
-                _exibeHorasTrabalhadas(pontosDoDia);
-                $ionicPopup.alert({
-                    title: 'Mensagem',
-                    cssClass: 'custom-popup',
-                    content: '<div class="text-center">Ponto marcado com sucesso.</div>',
-                    buttons: [
-                        {
-                            text: '<b>Ok</b>',
-                            type: 'btn-amarelo',
-                        },
-                    ]
+            var datahora = new Date(moment().format("YYYY-MM-DDTHH:mm:ss"));
+            TrabalhoService.postMarcarPonto(datahora).success(function() {
+                TrabalhoService.getPontosDoDia().success(function(pontosDoDia) {
+                    vm.PontosDoDia = {};
+                    _exibeHorasTrabalhadas(pontosDoDia);
+                    $ionicPopup.alert({
+                        title: 'Mensagem',
+                        cssClass: 'custom-popup',
+                        content: '<div class="text-center">Ponto marcado com sucesso.</div>',
+                        buttons: [
+                            {
+                                text: '<b>Ok</b>',
+                                type: 'btn-amarelo',
+                            },
+                        ]
+                    });
                 });
             });
         };

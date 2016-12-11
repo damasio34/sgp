@@ -31,8 +31,8 @@
             this.getPontosDoDia = function() {
                 return $http.get(self.urlBase + self.mainRoute + '/ponto/dodia', { headers: self.headers });
             };
-            this.postMarcarPonto = function() {
-                return $http.post(self.urlBase + self.mainRoute + '/ponto/marcar', { headers: self.headers });
+            this.postMarcarPonto = function(datahora) {
+                return $http.post(self.urlBase + self.mainRoute + '/ponto/marcar', datahora, { headers: self.headers });
             };
             this.putConfiguracoes = function(model) {
                 return $http.put(self.urlBase + self.mainRoute + '/configuracoes', model, { headers: self.headers });

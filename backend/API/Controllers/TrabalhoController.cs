@@ -65,9 +65,9 @@ namespace Damasio34.SGP.API.Controllers
 
         [HttpPost]
         [Route("ponto/marcar")]
-        public PontosDoDiaDto Post()
+        public PontosDoDiaDto Post([FromBody] DateTime dataDeReferencia)
         {
-            return _trabalhoAppService.MarcarPonto();
+            return _trabalhoAppService.MarcarPonto(dataDeReferencia);
         }
 
         [Route("configuracoes")]

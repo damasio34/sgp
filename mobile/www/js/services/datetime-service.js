@@ -114,7 +114,7 @@
             if (!pontosDoDia) return;
 
             var horasTrabalhadas;
-            var horaAtual = _getDateTime(moment.utc().format("YYYY-MM-DDTHH:mm:ss"));
+            var horaAtual = _getDateTime(moment().format("YYYY-MM-DDTHH:mm:ss"));
             var horarioDeEntrada = _getDateTime(pontosDoDia.HorarioDeEntrada);
             var horarioDeEntradaDoAlmoco = _getDateTime(pontosDoDia.HorarioDeEntradaDoAlmoco);
             var horarioDeSaida = _getDateTime(pontosDoDia.HorarioDeSaida);

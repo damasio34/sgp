@@ -7,7 +7,7 @@ namespace Damasio34.SGP.Aplicacao.Interfaces
     public interface ITrabalhoAppService
     {
         PontoDto GetPonto(Guid idPonto);
-        PontosDoDiaDto MarcarPonto();
+        PontosDoDiaDto MarcarPonto(DateTime? dataDeReferencia);
         IEnumerable<PontoDto> GetPontos();
         PontosDoDiaDto GetPontosDoDia();
         ContraChequeDto CalcularContraCheque();

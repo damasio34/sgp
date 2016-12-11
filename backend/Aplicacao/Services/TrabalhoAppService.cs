@@ -121,12 +121,12 @@ namespace Damasio34.SGP.Aplicacao.Services
                 throw ex;
             }
         }
-        public PontosDoDiaDto MarcarPonto()
+        public PontosDoDiaDto MarcarPonto(DateTime? dataDeReferencia)
         {        
             try
             {
                 var tipoDoEvento = IdentificarProximoEvento(_trabalho);
-                _trabalho.AdicionarPonto(tipoDoEvento);
+                _trabalho.AdicionarPonto(tipoDoEvento, dataDeReferencia);
                 _trabalhoRepository.Alterar(_trabalho);
                 _trabalhoRepository.Commit();
 

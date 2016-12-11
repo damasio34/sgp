@@ -20,7 +20,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho.Factories
         }
         public static Ponto Criar(TipoDoEvento tipoDoEvento)
         {
-            return Criar(tipoDoEvento, DateTime.Now);
+            return Criar(tipoDoEvento, DateTime.UtcNow);
         }
     }
 }
