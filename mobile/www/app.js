@@ -4,6 +4,7 @@
     angular.module('sgp', [
         'ionic',
 
+        'ngMessages',
         'angular.filter',
         'ui.utils.masks',
 

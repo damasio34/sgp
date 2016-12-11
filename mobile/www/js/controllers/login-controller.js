@@ -9,8 +9,10 @@
     function LoginController($state, $ionicPopup, WebStorageService, LoginService) {
         var vm = this;
 
-        vm.Usuario = { Login: 'damasio34', Senha: '1235', LembrarSenha: true };
+        vm.Usuario = {}; //{ Login: 'damasio34', Senha: '1235', LembrarSenha: true };
         vm.Login = Login;
+
+        // -----------------------------------------------------------------------------
 
         _init();
 
@@ -33,10 +35,24 @@
                 $state.go('app.dashboard');
             };
         };
-        function Login(usuario) {
-            LoginService.login(usuario.Login, usuario.Senha, usuario.LembrarSenha).then(function(result, status) {
-                if (result.access_token) $state.go('app.dashboard');
-            });
+        function Login(signupForm, usuario) {
+            if (signupForm.$valid) {
+                LoginService.login(usuario.Login, usuario.Senha, usuario.LembrarSenha).then(function(result, status) {
+                    if (result.access_token) $state.go('app.dashboard');
+                }, function(result) {
+                    $ionicPopup.alert({
+                        title: 'Alerta',
+                        cssClass: 'custom-popup',
+                        content: '<div class="text-center">' + result.error_description + '.</div>',
+                        buttons: [
+                            {
+                                text: '<b>Ok</b>',
+                                type: 'btn-amarelo',
+                            },
+                        ]
+                    });
+                });
+            };
         };
     };
 

@@ -114,6 +114,7 @@
             if (!pontosDoDia) return;
 
             var horasTrabalhadas;
+            var horaAtual = _getDateTime(moment.utc().format("YYYY-MM-DDTHH:mm:ss"));
             var horarioDeEntrada = _getDateTime(pontosDoDia.HorarioDeEntrada);
             var horarioDeEntradaDoAlmoco = _getDateTime(pontosDoDia.HorarioDeEntradaDoAlmoco);
             var horarioDeSaida = _getDateTime(pontosDoDia.HorarioDeSaida);
@@ -121,7 +122,7 @@
 
             if (horarioDeEntrada && (!pontosDoDia.ControlaAlmoco || !horarioDeEntradaDoAlmoco) && !horarioDeSaida)
             {
-                horasTrabalhadas = _calculaDiferencaEntreHoras(horarioDeEntrada, _getDateTime(moment().format("YYYY-MM-DDTHH:mm:ss")));
+                horasTrabalhadas = _calculaDiferencaEntreHoras(horarioDeEntrada, horaAtual);
             }
             else if (horarioDeEntrada && pontosDoDia.ControlaAlmoco && horarioDeEntradaDoAlmoco && !horarioDeSaidaDoAlmoco)
             {
@@ -130,7 +131,7 @@
             else if (horarioDeEntrada && pontosDoDia.ControlaAlmoco && horarioDeEntradaDoAlmoco && horarioDeSaidaDoAlmoco && !horarioDeSaida)
             {
                 var parte1 = _calculaDiferencaEntreHoras(horarioDeEntrada, horarioDeEntradaDoAlmoco);
-                var parte2 = _calculaDiferencaEntreHoras(horarioDeSaidaDoAlmoco, _getDateTime(moment().format("YYYY-MM-DDTHH:mm:ss")));
+                var parte2 = _calculaDiferencaEntreHoras(horarioDeSaidaDoAlmoco, horaAtual);
 
                 horasTrabalhadas = _somaHoras(parte1, parte2);
             }

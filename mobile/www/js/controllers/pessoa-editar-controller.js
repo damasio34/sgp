@@ -23,22 +23,24 @@
             });
         }
 
-        function Salvar(pessoa) {
-            var _pessoa = angular.copy(pessoa, _pessoa);
-            _pessoa.Senha = CryptSha1Service.hash(_pessoa.Senha);
-            PessoaService.editar(_pessoa).success(function() {
-                $ionicPopup.alert({
-                    title: 'Alerta',
-                    cssClass: 'custom-popup',
-                    content: '<div class="text-center">Perfil atualizados com sucesso.</div>',
-                    buttons: [
-                        {
-                            text: '<b>Ok</b>',
-                            type: 'btn-amarelo',
-                        },
-                    ]
+        function Salvar(perfilForm, pessoa) {
+            if (perfilForm.$valid) {
+                var _pessoa = angular.copy(pessoa, _pessoa);
+                if (_pessoa.AlterarSenha) _pessoa.Senha = CryptSha1Service.hash(_pessoa.Senha);
+                PessoaService.editar(_pessoa).success(function() {
+                    $ionicPopup.alert({
+                        title: 'Alerta',
+                        cssClass: 'custom-popup',
+                        content: '<div class="text-center">Perfil atualizados com sucesso.</div>',
+                        buttons: [
+                            {
+                                text: '<b>Ok</b>',
+                                type: 'btn-amarelo',
+                            },
+                        ]
+                    });
                 });
-            });
+            };
         }
     };
 

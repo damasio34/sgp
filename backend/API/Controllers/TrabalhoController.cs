@@ -34,6 +34,7 @@ namespace Damasio34.SGP.API.Controllers
         {
             return _trabalhoAppService.GetPontos();
         }
+
         [Route("ponto/{idPonto}")]
         [HttpDelete]
         public void DeletePonto([FromUri] Guid idPonto)

@@ -91,7 +91,7 @@ namespace Damasio34.SGP.Aplicacao.Services
         {
             var contraChequeDto = new ContraChequeDto
             {
-                ValorLiquido = contraCheque.ValorBruto,
+                ValorLiquido = contraCheque.ValorLiquido,
                 ValorBruto = contraCheque.ValorBruto,
                 LancamtentosDoContraChequeDto = contraCheque.Lancamentos.Select(LancamentoToLancamentoDto),
                 DataFinalizacao = contraCheque.DataFinalizacao,
@@ -132,10 +132,14 @@ namespace Damasio34.SGP.Aplicacao.Services
         {
             try
             {
-                return _trabalho.Pontos().Select(p => new PontoDto
+                var ciclos = _trabalho.Ciclos;
+                var pontos = ciclos.SelectMany(p => p.Pontos);
+                var pontosDto = pontos.Select(p => new PontoDto
                 {
                     Id = p.Id, DataHora = p.DataHora, TipoDoEvento = p.TipoDoEvento, Justificativa = p.Justificativa
-                }).OrderByDescending(p => p.DataHora).ToList();
+                }).OrderByDescending(p => p.DataHora);
+
+                return pontosDto;
             }
             catch (Exception ex)
             {                

@@ -1,24 +1,73 @@
 <ion-view view-title="Perfil">
 	<ion-content class="padding">
-        <div class="list">
-			<label class="item item-input">
-				<input type="text" placeholder="Nome completo" ng-model="vm.Pessoa.Nome" />
-			</label>
-			<label class="item item-input">
-				<input type="text" placeholder="CPF" ng-model="vm.Pessoa.Cpf" ui-br-cpf-mask />
-			</label>
-			<label class="item item-input">
-				<input type="email" placeholder="E-mail" ng-model="vm.Pessoa.Email" />
-			</label>
-			<label class="item item-input">
-				<input type="text" placeholder="Login" ng-model="vm.Pessoa.Login" />
-			</label>
-			<label class="item item-input">
-				<input type="password" placeholder="Senha" ng-model="vm.Pessoa.Senha" />
-			</label>
-		</div>
-		<button class="button button-block button-positive" ng-click="vm.Salvar(vm.Pessoa)">
-			Salvar
-		</button>
+		<form name="perfilForm" ng-submit="vm.Salvar(perfilForm, vm.Pessoa)" class="list card no-margin" novalidate="">
+			<div class="list">
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Nome</span>
+					<input type="text" name="Nome" placeholder="José da Silva" ng-model="vm.Pessoa.Nome" autofocus required />
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">CPF</span>
+					<input type="text" name="CPF" placeholder="999.999.999-99" ng-model="vm.Pessoa.Cpf" ui-br-cpf-mask required />
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">E-mail</span>
+					<input type="email" name="Email" placeholder="email@gmail.com" ng-model="vm.Pessoa.Email" required />
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Login</span>
+					<input type="text" name="Login" placeholder="informe seu login" ng-model="vm.Pessoa.Login" required />
+				</label>
+				<ion-toggle ng-model="vm.AlterarSenha" toggle-class="toggle-positive">Alterar senha?</ion-toggle>
+				<label class="item item-input item-stacked-label" ng-if="vm.AlterarSenha">
+					<span class="input-label">Senha</span>
+					<input type="password" name="Senha" placeholder="informe sua senha" ng-model="vm.Pessoa.Senha" required />
+				</label>
+			</div>
+			<!-- Validações -->
+			<div class="error-container" ng-show="perfilForm.Nome.$error && perfilForm.$submitted"
+				ng-messages="perfilForm.Nome.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe seu nome
+				</div>
+			</div>
+			<div class="error-container" ng-show="perfilForm.Cpf.$error && perfilForm.$submitted"
+				ng-messages="perfilForm.Cpf.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe seu CPF
+				</div>
+			</div>
+			<div class="error-container" ng-show="perfilForm.Email.$error && perfilForm.$submitted"
+				ng-messages="perfilForm.Email.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe seu e-mail
+				</div>
+				<div class="error" ng-show="signupForm.Email.$invalid && !perfilForm.Email.$pristine">
+					<i class="ion-information-circled"></i>
+					Informe um e-mail válido
+				</div>
+			</div>
+			<div class="error-container" ng-show="perfilForm.Login.$error && perfilForm.$submitted"
+				ng-messages="perfilForm.Login.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe seu login
+				</div>
+			</div>
+			<div class="error-container" ng-show="perfilForm.Senha.$error && perfilForm.$submitted"
+				ng-messages="perfilForm.Senha.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe sua senha
+				</div>
+			</div>
+			<ion-input class="item-input padding">
+				<input type="submit" class="button button-balanced" value="Salvar"
+					ng-disabled="perfilForm.$invalid && perfilForm.$submitted" />
+			</ion-input>
+		</form>
 	</ion-content>
 </ion-view>

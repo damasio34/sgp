@@ -9,7 +9,7 @@
     function PessoaIncluirController($state, WebStorageService, CryptSha1Service, PessoaService, LoginService) {
         var vm = this;
 
-        vm.Cadastrar = cadastrar;
+        vm.Cadastrar = Cadastrar;
 
         // -------------------------------------------------------------
 
@@ -19,15 +19,17 @@
 
         function _init() { }
 
-        function cadastrar(pessoa) {
-            var _pessoa = angular.copy(pessoa, _pessoa);
-            _pessoa.Senha = CryptSha1Service.hash(_pessoa.Senha);
+        function Cadastrar(signinForm, pessoa) {
+            if (signinForm.$valid) {
+                var _pessoa = angular.copy(pessoa, _pessoa);
+                _pessoa.Senha = CryptSha1Service.hash(_pessoa.Senha);
 
-            PessoaService.incluir(_pessoa).success(function() {
-                LoginService.login(pessoa.Login, pessoa.Senha, false).then(function(result, status) {
-                    if (result.access_token) $state.go('app.dashboard');
+                PessoaService.incluir(_pessoa).success(function() {
+                    LoginService.login(pessoa.Login, pessoa.Senha, false).then(function(result, status) {
+                        if (result.access_token) $state.go('app.dashboard');
+                    });
                 });
-            });
+            };
         }
     };
 

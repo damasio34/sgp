@@ -1,25 +1,76 @@
+<ion-header-bar align-title="left" class="bar-positive">
+	<h1 class="title">Novo cadastro</h1>
+</ion-header-bar>
 <ion-view class="has-footer" hide-nav-bar="true">
 	<ion-content class="padding">
-		<div class="list">
-			<label class="item item-input">
-				<input type="text" placeholder="Nome completo" ng-model="vm.pessoa.Nome" />
-			</label>
-			<label class="item item-input">
-				<input type="text" placeholder="CPF" ng-model="vm.pessoa.Cpf" ui-br-cpf-mask />
-			</label>
-			<label class="item item-input">
-				<input type="email" placeholder="E-mail" ng-model="vm.pessoa.Email" />
-			</label>
-			<label class="item item-input">
-				<input type="text" placeholder="Login" ng-model="vm.pessoa.Login" />
-			</label>
-			<label class="item item-input">
-				<input type="password" placeholder="Senha" ng-model="vm.pessoa.Senha" />
-			</label>
-		</div>
+		<form name="signinForm" ng-submit="vm.Cadastrar(signinForm, vm.Pessoa)" class="list card no-margin" novalidate="">
+			<div class="list">
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Nome</span>
+					<input type="text" name="Nome" placeholder="José da Silva" ng-model="vm.pessoa.Nome" autofocus required />
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">CPF</span>
+					<input type="text" name="CPF" placeholder="999.999.999-99" ng-model="vm.pessoa.Cpf" ui-br-cpf-mask required />
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">E-mail</span>
+					<input type="email" name="Email" placeholder="email@gmail.com" ng-model="vm.pessoa.Email" required />
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Login</span>
+					<input type="text" name="Login" placeholder="informe seu login" ng-model="vm.pessoa.Login" required />
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Senha</span>
+					<input type="password" name="Senha" placeholder="informe sua senha" ng-model="vm.pessoa.Senha" required />
+				</label>
+			</div>
+			<!-- Validações -->
+			<div class="error-container" ng-show="signinForm.Nome.$error && signinForm.$submitted"
+				ng-messages="signinForm.Nome.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe seu nome
+				</div>
+			</div>
+			<div class="error-container" ng-show="signinForm.Cpf.$error && signinForm.$submitted"
+				ng-messages="signinForm.Cpf.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe seu CPF
+				</div>
+			</div>
+			<div class="error-container" ng-show="signinForm.Email.$error && signinForm.$submitted"
+				ng-messages="signinForm.Email.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe seu e-mail
+				</div>
+				<div class="error" ng-show="signupForm.Email.$invalid && !signinForm.Email.$pristine">
+					<i class="ion-information-circled"></i>
+					Informe um e-mail válido
+				</div>
+			</div>
+			<div class="error-container" ng-show="signinForm.Login.$error && signinForm.$submitted"
+				ng-messages="signinForm.Login.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe seu login
+				</div>
+			</div>
+			<div class="error-container" ng-show="signinForm.Senha.$error && signinForm.$submitted"
+				ng-messages="signinForm.Senha.$error">
+				<div class="error" ng-message="required">
+					<i class="ion-information-circled"></i>
+					Informe sua senha
+				</div>
+			</div>
+			<ion-input class="item-input padding">
+				<input type="submit" class="button button-balanced" value="Cadastrar" style="margin-right:5px"
+					ng-disabled="signinForm.$invalid && signinForm.$submitted" />
+				<input type="submit" class="button button-assertive" value="Cancelar" style="margin-left:5px" ui-sref="login" />
+			</ion-input>
+		</form>
 	</ion-content>
-	<ion-footer-bar>
-		<button class="button" style="width:49%" ng-click="vm.Cadastrar(vm.pessoa)">Cadastrar</button>
-		<button class="button" style="width:49%" ui-sref="login">Cancelar</button>
-	</ion-footer-bar>
 </ion-view>

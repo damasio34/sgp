@@ -19,7 +19,7 @@ namespace Damasio34.SGP.Data.UnitOfWork.SeedDatabase
                 4, new TimeSpan(12, 0, 0), new TimeSpan(13, 0, 0));
 
             var rnd = new Random();
-            var dataAtual = new DateTime(2016, 7, 1);
+            var dataAtual = new DateTime(2016, 11, 1);
             var dataFinal = new DateTime(2016, 11, 30);
             while (dataAtual <= dataFinal)
             {

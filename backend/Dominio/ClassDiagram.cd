@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Damasio34.SGP.Dominio.ModuloTrabalho.Ciclo" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABEAAIGgAABEAAQAAAAAAAAAEAAAAAABAAACAAAAIAA=</HashCode>
+      <FileName>ModuloTrabalho\Ciclo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Damasio34.SGP.Dominio.ModuloTrabalho.ContraCheque" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgABAAAAAAgAAAAAAAAQAAACAAAgAAAAABAAA=</HashCode>
+      <FileName>ModuloTrabalho\ContraCheque.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Damasio34.SGP.Dominio.ModuloTrabalho.Imposto" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ModuloTrabalho\Imposto.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Damasio34.SGP.Dominio.ModuloTrabalho.Inss" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ModuloTrabalho\Inss.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Damasio34.SGP.Dominio.ModuloTrabalho.Irrf" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ModuloTrabalho\Irrf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Damasio34.SGP.Dominio.ModuloTrabalho.LancamentoDoContraCheque" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAABAAACAAAAAABEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ModuloTrabalho\LancamentoDoContracheque.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Damasio34.SGP.Dominio.ModuloTrabalho.Ponto" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAgCAAAAAAAAAAAAAAAAAAAIAQAAA=</HashCode>
+      <FileName>ModuloTrabalho\Ponto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Damasio34.SGP.Dominio.ModuloTrabalho.Trabalho" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIwAQAUACABAAAAAgQAIAAAgEAAIAAABQQAQAIAgIUA=</HashCode>
+      <FileName>ModuloTrabalho\Trabalho.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Damasio34.SGP.Dominio.ModuloPessoa.Usuario" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>ModuloPessoa\Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Damasio34.SGP.Dominio.ModuloPessoa.Pessoa" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAEAAGAAAA=</HashCode>
+      <FileName>ModuloPessoa\Pessoa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Damasio34.SGP.Dominio.ModuloTrabalho.IImposto" Collapsed="true">
+    <Position X="5.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ModuloTrabalho\IImposto.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Damasio34.SGP.Dominio.ModuloTrabalho.TipoDeLancamento" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ModuloTrabalho\TipoDeLancamento.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Damasio34.SGP.Dominio.ModuloTrabalho.TipoDoEvento">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAABAAAgAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ModuloTrabalho\TipoDoEvento.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Damasio34.SGP.Dominio.ModuloTrabalho.TipoDoImposto" Collapsed="true">
+    <Position X="8.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAIAAAAAA=</HashCode>
+      <FileName>ModuloTrabalho\TipoDoImposto.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

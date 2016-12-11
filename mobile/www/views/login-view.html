@@ -1,18 +1,60 @@
 <ion-view class="loginBg" hide-nav-bar="true">
 	<ion-content class="padding has-footer">
-		<div class="row responsive-sm padding remvoeBP">
+		<div class="row responsive-sm padding">
 			<div class="col">
 				<div class="app-logo"><img src="img/logotipo.svg" width="120"></div>
-				<div class="list list-inset removePM">
-					<label class="item item-input"><input type="text" ng-model="vm.Usuario.Login" placeholder="Informe seu login"></label>
-					<label class="item item-input"><input type="password" ng-model="vm.Usuario.Senha" placeholder="Informe sua senha"></label>
-					<ion-checkbox ng-model="vm.Usuario.LembrarSenha">Lembrar senha</ion-checkbox>
+				<div class="list list-inset">
+					<form name="signupForm" ng-submit="vm.Login(signupForm, vm.Usuario)" class="list card no-margin" novalidate="">
+						<ion-input class="item item-input item-stacked-label"
+					  		ng-class="{ 'has-errors' : signupForm.Login.$invalid && signupForm.$submitted,
+				        	'no-errors' : signupForm.Login.$valid && signupForm.$submitted}">
+						  	<!-- <ion-label>Login</ion-label> -->
+						  	<input type="text" name="Login" placeholder="Informe seu login" ng-model="vm.Usuario.Login" autofocus required>
+						</ion-input>
+						<!-- <label class="item item-input">
+							<input type="text" ng-model="vm.Usuario.Login" placeholder="Informe seu login" required />
+						</label> -->
+						<label class="item item-input">
+							<input type="password" name="Senha" ng-model="vm.Usuario.Senha" placeholder="Informe sua senha" required />
+						</label>
+						<ion-checkbox ng-model="vm.Usuario.LembrarSenha">Lembrar senha</ion-checkbox>
+						<ion-input class="item-input padding">
+						  	<input type="submit" class="button button-positive" value="Login"
+					    		ng-disabled="signupForm.$invalid && signupForm.$submitted">
+						</ion-input>
+						<!-- <ion-input class="item-input padding">
+							<a ui-sref="singin" class="button button-dark button-block">Novo cadastro</a>
+						</ion-input> -->
+					</form>
+					<div class="error-container" ng-show="signupForm.Login.$error && signupForm.$submitted"
+						ng-messages="signupForm.Login.$error">
+						<div class="error" ng-message="required">
+							<i class="ion-information-circled"></i>
+							Informe o login do usuário
+						</div>
+						<!-- <div class="error" ng-show="signupForm.email.$invalid && !signupForm.email.$pristine">
+							<i class="ion-information-circled"></i>
+							Escribe un email válido
+						</div> -->
+					</div>
+					<div class="error-container" ng-show="signupForm.Senha.$error && signupForm.$submitted"
+						ng-messages="signupForm.Senha.$error">
+						<div class="error" ng-message="required">
+							<i class="ion-information-circled"></i>
+							Informe a senha do usuário
+						</div>
+					</div>
 				</div>
-				<div class="loginButton">
+
+				<!-- <div class="loginButton">
 					<button class="button button-block button-balanced" ng-click="vm.Login(vm.Usuario)">Entrar</button>
-					<a ui-sref="singin" class="button button-positive button-full">Novo cadastro</a>
-				</div>
+				</div> -->
 			</div>
 		</div>
+		<!-- <div class="padding">
+			<a ui-sref="singin" class="button button-dark button-full padding">Novo cadastro</a>
+		</div> -->
 	</ion-content>
+	<button class="button button-full button-dark"
+		style="position: fixed; bottom: 0px; margin:0" ui-sref="singin">Novo cadastro</button>
 </ion-view>

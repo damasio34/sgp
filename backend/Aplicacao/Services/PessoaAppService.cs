@@ -45,7 +45,7 @@ namespace Damasio34.SGP.Aplicacao.Services
                 Email = pessoa.Email,
                 Cpf = pessoa.Cpf,
                 Login = pessoa.Usuario.Login,
-                Senha = pessoa.Usuario.Senha
+                //Senha = pessoa.Usuario.Senha
             };
 
             return pessoaDto;
@@ -56,7 +56,7 @@ namespace Damasio34.SGP.Aplicacao.Services
             pessoa.Email = pessoaDto.Email;
             pessoa.Cpf = pessoaDto.Cpf;
             pessoa.Usuario.Login = pessoaDto.Login;
-            pessoa.Usuario.Senha = pessoaDto.Senha;
+            if (pessoaDto.Senha.IsNotNull()) pessoa.Usuario.Senha = pessoaDto.Senha;
         }
 
         public void Incluir(PessoaDto pessoaDto)

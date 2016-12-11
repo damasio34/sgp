@@ -19,6 +19,7 @@
         // -------------------------------------------------------------
 
         function _init() {
+            vm.PontosDoDia = {};
             TrabalhoService.getPontosDoDia().success(function(pontosDoDia) {
                 vm.Relogio = "00:00:00";
                 _exibeHorasTrabalhadas(pontosDoDia);
@@ -36,11 +37,11 @@
             else vm.bloqueiaBotao = false;
 
             var tick = function() {
-                var horasTrabalhadas = DateTimeService.calcularHorasTrabalhadas(pontosDoDia);
+                var horasTrabalhadas = DateTimeService.calcularHorasTrabalhadas(vm.PontosDoDia);
                 vm.Relogio = horasTrabalhadas.duracao;
 
-                if (!pontosDoDia.HorarioDeEntrada || pontosDoDia.HorarioDeSaida ||
-                    (pontosDoDia.HorarioDeEntradaDoAlmoco && !pontosDoDia.HorarioDeSaidaDoAlmoco))
+                if (!vm.PontosDoDia.HorarioDeEntrada || vm.PontosDoDia.HorarioDeSaida ||
+                    (vm.PontosDoDia.HorarioDeEntradaDoAlmoco && !vm.PontosDoDia.HorarioDeSaidaDoAlmoco))
                 {
                     $timeout.cancel(tick); // Stop the timer
                     return;
@@ -54,6 +55,7 @@
             vm.bloqueiaBotao = true;
 
             TrabalhoService.postMarcarPonto().success(function(pontosDoDia) {
+                vm.PontosDoDia = {};
                 _exibeHorasTrabalhadas(pontosDoDia);
                 $ionicPopup.alert({
                     title: 'Mensagem',
