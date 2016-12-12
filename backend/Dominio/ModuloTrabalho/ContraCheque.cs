@@ -15,6 +15,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         {
             ciclo.ContraCheque = this;
             this.Ciclo = ciclo;
+            this.ValorBruto = Ciclo.Trabalho.SalarioBruto;
         }
 
         #endregion
@@ -28,25 +29,33 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public virtual IList<LancamentoDoContraCheque> Lancamentos { get; set; } = new List<LancamentoDoContraCheque>();
 
         // Propriedades calculadas
-        public double ValorLiquido => Math.Round(Ciclo.Trabalho.SalarioBruto + Lancamentos.Sum(s => s.Valor), 2);
+        public double ValorLiquido => Math.Round(Lancamentos.Sum(s => s.Valor), 2);
 
         #endregion
 
         #region [ Métodos públicos ]
 
-        public void AdiconarLancamento(Imposto imposto, TipoDeLancamento tipoDeLancamento)
+        public void AdiconarLancamento(double valor, TipoDeLancamento tipoDeLancamento, string descricao)
         {
-            var lancamento = new LancamentoDoContraCheque(this, imposto.Valor, tipoDeLancamento, 
+            var lancamento = new LancamentoDoContraCheque(this, valor, tipoDeLancamento, descricao);
+            this.Lancamentos.Add(lancamento);
+        }
+
+        public void AdiconarLancamento(Imposto imposto)
+        {
+            var lancamento = new LancamentoDoContraCheque(this, imposto.Valor, TipoDeLancamento.Saida, 
                 imposto.TipoDoImposto.ToString());
             this.Lancamentos.Add(lancamento);
         }
         public void Calcular()
         {
+            this.AdiconarLancamento(ValorBruto, TipoDeLancamento.Entrada, "Salário Normal");
+
             var inss = new Inss(this.ValorLiquido);
-            this.AdiconarLancamento(inss, TipoDeLancamento.Saida);
+            this.AdiconarLancamento(inss);
 
             var irrf = new Irrf(this.ValorLiquido);
-            this.AdiconarLancamento(irrf, TipoDeLancamento.Saida);
+            this.AdiconarLancamento(irrf);                       
         }
 
         #endregion

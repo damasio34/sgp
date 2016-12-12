@@ -95,6 +95,7 @@ namespace Damasio34.SGP.Aplicacao.Services
                 ValorBruto = contraCheque.ValorBruto,
                 LancamtentosDoContraChequeDto = contraCheque.Lancamentos.Select(LancamentoToLancamentoDto),
                 DataFinalizacao = contraCheque.DataFinalizacao,
+                MesDeReferencia = contraCheque.Ciclo.DateDeTermino.ToString("MMMM")
             };
 
             return contraChequeDto;

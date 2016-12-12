@@ -2,7 +2,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 {
     public class Irrf : Imposto
     {
-        public Irrf(double valor) : base(TipoDoImposto.Irrf) { this.CalcularAliquota(valor); }
+        public Irrf(double valor) : base(TipoDoImposto.IRRF) { this.CalcularAliquota(valor); }
 
         protected sealed override void CalcularAliquota(double valor)
         {            

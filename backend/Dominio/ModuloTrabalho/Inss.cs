@@ -2,7 +2,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
 {
     public class Inss : Imposto
     {
-        public Inss(double valor) : base(TipoDoImposto.Inss) { this.CalcularAliquota(valor); }
+        public Inss(double valor) : base(TipoDoImposto.INSS) { this.CalcularAliquota(valor); }
 
         protected sealed override void CalcularAliquota(double valor)
         {

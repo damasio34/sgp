@@ -9,6 +9,7 @@ namespace Damasio34.SGP.Aplicacao.Dtos
     {
         public double ValorBruto { get; set; }        
         public DateTime? DataFinalizacao { get; set; }
+        public string MesDeReferencia { get; set; }
         public double ValorLiquido { get; set; }
         public IEnumerable<LancamentoDoContraChequeDto> LancamtentosDoContraChequeDto { get; set; }
 

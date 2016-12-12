@@ -4,23 +4,25 @@
 	</ion-nav-buttons>
     <ion-content class="padding">
         <ion-list can-swipe="true">
-            <ion-item class="item-divider">{{vm.ContraCheque.DataFinalizacao | date : 'm'}}</ion-item>
-            <ion-item>
+            <ion-item class="item-divider">Mês de referência: {{vm.ContraCheque.MesDeReferencia}}</ion-item>
+            <!-- <ion-item class="item-stacked-label">
                 <span class="input-label">Salário bruto</span>
-                <label>{{vm.ContraCheque.SalarioBruto}}</label>
-            </ion-item>
+                <span class="text-right">{{vm.ContraCheque.ValorBruto | currency }}</span>
+            </ion-item> -->
             <ion-item class="item-divider">Entradas</ion-item>
-            <ion-item ng-repeat="entrada in vm.ContraCheque.Entradas">
-                <span class="input-label">{{saida.Descricao}}</span>
-                <label>{{entrada.Valor}}</label>
+            <ion-item class="item-stacked-label" ng-repeat="entrada in vm.ContraCheque.Entradas">
+                <span class="input-label">{{entrada.Descricao}}</span>
+                <span class="text-right">{{entrada.Valor | currency : 'R$' }}</span>
             </ion-item>
             <ion-item class="item-divider">Saidas</ion-item>
-            <ion-item ng-repeat="saida in vm.ContraCheque.Saidas">
-                <span class="input-label">{{saida.Descricao}} <label>{{saida.Valor}}</label></span>
+            <ion-item class="item-stacked-label" ng-repeat="saida in vm.ContraCheque.Saidas">
+                <span class="input-label">{{saida.Descricao}} </span>
+                <span class="text-right">{{saida.Valor*-1 | currency : 'R$' }}</span>
             </ion-item>
             <ion-item class="item-divider">Salário líquido</ion-item>
-            <ion-item>
-                <span class="input-label">Salário líquido <label>{{vm.ContraCheque.SalarioLiquido}}</label></span>
+            <ion-item class="item-stacked-label">
+                <span class="input-label">Salário líquido</span>
+                <span class="text-right">{{vm.ContraCheque.ValorLiquido | currency : 'R$' }}</span>
             </ion-item>
         </ion-list>
     </ion-content>
