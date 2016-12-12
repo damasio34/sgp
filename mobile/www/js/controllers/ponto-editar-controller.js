@@ -27,7 +27,9 @@
 
         function Salvar(pontoForm, ponto) {
             if (pontoForm.$valid) {
-                TrabalhoService.putPonto(ponto).success(function() {
+                var _ponto = angular.copy(ponto, _ponto);
+                _ponto.DataHora = new Date(moment(ponto.DataHora).format("YYYY-MM-DDTHH:mm:ss"));
+                TrabalhoService.putPonto(_ponto).success(function() {
                     var alerta = $ionicPopup.alert({
                         title: 'Alerta',
                         cssClass: 'custom-popup',

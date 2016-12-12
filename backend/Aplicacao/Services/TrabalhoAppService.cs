@@ -179,6 +179,7 @@ namespace Damasio34.SGP.Aplicacao.Services
                 var configuracoesDoUsuarioDto = new PontosDoDiaDto
                 {
                     IdTrabalho = _trabalho.Id,
+                    IdNfc = _trabalho.IdNfc,
                     ControlaAlmoco = _trabalho.ControlaAlmoco,
                     HorarioDeEntrada = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.Entrada))?.DataHora,
                     HorarioDeSaida = deHoje.FirstOrDefault(p => p.TipoDoEvento.Equals(TipoDoEvento.Saida))?.DataHora,

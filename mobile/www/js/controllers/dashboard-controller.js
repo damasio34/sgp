@@ -19,14 +19,14 @@
         // -------------------------------------------------------------
 
         function _init() {
-            vm.PontosDoDia = {};
+            // vm.PontosDoDia = {};
             var datahora = new Date(moment().format("YYYY-MM-DDTHH:mm:ss"));
             TrabalhoService.getPontosDoDia(datahora).success(function(pontosDoDia) {
                 vm.Relogio = "00:00:00";
                 _exibeHorasTrabalhadas(pontosDoDia);
             });
 
-            NfcService.setCallback(MarcarPonto);
+            NfcService.setCallback(MarcarPontoPorNFC);
         };
         //ToDo: Colocar método no DateTimeService
         function _exibeHorasTrabalhadas(pontosDoDia) {
@@ -52,13 +52,32 @@
             $timeout(tick, tickInterval); // Start the timer
         };
 
+        function MarcarPontoPorNFC(nfcEvent) {
+            if (vm.PontosDoDia.IdNfc == nfcEvent.tag.id.toString()) {
+                MarcarPonto();
+            }
+            else {
+                $ionicPopup.alert({
+                    title: 'Mensagem',
+                    cssClass: 'custom-popup',
+                    content: '<div class="text-center">NFC não cadastrado.</div>',
+                    buttons: [
+                        {
+                            text: '<b>Ok</b>',
+                            type: 'btn-amarelo',
+                        },
+                    ]
+                });
+            }
+        }
+
         function MarcarPonto() {
             vm.bloqueiaBotao = true;
 
             var datahora = new Date(moment().format("YYYY-MM-DDTHH:mm:ss"));
             TrabalhoService.postMarcarPonto(datahora).success(function() {
-                TrabalhoService.getPontosDoDia().success(function(pontosDoDia) {
-                    vm.PontosDoDia = {};
+                TrabalhoService.getPontosDoDia(datahora).success(function(pontosDoDia) {
+                    // vm.PontosDoDia = {};
                     _exibeHorasTrabalhadas(pontosDoDia);
                     $ionicPopup.alert({
                         title: 'Mensagem',

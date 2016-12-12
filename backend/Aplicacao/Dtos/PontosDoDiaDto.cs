@@ -10,5 +10,6 @@ namespace Damasio34.SGP.Aplicacao.Dtos
         public bool ControlaAlmoco { get; set; }
         public DateTime? HorarioDeEntradaDoAlmoco { get; set; }
         public DateTime? HorarioDeSaidaDoAlmoco { get; set; }
+        public string IdNfc { get; set; }
     }
 }
