@@ -9,6 +9,7 @@
 	function NfcService($rootScope, $ionicPlatform) {
         var self = this;
         var tag = {};
+        this.callback = null;
 
         $ionicPlatform.ready(function() {
             if (window.cordova) {

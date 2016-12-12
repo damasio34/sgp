@@ -57,10 +57,10 @@ namespace Damasio34.SGP.API.Controllers
         }
 
         [Route("ponto/dodia")]
-        [HttpGet]
-        public PontosDoDiaDto GetPontosDoDia()
+        [HttpPost]
+        public PontosDoDiaDto GetPontosDoDia([FromBody] DateTime dataDeReferencia)
         {
-            return _trabalhoAppService.GetPontosDoDia();
+            return _trabalhoAppService.GetPontosDoDia(dataDeReferencia);
         }
 
         [HttpPost]

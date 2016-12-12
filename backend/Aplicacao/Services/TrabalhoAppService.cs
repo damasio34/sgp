@@ -59,7 +59,8 @@ namespace Damasio34.SGP.Aplicacao.Services
                 SalarioBruto = trabalho.SalarioBruto,
                 MesesDoCiclo = trabalho.MesesDoCiclo,
                 HorarioDeEntradaDoAlmoco = trabalho.HorarioDeEntradaDoAlmoco,
-                HorarioDeSaidaDoAlmoco = trabalho.HorarioDeSaidaDoAlmoco
+                HorarioDeSaidaDoAlmoco = trabalho.HorarioDeSaidaDoAlmoco,
+                IdNfc = trabalho.IdNfc
             };
 
             return configuracaoDto;
@@ -73,6 +74,7 @@ namespace Damasio34.SGP.Aplicacao.Services
             trabalho.MesesDoCiclo = configuracoesDto.MesesDoCiclo;
             trabalho.HorarioDeEntradaDoAlmoco = configuracoesDto.HorarioDeEntradaDoAlmoco;
             trabalho.HorarioDeSaidaDoAlmoco = configuracoesDto.HorarioDeSaidaDoAlmoco;
+            trabalho.IdNfc = configuracoesDto.IdNfc;
 
             return trabalho;
         }
@@ -168,11 +170,11 @@ namespace Damasio34.SGP.Aplicacao.Services
                 throw ex;
             }
         }
-        public PontosDoDiaDto GetPontosDoDia()
+        public PontosDoDiaDto GetPontosDoDia(DateTime dataDeReferencia)
         {
             try
             {
-                var pontosDoDia = _trabalho.PontosDoDia();
+                var pontosDoDia = _trabalho.PontosDoDia(dataDeReferencia);
                 var deHoje = pontosDoDia as Ponto[] ?? pontosDoDia.ToArray();
                 var configuracoesDoUsuarioDto = new PontosDoDiaDto
                 {

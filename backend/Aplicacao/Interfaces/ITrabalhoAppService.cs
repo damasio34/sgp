@@ -9,7 +9,7 @@ namespace Damasio34.SGP.Aplicacao.Interfaces
         PontoDto GetPonto(Guid idPonto);
         PontosDoDiaDto MarcarPonto(DateTime? dataDeReferencia);
         IEnumerable<PontoDto> GetPontos();
-        PontosDoDiaDto GetPontosDoDia();
+        PontosDoDiaDto GetPontosDoDia(DateTime dataDeReferencia);
         ContraChequeDto CalcularContraCheque();
         ContraChequeDto CalcularContraCheque(DateTime dataDeReferencia);
         ConfiguracoesDto SelecionarConfiguracoes();

@@ -13,5 +13,6 @@ namespace Damasio34.SGP.Aplicacao.Dtos
         public int MesesDoCiclo { get; set; }
         public double SalarioBruto { get; set; }
         public bool ControlaAlmoco { get; set; }
+        public string IdNfc { get; set; }
     }
 }

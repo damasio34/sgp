@@ -20,7 +20,8 @@
 
         function _init() {
             vm.PontosDoDia = {};
-            TrabalhoService.getPontosDoDia().success(function(pontosDoDia) {
+            var datahora = new Date(moment().format("YYYY-MM-DDTHH:mm:ss"));
+            TrabalhoService.getPontosDoDia(datahora).success(function(pontosDoDia) {
                 vm.Relogio = "00:00:00";
                 _exibeHorasTrabalhadas(pontosDoDia);
             });

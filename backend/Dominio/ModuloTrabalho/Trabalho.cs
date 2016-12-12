@@ -45,6 +45,7 @@ namespace Damasio34.SGP.Dominio.ModuloTrabalho
         public int MesesDoCiclo { get; set; }
         public double SalarioBruto { get; set; }
         public bool ControlaAlmoco { get; set; }
+        public string IdNfc { get; set; }
 
         public virtual IList<Ciclo> Ciclos { get; protected set; } = new List<Ciclo>();        
 
